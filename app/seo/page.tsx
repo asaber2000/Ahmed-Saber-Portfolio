@@ -118,10 +118,10 @@ export default function SeoCaseStudies() {
                     </p>
                   </div>
                   <div
-                    onClick={() => setLightboxImg(getImgSrc('gtmetrix-before.png'))}
+                    onClick={() => setLightboxImg(getImgSrc('gtmetrix-before.jpg'))}
                     className="relative h-36 w-full mt-4 rounded-xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
                   >
-                    <img src={getImgSrc('gtmetrix-before.png')} alt="GTmetrix Before" className="w-full h-full object-cover" />
+                    <img src={getImgSrc('gtmetrix-before.jpg')} alt="GTmetrix Before" className="w-full h-full object-cover" />
                   </div>
                 </div>
 
@@ -138,10 +138,10 @@ export default function SeoCaseStudies() {
                     </p>
                   </div>
                   <div
-                    onClick={() => setLightboxImg(getImgSrc('3 HTTP HEADERS.png'))}
+                    onClick={() => setLightboxImg(getImgSrc('3http-headers.png'))}
                     className="relative h-36 w-full mt-4 rounded-xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
                   >
-                    <img src={getImgSrc('3 HTTP HEADERS.png')} alt="Headers Before" className="w-full h-full object-cover" />
+                    <img src={getImgSrc('3http-headers.png')} alt="Headers Before" className="w-full h-full object-cover" />
                   </div>
                 </div>
 
@@ -158,10 +158,10 @@ export default function SeoCaseStudies() {
                     </p>
                   </div>
                   <div
-                    onClick={() => setLightboxImg(getImgSrc('organic traffic semruch before.jpg'))}
+                    onClick={() => setLightboxImg(getImgSrc('organic-traffic-semruch-before.jpg'))}
                     className="relative h-36 w-full mt-4 rounded-xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
                   >
-                    <img src={getImgSrc('organic traffic semruch before.jpg')} alt="Traffic Before" className="w-full h-full object-cover" />
+                    <img src={getImgSrc('organic-traffic-semruch-before.jpg')} alt="Traffic Before" className="w-full h-full object-cover" />
                   </div>
                 </div>
 
@@ -192,10 +192,10 @@ export default function SeoCaseStudies() {
                     Optimized critical CSS, lazy-loaded off-screen assets, and improved Core Web Vitals.
                   </p>
                   <div
-                    onClick={() => setLightboxImg(getImgSrc('gtmetrix-after.png'))}
+                    onClick={() => setLightboxImg(getImgSrc('gtmetrix-after.jpg'))}
                     className="relative h-60 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
                   >
-                    <img src={getImgSrc('gtmetrix-after.png')} alt="GTmetrix After" className="w-full h-full object-contain" />
+                    <img src={getImgSrc('gtmetrix-after.jpg')} alt="GTmetrix After" className="w-full h-full object-contain" />
                   </div>
                 </div>
 
@@ -210,32 +210,116 @@ export default function SeoCaseStudies() {
                     Injected Strict-Transport-Security, X-Frame-Options, Referrer-Policy, and X-Content-Type-Options.
                   </p>
                   <div
-                    onClick={() => setLightboxImg(getImgSrc('4 HTTP HEADERS.png'))}
+                    onClick={() => setLightboxImg(getImgSrc('4http-headers.png'))}
                     className="relative h-60 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
                   >
-                    <img src={getImgSrc('4 HTTP HEADERS.png')} alt="Headers After" className="w-full h-full object-contain" />
+                    <img src={getImgSrc('4http-headers.png')} alt="Headers After" className="w-full h-full object-contain" />
                   </div>
                 </div>
 
               </div>
             </section>
 
-            {/* 3. GSC & GA4 PRODUCTION GROWTH */}
-            <section className="space-y-6">
+            {/* 3. GSC & GA4 PRODUCTION GROWTH (الترافيك قبل وبعد بوضوح تام) */}
+            <section className="space-y-8">
               <div>
                 <div className="text-xs font-mono uppercase tracking-widest text-[#ff2e7e] mb-1">
                   Phase 03 / Measured Scale
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold text-white">
-                  Empirical Growth Across GSC, GA4 & Authority Metrics
+                <h3 className="text-xl md:text-3xl font-bold text-white">
+                  Organic Traffic Explosion: From Baseline to Market Leader
                 </h3>
+                <p className="text-xs md:text-sm text-zinc-400 mt-2 max-w-2xl">
+                  Clear before & after proof directly from Google Search Console: 6x expansion in organic impressions and average position jumping from page 3 (Pos 21) straight into page 1 (Pos 8.5).
+                </p>
               </div>
 
-              {/* Metrics Highlights */}
+              {/* HUGE FEATURED CARD: GSC BEFORE VS AFTER (المقارنة المباشرة الكبيرة) */}
+              <div className="p-7 md:p-9 rounded-3xl bg-[#0a0a0c] border border-zinc-800 shadow-2xl">
+                
+                {/* Header with Live Stats */}
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-zinc-850">
+                  <div>
+                    <span className="text-[11px] font-mono uppercase tracking-widest text-emerald-400">
+                      Google Search Console • Verification Proof
+                    </span>
+                    <h4 className="text-xl md:text-2xl font-bold text-white mt-1">
+                      June 2024 (Baseline) vs Recent 28-Days (Scaled Authority)
+                    </h4>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-xs font-bold">
+                      +595% Impressions Surge
+                    </span>
+                    <span className="px-3 py-1 rounded-lg bg-[#ff2e7e]/10 border border-[#ff2e7e]/20 text-[#ff2e7e] font-mono text-xs font-bold">
+                      Pos 21 → Pos 8.5
+                    </span>
+                  </div>
+                </div>
+
+                {/* The 2 Big Side-by-Side Images */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                  
+                  {/* GSC Before (June 2024) */}
+                  <div className="flex flex-col justify-between p-4 rounded-2xl bg-zinc-950/80 border border-zinc-900">
+                    <div className="flex items-center justify-between text-xs font-mono mb-3">
+                      <span className="text-red-400 font-semibold">● BEFORE (June 2024 - Arrival)</span>
+                      <span className="text-zinc-500">17.3K Impr • Pos 21</span>
+                    </div>
+                    
+                    <div
+                      onClick={() => setLightboxImg(getImgSrc('search-console-( jun,2024).jpg'))}
+                      className="relative h-64 md:h-72 w-full rounded-xl overflow-hidden border border-zinc-850 bg-black cursor-pointer group"
+                    >
+                      <img
+                        src={getImgSrc('search-console-( jun,2024).jpg')}
+                        alt="Search Console June 2024 Before"
+                        className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
+                    </div>
+
+                    <div className="mt-3 flex justify-between text-[11px] font-mono text-zinc-500">
+                      <span>Total Clicks: 384</span>
+                      <span>Avg CTR: 2.2%</span>
+                      <span>Page 3 Avg Rank</span>
+                    </div>
+                  </div>
+
+                  {/* GSC After (Last 28 Days) */}
+                  <div className="flex flex-col justify-between p-4 rounded-2xl bg-zinc-950/80 border border-zinc-800">
+                    <div className="flex items-center justify-between text-xs font-mono mb-3">
+                      <span className="text-emerald-400 font-semibold">● AFTER (Last 28 Days Scaled)</span>
+                      <span className="text-emerald-400 font-bold">103K Impr • Pos 8.5</span>
+                    </div>
+
+                    <div
+                      onClick={() => setLightboxImg(getImgSrc('GGSC-last28-baitalnokhada.jpg'))}
+                      className="relative h-64 md:h-72 w-full rounded-xl overflow-hidden border border-zinc-700/80 bg-black cursor-pointer group"
+                    >
+                      <img
+                        src={getImgSrc('GSC-last28-baitalnokhada.jpg')}
+                        alt="Search Console Last 28 Days After"
+                        className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
+                    </div>
+
+                    <div className="mt-3 flex justify-between text-[11px] font-mono text-zinc-400">
+                      <span className="text-white font-bold">Total Clicks: 701</span>
+                      <span className="text-emerald-400 font-bold">103,000 Impressions</span>
+                      <span className="text-[#ff2e7e] font-bold">Page 1 Avg Rank</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* 4 Supporting Numeric Metrics */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
                   <div className="text-3xl font-mono font-bold text-white">+108%</div>
-                  <div className="text-xs text-zinc-400 mt-1">GSC Impressions</div>
+                  <div className="text-xs text-zinc-400 mt-1">6-Month GSC Growth</div>
                   <div className="text-[10px] text-zinc-600 font-mono mt-1">108K → 225K</div>
                 </div>
                 <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
@@ -255,10 +339,10 @@ export default function SeoCaseStudies() {
                 </div>
               </div>
 
-              {/* Evidence Grids */}
+              {/* Additional In-Depth Evidence Cards (GA4, 6M comparison, SEMrush, Mangools) */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
-                {/* GSC 6 months */}
+                {/* GSC 6 months Comparison */}
                 <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
                   <div className="text-xs font-mono text-zinc-400 mb-3 flex justify-between">
                     <span>Google Search Console: 6 Months vs Previous</span>
@@ -272,7 +356,7 @@ export default function SeoCaseStudies() {
                   </div>
                 </div>
 
-                {/* GA4 */}
+                {/* GA4 Active Users */}
                 <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
                   <div className="text-xs font-mono text-zinc-400 mb-3 flex justify-between">
                     <span>Google Analytics 4: 9.3K Active Users</span>
@@ -293,29 +377,29 @@ export default function SeoCaseStudies() {
                     <span className="text-emerald-400 font-bold">Top 3 & Top 10 Dominance</span>
                   </div>
                   <div
-                    onClick={() => setLightboxImg(getImgSrc('organic keywords semruch befor.jpg'))}
+                    onClick={() => setLightboxImg(getImgSrc('organic-keywords-semruch.jpg'))}
                     className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
                   >
-                    <img src={getImgSrc('organic keywords semruch befor.jpg')} alt="SEMrush Keywords" className="w-full h-full object-contain" />
+                    <img src={getImgSrc('organic-keywords-semruch.jpg')} alt="SEMrush Keywords" className="w-full h-full object-contain" />
                   </div>
                 </div>
 
-                {/* Mangools */}
+                {/* Mangools Backlinks */}
                 <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
                   <div className="text-xs font-mono text-zinc-400 mb-3 flex justify-between">
                     <span>Mangools: +374.6% Backlinks Growth</span>
                     <span className="text-emerald-400 font-bold">503 Active</span>
                   </div>
                   <div
-                    onClick={() => setLightboxImg(getImgSrc('mangools backlinks-bait.jpg'))}
+                    onClick={() => setLightboxImg(getImgSrc('mangools-backlinks-bait.jpg'))}
                     className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
                   >
-                    <img src={getImgSrc('mangools backlinks-bait.jpg')} alt="Backlinks" className="w-full h-full object-contain" />
+                    <img src={getImgSrc('mangools-backlinks-bait.jpg')} alt="Backlinks" className="w-full h-full object-contain" />
                   </div>
                 </div>
 
               </div>
-            </section>
+            </section>ٍٍٍٍٍ
 
             {/* 4. VERIFIED #1 POSITIONS IN SERP (الرانك والأورجانيك) */}
             <section className="space-y-6">
@@ -349,10 +433,10 @@ export default function SeoCaseStudies() {
                     <span className="text-emerald-400 font-bold">Verified #1</span>
                   </div>
                   <div
-                    onClick={() => setLightboxImg(getImgSrc('Rank1 (2).jpg'))}
+                    onClick={() => setLightboxImg(getImgSrc('Rank1-(2).jpg'))}
                     className="relative h-72 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
                   >
-                    <img src={getImgSrc('Rank1 (2).jpg')} alt="Rank 1 Table 2" className="w-full h-full object-contain" />
+                    <img src={getImgSrc('Rank1-(2).jpg')} alt="Rank 1 Table 2" className="w-full h-full object-contain" />
                   </div>
                 </div>
               </div>
@@ -415,10 +499,10 @@ export default function SeoCaseStudies() {
                     Google AI extracts brand specifications as the primary reference model with direct image links.
                   </p>
                   <div
-                    onClick={() => setLightboxImg(getImgSrc('الخيمة-الهرمية-في-دبي.jpg'))}
+                    onClick={() => setLightboxImg(getImgSrc('الخيمة-الهرمية-في-دبيai.jpg'))}
                     className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
                   >
-                    <img src={getImgSrc('الخيمة-الهرمية-في-دبي.jpg')} alt="AI Pyramid" className="w-full h-full object-contain" />
+                    <img src={getImgSrc('الخيمة-الهرمية-في-دبيai.jpg')} alt="AI Pyramid" className="w-full h-full object-contain" />
                   </div>
                 </div>
 
@@ -451,10 +535,10 @@ export default function SeoCaseStudies() {
                     Structured entity schema forced Google generative model to cite client specifications directly.
                   </p>
                   <div
-                    onClick={() => setLightboxImg(getImgSrc('tent rental in dubai google ai.jpg'))}
+                    onClick={() => setLightboxImg(getImgSrc('tent rental in dubai google ai.png'))}
                     className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
                   >
-                    <img src={getImgSrc('tent rental in dubai google ai.jpg')} alt="AI English" className="w-full h-full object-contain" />
+                    <img src={getImgSrc('tent rental in dubai google ai.png')} alt="AI English" className="w-full h-full object-contain" />
                   </div>
                 </div>
 
