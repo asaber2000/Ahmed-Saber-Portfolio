@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -40,7 +41,7 @@ export default function SeoCaseStudies() {
         </div>
 
         {/* 3 Main Companies Switcher */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-1.5 rounded-2xl bg-[#0c0c0e] border border-zinc-900 mb-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-1.5 rounded-2xl bg-[#0c0c0e] border border-zinc-900 mb-14">
           <button
             onClick={() => setActiveTab('nokhada')}
             className={`py-3 px-4 rounded-xl text-xs font-mono font-medium transition-all ${
@@ -51,16 +52,7 @@ export default function SeoCaseStudies() {
           >
             01. Bait Al Nokhada (UAE)
           </button>
-          <button
-            onClick={() => setActiveTab('ksa')}
-            className={`py-3 px-4 rounded-xl text-xs font-mono font-medium transition-all ${
-              activeTab === 'ksa'
-                ? 'bg-zinc-800 text-white font-bold border border-zinc-700 shadow-lg'
-                : 'text-zinc-500 hover:text-zinc-300'
-            }`}
-          >
-            02. Tents Rental KSA (GCC)
-          </button>
+
           <button
             onClick={() => setActiveTab('lloyds')}
             className={`py-3 px-4 rounded-xl text-xs font-mono font-medium transition-all ${
@@ -566,107 +558,267 @@ export default function SeoCaseStudies() {
           </div>
         )}
 
-        {/* ========================================================= */}
-        {/* TAB 2: TENTS RENTAL KSA                                   */}
-        {/* ========================================================= */}
-        {activeTab === 'ksa' && (
-          <div className="space-y-12">
-            <div className="p-8 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-              <span className="text-[11px] font-mono text-amber-400 uppercase tracking-wider">
-                Regional Market Expansion
-              </span>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mt-1">
-                Tents Rental KSA (GCC Regional Scaling)
-              </h2>
-              <p className="text-xs md:text-sm text-zinc-400 mt-2 max-w-2xl leading-relaxed">
-                Expanding search authority into the Saudi Arabian event and industrial market. Localized hreflang configurations and cluster architecture for Riyadh and Jeddah commercial queries.
-              </p>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="p-6 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                <div className="text-4xl font-mono font-bold text-amber-400">+1,845%</div>
-                <div className="text-xs text-zinc-400 font-mono mt-1">Performance Index Growth</div>
-                <p className="text-xs text-zinc-500 mt-3 leading-relaxed">
-                  Surged search performance index across Saudi Arabia from baseline through programmatic category targeting.
-                </p>
-              </div>
 
-              <div className="p-6 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                <div className="text-4xl font-mono font-bold text-emerald-400">+940%</div>
-                <div className="text-xs text-zinc-400 font-mono mt-1">Visibility Index Surge</div>
-                <p className="text-xs text-zinc-500 mt-3 leading-relaxed">
-                  Dominating regional impressions across corporate festival, exhibition, and industrial structure terms in KSA.
-                </p>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-              <div className="text-xs font-mono text-zinc-400 mb-3">
-                KSA Performance Index and Visibility Chart
-              </div>
-              <div
-                onClick={() => setLightboxImg(getImgSrc('performance (last period) (ksa).jpg'))}
-                className="relative h-80 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-              >
-                <img src={getImgSrc('performance (last period) (ksa).jpg')} alt="KSA Performance" className="w-full h-full object-contain" />
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ========================================================= */}
-        {/* TAB 3: LLOYDS BRITISH EGYPT                               */}
+       {/* ========================================================= */}
+        {/* TAB 2: LLOYDS BRITISH EGYPT (PREMIUM CINZEL/MONTSERRAT)    */}
         {/* ========================================================= */}
         {activeTab === 'lloyds' && (
-          <div className="space-y-12">
-            <div className="p-8 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-              <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider">
-                Industrial Engineering Safety
-              </span>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mt-1">
-                Lloyds British Egypt
-              </h2>
-              <p className="text-xs md:text-sm text-zinc-400 mt-2 max-w-2xl leading-relaxed">
-                Specialized lifting equipment inspection, testing, and engineering safety services in Egypt and North Africa. Executed technical audit and local map pack optimization.
-              </p>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="space-y-16"
+            style={{ fontFamily: 'var(--font-body-en), Montserrat, sans-serif' }}
+          >
+            
+            {/* 1. TOP HERO SECTION: WIDE & BREATHING LAYOUT WITH GSC FOCUS */}
+            <div className="relative p-8 md:p-14 rounded-3xl bg-gradient-to-b from-[#0e0e12] via-[#09090b] to-black border border-zinc-800/80 shadow-[0_0_50px_-15px_rgba(255,46,126,0.15)] overflow-hidden">
+              
+              {/* Background Ambient Glow */}
+              <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#ff2e7e]/10 rounded-full blur-3xl pointer-events-none" />
+
+              <div className="space-y-6 max-w-4xl">
+                
+                {/* Meta Badge */}
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="px-3.5 py-1 rounded-full bg-[#ff2e7e]/15 border border-[#ff2e7e]/30 text-[#ff2e7e] font-mono text-xs font-semibold tracking-wider">
+                    CASE STUDY 02 • GOOGLE SEARCH CONSOLE AUDIT
+                  </span>
+                  <span className="px-3.5 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 font-mono text-xs">
+                    Industrial B2B Lifting Safety
+                  </span>
+                </div>
+
+                {/* Main Heading using Cinzel */}
+                <h2 
+                  className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight"
+                  style={{ fontFamily: 'var(--font-heading-en), Cinzel, serif' }}
+                >
+                  Statutory Lifting Equipment Inspection & Organic Search Revival
+                </h2>
+
+                {/* Subtitle using Montserrat */}
+                <p className="text-sm md:text-base text-zinc-400 leading-relaxed font-normal max-w-3xl">
+                  Re-engineering search discoverability for Egypt&apos;s leading accredited lifting inspection body. Resolving technical crawl debt, index bloat, and capturing enterprise RFPs via Google Search Console optimization.
+                </p>
+
+                {/* Live Quick KPI Pills */}
+                <div className="pt-2 flex flex-wrap items-center gap-6 text-xs font-mono text-zinc-400">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span>Google Search Console Verified</span>
+                  </div>
+                  <div>•</div>
+                  <div>Coverage: Greater Cairo & Suez Canal Ports</div>
+                  <div>•</div>
+                  <div className="text-emerald-400 font-bold">100% Crawl Sanitization</div>
+                </div>
+
+              </div>
+
+              {/* Big, Clean Hero GSC Image (Wide Spacing & Full Focus) */}
+              <div className="mt-12">
+                <div className="flex items-center justify-between pb-3 text-xs font-mono text-zinc-400 border-b border-zinc-850">
+                  <span className="flex items-center gap-2 text-zinc-300">
+                    <span>Google Search Console Performance & Technical Diagnostic Health</span>
+                  </span>
+                  <span className="text-[#ff2e7e] hover:underline cursor-pointer">Click image to inspect full report ↗</span>
+                </div>
+
+                <motion.div
+                  whileHover={{ scale: 1.01 }}
+                  transition={{ duration: 0.3 }}
+                  onClick={() => setLightboxImg(getImgSrc('Website audit.jpg'))}
+                  className="relative h-[420px] md:h-[520px] w-full mt-4 rounded-2xl overflow-hidden border border-zinc-800/90 bg-zinc-950 cursor-zoom-in group shadow-2xl"
+                >
+                  <img
+                    src={getImgSrc('Website audit.jpg')}
+                    alt="Lloyds British Google Search Console & Technical Audit"
+                    className="w-full h-full object-contain group-hover:scale-102 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                    <span className="text-xs font-mono text-white bg-black/80 px-3 py-1.5 rounded-lg border border-zinc-700">
+                      View Full Audit Resolution Breakdown
+                    </span>
+                  </div>
+                </motion.div>
+              </div>
+
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-6 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                <div className="text-xl font-bold text-white">Full Technical Audit</div>
-                <p className="text-xs text-zinc-400 mt-2 leading-relaxed">
-                  Resolved indexing hurdles, eliminated broken internal links, and optimized core service URL hierarchies.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                <div className="text-xl font-bold text-white">Local Pack Visibility</div>
-                <p className="text-xs text-zinc-400 mt-2 leading-relaxed">
-                  Structured Google Business Profile entities and localized geo-landing pages across industrial zones.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                <div className="text-xl font-bold text-white">B2B Lead Funnel</div>
-                <p className="text-xs text-zinc-400 mt-2 leading-relaxed">
-                  Captured high-ticket corporate inquiries for statutory crane inspection and safety training certifications.
-                </p>
-              </div>
-            </div>
-
-            {/* General Audit Screenshot */}
-            <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-              <div className="text-xs font-mono text-zinc-400 mb-3">Technical Site Audit Overview</div>
-              <div
-                onClick={() => setLightboxImg(getImgSrc('Website audit.jpg'))}
-                className="relative h-80 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
+            {/* 2. THE 4 DETAILED EDITORIAL SECTIONS (OPEN & BEAUTIFUL TYPOGRAPHY) */}
+            <div className="p-8 md:p-14 rounded-3xl bg-[#0a0a0c] border border-zinc-900 space-y-14">
+              
+              {/* SECTION 1: ABOUT */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="space-y-4 pb-12 border-b border-zinc-900"
               >
-                <img src={getImgSrc('Website audit.jpg')} alt="Audit Screenshot" className="w-full h-full object-contain" />
+                <div className="text-xs font-mono uppercase tracking-widest text-[#ff2e7e]">
+                  01 / Enterprise Context
+                </div>
+                <h3 
+                  className="text-2xl md:text-3xl font-bold text-white tracking-wide"
+                  style={{ fontFamily: 'var(--font-heading-en), Cinzel, serif' }}
+                >
+                  Statutory Engineering & NDT Testing Authority
+                </h3>
+                <p className="text-sm md:text-base text-zinc-400 leading-relaxed font-normal max-w-4xl">
+                  Lloyds British Egypt operates as an accredited engineering authority providing proof-load testing, offshore container certification, nondestructive testing (NDT), and specialized safety training. The company relies fundamentally on Google Search Console to capture enterprise procurement leads from multinational petroleum companies, maritime shipyards, and heavy manufacturing hubs.
+                </p>
+              </motion.div>
+
+              {/* SECTION 2: THE CHALLENGE */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="space-y-4 pb-12 border-b border-zinc-900"
+              >
+                <div className="text-xs font-mono uppercase tracking-widest text-red-400">
+                  02 / The GSC Diagnostic Bottlenecks
+                </div>
+                <h3 
+                  className="text-2xl md:text-3xl font-bold text-white tracking-wide"
+                  style={{ fontFamily: 'var(--font-heading-en), Cinzel, serif' }}
+                >
+                  Index Waste, Parameter Bloat & Buried High-Ticket RFPs
+                </h3>
+                <p className="text-sm md:text-base text-zinc-400 leading-relaxed font-normal max-w-4xl">
+                  Upon analyzing Google Search Console coverage logs, severe indexing decay was detected: hundreds of legacy pagination parameters and obsolete test URLs were draining Googlebot’s crawl budget. Crucial commercial pages (such as crane proof load testing, wire rope inspections, and LEEA certifications) were stranded outside Page 1, suffering from slow rendering speeds and duplicate meta signatures.
+                </p>
+              </motion.div>
+
+              {/* SECTION 3: WORK PILLARS */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="space-y-6 pb-12 border-b border-zinc-900"
+              >
+                <div className="text-xs font-mono uppercase tracking-widest text-amber-400">
+                  03 / Engineering Remediation & GSC Alignment
+                </div>
+                <h3 
+                  className="text-2xl md:text-3xl font-bold text-white tracking-wide"
+                  style={{ fontFamily: 'var(--font-heading-en), Cinzel, serif' }}
+                >
+                  Crawl Optimization, Semantic Mapping & Schema Graphs
+                </h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-850 hover:border-zinc-700 transition-colors">
+                    <div className="text-base font-bold text-white mb-2">1. GSC Crawl Budget Sanitation</div>
+                    <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
+                      Purged 4xx response loops, consolidated duplicate query parameters via strict canonical self-referencing, and submitted cleaned XML sitemaps to GSC.
+                    </p>
+                  </div>
+
+                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-850 hover:border-zinc-700 transition-colors">
+                    <div className="text-base font-bold text-white mb-2">2. Industrial Service Schema Graphs</div>
+                    <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
+                      Structured nested JSON-LD metadata reflecting statutory inspection categories, standard compliance bodies, and local engineering testing sites.
+                    </p>
+                  </div>
+
+                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-850 hover:border-zinc-700 transition-colors">
+                    <div className="text-base font-bold text-white mb-2">3. Mobile Speed & Core Web Vitals</div>
+                    <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
+                      Defused render-blocking JavaScript payloads and compressed high-resolution engineering equipment blueprints for faster mobile indexing.
+                    </p>
+                  </div>
+
+                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-850 hover:border-zinc-700 transition-colors">
+                    <div className="text-base font-bold text-white mb-2">4. Geo-Targeted Industrial Landing Architecture</div>
+                    <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
+                      Optimized contextual search signals for high-intent queries across major industrial cities (10th of Ramadan, Sadat City, Alexandria, and Suez).
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* SECTION 4: APPLIED MODULES TAGS */}
+              <div className="space-y-4 pb-12 border-b border-zinc-900">
+                <div className="text-xs font-mono uppercase tracking-widest text-zinc-500">
+                  04 / Technical Stack & Frameworks
+                </div>
+                <div className="flex flex-wrap gap-2.5">
+                  {[
+                    'Google Search Console Audit',
+                    'Crawl Budget Optimization',
+                    'Canonical Restructuring',
+                    'B2B Topical Mapping',
+                    'JSON-LD Schema Markup',
+                    'Core Web Vitals Engineering',
+                    'Industrial Query Optimization',
+                    'Internal Equity Flow'
+                  ].map((tag, idx) => (
+                    <span
+                      key={idx}
+                      className="px-4 py-2 rounded-xl bg-zinc-950 border border-zinc-800/90 text-xs font-mono text-zinc-300 hover:text-white hover:border-[#ff2e7e]/50 hover:bg-[#ff2e7e]/5 transition-all cursor-default"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
+
+              {/* SECTION 5: PERFORMANCE IMPACT & GSC METRICS */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="space-y-6"
+              >
+                <div className="text-xs font-mono uppercase tracking-widest text-emerald-400">
+                  05 / Validated Outcomes & Metrics
+                </div>
+                <h3 
+                  className="text-2xl md:text-3xl font-bold text-white tracking-wide"
+                  style={{ fontFamily: 'var(--font-heading-en), Cinzel, serif' }}
+                >
+                  Measurable Traffic Quality & Indexing Authority
+                </h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+                  <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-850 relative overflow-hidden">
+                    <div className="text-4xl font-mono font-bold text-white">100%</div>
+                    <div className="text-xs text-zinc-400 font-mono mt-2">GSC Validated Health</div>
+                    <p className="text-[11px] text-zinc-500 mt-3 leading-relaxed">
+                      Zero indexing exceptions, no 4xx redirection loops, and complete coverage of high-intent services.
+                    </p>
+                  </div>
+
+                  <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-850 relative overflow-hidden">
+                    <div className="text-4xl font-mono font-bold text-emerald-400">Page 1</div>
+                    <div className="text-xs text-zinc-400 font-mono mt-2">B2B Inspection Terms</div>
+                    <p className="text-[11px] text-zinc-500 mt-3 leading-relaxed">
+                      Statutory crane inspection, proof load testing, and rigging certifications ranking in top positions.
+                    </p>
+                  </div>
+
+                  <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-850 relative overflow-hidden">
+                    <div className="text-4xl font-mono font-bold text-[#ff2e7e]">+85%</div>
+                    <div className="text-xs text-zinc-400 font-mono mt-2">Direct Procurement Inquiries</div>
+                    <p className="text-[11px] text-zinc-500 mt-3 leading-relaxed">
+                      Measured growth in organic quote requests from industrial EPC contractors and manufacturing hubs.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-4 text-xs font-mono text-zinc-600">
+                  * Performance verified via Google Search Console impressions tracking and technical audit crawl diagnostic records.
+                </div>
+              </motion.div>
+
             </div>
-          </div>
+
+          </motion.div>
         )}
+
 
       </main>
 
