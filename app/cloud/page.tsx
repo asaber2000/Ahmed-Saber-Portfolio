@@ -693,8 +693,7 @@ if __name__ == "__main__":
           }
         ],
         imagePath: 'AI Conversational Agent Automated Booking Solution (Arabic Project)/1.webp',
-        
-        figureCaption: 'Figure 1: AWS Budgets threshold parameters established for zero-cost sandbox execution.'
+        figureCaption: 'Figure 1: Implementing AWS Budgets with a Zero-Spend threshold to ensure full cost control and operational financial safety during the AI development phase.'
       },
       {
         name: 'Phase 2: Conversational AI Infrastructure Provisioning',
@@ -716,7 +715,7 @@ if __name__ == "__main__":
           }
         ],
         imagePath: ['AI Conversational Agent Automated Booking Solution (Arabic Project)/2.webp', 'AI Conversational Agent Automated Booking Solution (Arabic Project)/22.webp'],
-        figureCaption: ['Figure 9: My GitHub repository where I keep the final version of the code ready for the world to see.', 'Figure 9: A list of the Python tools the server needs to install to run the dashboard correctly.'],
+        figureCaption: ['Figure 2: Amazon Lex Dashboard (Build a bot using Generative AI).', 'Figure 3: Provisioning the Amazon Lex V2 bot instance and verifying its (Available) status, marking the readiness of the NLU (Natural Language Understanding) core for the project.'],
       },
       {
         name: 'Phase 3: Intent Architecture & Language Localization',
@@ -738,7 +737,7 @@ if __name__ == "__main__":
           }
         ],
         imagePath: 'AI Conversational Agent Automated Booking Solution (Arabic Project)/3(1).webp',
-        figureCaption: 'Figure 3: Multi-turn slot definition and user input confirmation rules.'
+        figureCaption: 'Figure 4: Establishing the Intent hierarchy within the Arabic (UAE) localized environment to ensure the bot effectively categorizes user goals.'
       },
       {
         name: 'Phase 4: Utterance Engineering & NLU Confidence Tuning',
@@ -760,7 +759,7 @@ if __name__ == "__main__":
           }
         ],
         imagePath: ['AI Conversational Agent Automated Booking Solution (Arabic Project)/4.webp', 'AI Conversational Agent Automated Booking Solution (Arabic Project)/44.webp'],
-        figureCaption: ['Figure 9: My GitHub repository where I keep the final version of the code ready for the world to see.', 'Figure 9: A list of the Python tools the server needs to install to run the dashboard correctly.'],
+        figureCaption: ['Figure 5: Designing the OrderTent intent core and initiating the training phase with diverse linguistic samples for better Natural Language Understanding.', 'Figure 6: Engineering 13 Sample Utterances with dynamic slot placeholders to capture variables like type and size directly from the user\'s initial message.'],
       },
       {
         name: 'Phase 5: Advanced Slot Architecture & Multi-Turn Data Collection',
@@ -860,7 +859,7 @@ if __name__ == "__main__":
           }
         ],
         imagePath: 'AI Conversational Agent Automated Booking Solution (Arabic Project)/6.webp',
-        figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
+        figureCaption: 'Figure 7: Engineering a complete Conversational Flow; featuring multi-turn Slot collection for booking data, followed by a secure Confirmation and Fulfillment logic to ensure accurate transaction processing and personalized user engagement.'
       },
       {
         name: 'Phase 7: Conversational Experience & Dialogue Management',
@@ -917,21 +916,21 @@ if __name__ == "__main__":
           </div>
         ),
         imagePath: ['AI Conversational Agent Automated Booking Solution (Arabic Project)/7.webp', 'AI Conversational Agent Automated Booking Solution (Arabic Project)/77.webp'],
-        figureCaption: ['Figure 9: My GitHub repository where I keep the final version of the code ready for the world to see.', 'Figure 9: A list of the Python tools the server needs to install to run the dashboard correctly.'],
+        figureCaption: ['Figure 8: Implementing a GreetingIntent to handle social conversational triggers in Arabic and English, ensuring a natural and frictionless user experience while preventing NLU classification errors.', 'Figure 9: Implementing a GreetingIntent to handle social conversational triggers in Arabic and English, ensuring a natural and frictionless user experience while preventing NLU classification errors.'],
       },
       {
         name: 'Phase 8: Error Handling & Fallback Strategy',
         tools: 'Amazon Lex (V2) - FallbackIntent',
         desc: 'To ensure the bot never leaves a user without a response, I configured the FallbackIntent. This is the (Safety Net) of the conversational flow. If the user input doesn\'t match any trained intents, this intent triggers a polite response, maintaining the professional image of the bot and preventing (dead-end)conversations. It’s a critical step for maintaining a robust User Experience (UX).',
         imagePath: 'AI Conversational Agent Automated Booking Solution (Arabic Project)/8(1).webp',
-        figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
+        figureCaption: 'Figure 10: Configuring the FallbackIntent as a fail-safe mechanism to handle unrecognized user inputs gracefully and maintain conversation continuity.'
       },
       {
         name: 'Phase 9: API Gateway Provisioning & Security',
         tools: 'Twilio Console & REST API Credentials',
         desc: 'To enable external communication, I provisioned a Twilio Cloud Communications account. This served as the primary gateway for the WhatsApp integration. I secured the essential API credentials, including the Account SID and Auth Token, which are required to authenticate and authorize requests sent from the AWS environment. This step ensures that the communication channel is both private and secure.',
         imagePath: 'AI Conversational Agent Automated Booking Solution (Arabic Project)/9.webp',
-        figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
+        figureCaption: 'Figure 11: Generating and securing the Account SID and Auth Token in the Twilio Console to establish a trusted API connection between AWS and the messaging gateway.'
       },
       {
         name: 'Phase 10: WhatsApp Sandbox Activation & Handshake',
@@ -953,7 +952,7 @@ if __name__ == "__main__":
           }
         ],
         imagePath: ['AI Conversational Agent Automated Booking Solution (Arabic Project)/10.webp', 'AI Conversational Agent Automated Booking Solution (Arabic Project)/1010.webp'],
-        figureCaption: ['Figure 9: My GitHub repository where I keep the final version of the code ready for the world to see.', 'Figure 9: A list of the Python tools the server needs to install to run the dashboard correctly.'],
+        figureCaption: ['Figure 12: Executing the WhatsApp Sandbox Handshake to link the development device and verifying real-time message delivery through the Twilio gateway.', 'Figure 13: WhatsApp Message from Twilio.'],
       },
       {
         name: 'Phase 11: Serverless Logic & Real-Time Alert Automation',
@@ -1007,7 +1006,7 @@ if __name__ == "__main__":
               <div className="rounded-lg overflow-hidden border border-zinc-900 bg-black/50">
                 <img
                   src="/AI Conversational Agent Automated Booking Solution (Arabic Project)/11.webp"
-                  alt="Figure 11: Developing the Python-based Lambda handler to process Lex events and automate outbound WhatsApp notifications via Twilio's REST API using secure HTTP Basic Authentication."
+                  alt="Figure 14: Developing the Python-based Lambda handler to process Lex events and automate outbound WhatsApp notifications via Twilio’s REST API using secure HTTP Basic Authentication."
                   className="w-full h-auto object-contain max-h-[600px] mx-auto rounded-md"
                 />
               </div>
@@ -1105,7 +1104,7 @@ from_number = 'whatsapp:+14155238886'
           }
         ],
         imagePath: ['AI Conversational Agent Automated Booking Solution (Arabic Project)/12.webp', 'AI Conversational Agent Automated Booking Solution (Arabic Project)/1212.webp'],
-        figureCaption: ['Figure 9: My GitHub repository where I keep the final version of the code ready for the world to see.', 'Figure 9: A list of the Python tools the server needs to install to run the dashboard correctly.'],
+        figureCaption: ['', 'Figure 15: Generating the Callback URL from Lex to act as the primary endpoint for WhatsApp integration.'],
       },
       {
         name: 'Phase 13: Omnichannel Deployment & Channel Integration',
@@ -1127,14 +1126,14 @@ from_number = 'whatsapp:+14155238886'
           }
         ],
         imagePath: 'AI Conversational Agent Automated Booking Solution (Arabic Project)/13(1).webp',
-        figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
+        figureCaption: 'Figure 16: Configuring the Webhook in Twilio Sandbox to bridge incoming WhatsApp messages with the Lex bot.'
       },
       {
         name: 'Final Phase: Live Demonstration & Real-World Validation',
         tools: 'WhatsApp Messenger & Amazon Lex Runtime',
         desc: 'The culmination of this project is a fully functional, localized AI agent operating within WhatsApp. As shown in the final demonstration, the bot seamlessly handles the end-to-end booking journey in Arabic (UAE). It initiates the conversation, collects specific requirements through structured slots, and provides a personalized confirmation—all within seconds and without any manual intervention.',
         imagePath: 'AI Conversational Agent Automated Booking Solution (Arabic Project)/14.webp',
-        figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
+        figureCaption: 'Figure 17: A live demonstration of the Bait Al-Nokhedha AI on WhatsApp, successfully processing a complete tent reservation through automated Natural Language Understanding.'
       },
     ],
     conclusionContent: (
@@ -1228,8 +1227,8 @@ The core of this solution lies in its automated ETL architecture: simply uploadi
             desc: 'By utilizing the "Queries.csv" file as the primary source, I established a consistent data schema for the serverless pipeline, capturing a 3-month performance snapshot for comprehensive trend analysis.'
           }
         ],
-        imagePath: 'slack-phase1.png',
-        figureCaption: 'Figure 1: S3 object landing zone structured by date for automated consumption.'
+        imagePath: 'End-to-End Real-Time SEO Analytics Pipeline A Serverless Approach/1.webp',
+        figureCaption: 'Figure 1: Executing the data export from Google Search Console (GSC) to obtain the raw (Queries.csv) file, forming the primary ingestion layer for the analytics pipeline.'
       },
       {
         name: 'Phase 2: Data Lake Provisioning & S3 Architecture',
@@ -1250,8 +1249,8 @@ The core of this solution lies in its automated ETL architecture: simply uploadi
             desc: 'I successfully uploaded the Queries.csv file into the designated folder, establishing the "Bronze" or raw layer of the data lake, ready for cataloging and analysis.'
           }
         ],
-        imagePath: 'slack-phase2.png',
-        figureCaption: 'Figure 2: Glue crawler schedule maintaining synchronicity with incoming search datasets.'
+        imagePath: 'End-to-End Real-Time SEO Analytics Pipeline A Serverless Approach/2.webp',
+        figureCaption: 'Figure 2: Architecting the Amazon S3 Data Lake structure, featuring the quires-seo bucket and the organized deployment of raw CSV data.'
       },
       {
         name: 'Phase 3: Automated Data Cataloging & Schema Discovery',
@@ -1276,8 +1275,8 @@ The core of this solution lies in its automated ETL architecture: simply uploadi
             desc: 'I executed the crawler (Run Crawler), which automatically created the data table in our database, as confirmed by the "Succeeded" status and the "Table changes: 1 created" log.'
           }
         ],
-        imagePath: 'slack-phase3.png',
-        figureCaption: 'Figure 3: Athena analytical query isolating commercial query volatility.'
+        imagePath: ['End-to-End Real-Time SEO Analytics Pipeline A Serverless Approach/3(1).webp', 'End-to-End Real-Time SEO Analytics Pipeline A Serverless Approach/33.webp'],
+        figureCaption: ['Figure 3: Monitoring the AWS Glue Crawler dashboard, showing the successful execution of the gsc_crawler with a (Ready) state for automated data sync.', 'Figure 4: Detailed Crawler logs confirming the successful population of the seo_analytics_db database and the creation of metadata tables from raw S3 files.'],
       },
       {
         name: 'Phase 4: Serverless Analytics & SQL Intelligence',
@@ -1302,8 +1301,8 @@ The core of this solution lies in its automated ETL architecture: simply uploadi
             desc: 'The query engine processed the dataset in milliseconds, demonstrating the scalability of the architecture to handle millions of rows of SEO data as the project grows.'
           }
         ],
-        imagePath: 'slack-phase4.png',
-        figureCaption: 'Figure 4: Automated Slack notification card detailing live keyword clicks and commercial metrics.'
+        imagePath: 'End-to-End Real-Time SEO Analytics Pipeline A Serverless Approach/4.webp',
+        figureCaption: 'Figure 5: Utilizing Amazon Athena to run serverless SQL queries on the GSC dataset; successfully validating the data schema and retrieving organic performance metrics for analysis.'
       },
       {
         name: 'Phase 5: API Integration & Messaging Gateway',
@@ -1324,8 +1323,8 @@ The core of this solution lies in its automated ETL architecture: simply uploadi
             desc: 'Assigned specific OAuth scopes to the app, ensuring it has the minimum necessary permissions to post formatted messages and rich-text reports to the designated channel.'
           }
         ],
-        imagePath: 'slack-phase4.png',
-        figureCaption: 'Figure 4: Automated Slack notification card detailing live keyword clicks and commercial metrics.'
+        imagePath: ['End-to-End Real-Time SEO Analytics Pipeline A Serverless Approach/5.webp', 'End-to-End Real-Time SEO Analytics Pipeline A Serverless Approach/55.webp'],
+        figureCaption: ['', 'Figure 6: Configuring the Slack API and generating the secure Incoming Webhook URL to enable automated report delivery to the company channel.'],
       },
       {
         name: 'Phase 6: Serverless Orchestration & Secure Automation',
@@ -1362,8 +1361,8 @@ The core of this solution lies in its automated ETL architecture: simply uploadi
             <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3">
               <div className="rounded-lg overflow-hidden border border-zinc-900 bg-black/50">
                 <img
-                  src="/seo-pipeline-phase6-lambda.png"
-                  alt="Figure 6A: AWS Lambda function configuration and integrated code source for SEO Slack alerts"
+                  src="/End-to-End Real-Time SEO Analytics Pipeline A Serverless Approach/6.webp"
+                  alt=""
                   className="w-full h-auto object-contain max-h-[600px] mx-auto rounded-md"
                 />
               </div>
@@ -1443,8 +1442,8 @@ def lambda_handler(event, context):
             <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3">
               <div className="rounded-lg overflow-hidden border border-zinc-900 bg-black/50">
                 <img
-                  src="/seo-pipeline-phase6-iam.png"
-                  alt="Figure 6B: Execution role and IAM least-privilege security policies attached to the Lambda function"
+                  src="/End-to-End Real-Time SEO Analytics Pipeline A Serverless Approach/66.webp"
+                  alt="Figure 7: Developing the AWS Lambda handler and configuring the custom IAM Execution Role to ensure secure and automated cross-service data processing."
                   className="w-full h-auto object-contain max-h-[600px] mx-auto rounded-md"
                 />
               </div>
@@ -1474,8 +1473,8 @@ def lambda_handler(event, context):
             desc: 'By providing these automated updates every morning at 9:00 AM, the project reduces manual reporting time by 100%, allowing the marketing team to focus on optimization rather than data collection.'
           }
         ],
-        imagePath: 'slack-phase4.png',
-        figureCaption: 'Figure 4: Automated Slack notification card detailing live keyword clicks and commercial metrics.'
+        imagePath: 'End-to-End Real-Time SEO Analytics Pipeline A Serverless Approach/7.webp',
+        figureCaption: 'Figure 8: A live demonstration of the final SEO-Alert-Bot output within the Slack channel, displaying consistent, automated daily reports of search performance for Bait Al Nokhada.'
       }
     ],
     conclusionContent: (
@@ -1541,7 +1540,7 @@ def lambda_handler(event, context):
         </div>
       </div>
     ),
-    coverImage: 'cloud-project-4.jpg'
+    coverImage: 'End-to-End Real-Time SEO Analytics Pipeline A Serverless Approach/7.webp'
   }
 ];
 
