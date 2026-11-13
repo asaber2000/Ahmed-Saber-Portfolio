@@ -27,8 +27,8 @@ interface PhaseItem {
   realValue?: string;             // مثل مرحلة 1 و3 و4
   realValueTitle?: string;        // عنوان القيمة (Why Serverless أو Cost & Speed)
   keyActions?: string[];          // مصفوفة تدعم أكثر من Key Action
-  imagePath?: string;
-  figureCaption?: string;
+  imagePath?: string | string[];
+  figureCaption?: string | string[];
 }
 
 interface CloudProject {
@@ -41,7 +41,8 @@ interface CloudProject {
   detailedOverview: string;    // النص الداخلي في التوثيق (PROJECT OVERVIEW)
   whyAws: string;
   phases: PhaseItem[];
-  keyTakeaway: string;
+  keyTakeaway?: string;
+  conclusionContent?: React.ReactNode;
   coverImage: string;
 }
 
@@ -65,7 +66,7 @@ const cloudProjects: CloudProject[] = [
         desc: 'To handle live data, I configured a Kinesis Firehose delivery stream. This acts as the "smart pump" and the primary entry point for all incoming SEO events. Firehose automatically receives, organizes, and compresses the streaming data before delivering it to its final destination.',
         realValue: 'The true advantage of using Firehose is that it is a fully managed, serverless solution. I didn\'t need to write custom code or manage complex server infrastructures to ingest data; Firehose handles the entire ingestion lifecycle automatically and scales seamlessly with traffic.',
         keyActions: ['Configured buffering hints to balance data latency and storage cost-effectiveness.'],
-        imagePath: 'pipeline-phase1.png',
+        imagePath: 'Real-Time SEO Analytics Data Pipeline/Firehose-Streams1.webp',
         figureCaption: 'Figure 1: Real-time monitoring dashboard for the SEO data stream, showing active ingestion metrics.'
       },
       {
@@ -73,7 +74,7 @@ const cloudProjects: CloudProject[] = [
         tools: 'Amazon S3',
         desc: 'Amazon S3 serves as the central Data Lake for this pipeline. I configured the storage to be highly organized and optimized for performance. The incoming data is automatically partitioned by date (Year/Month/Day).',
         keyActions: ['Implemented a structured folder hierarchy for "Raw Data" to maintain data integrity.'],
-        imagePath: 'pipeline-phase2.png',
+        imagePath: 'Real-Time SEO Analytics Data Pipeline/S3-Bucket2.webp',
         figureCaption: 'Figure 2: Automated date-based partitioning (Year/Month/Day) within the S3 Data Lake for optimized query performance and cost-efficiency.'
       },
       {
@@ -82,11 +83,11 @@ const cloudProjects: CloudProject[] = [
         desc: 'After storing the raw data in S3, I needed a way to translate these files into a structured format. I deployed an AWS Glue Crawler to automate this process. The crawler effectively "scanned" the S3 bucket, identified the data types (Schema), and automatically created a metadata table in the AWS Glue Data Catalog.',
         realValue: 'Instead of manually defining columns and data types, AWS Glue handles the discovery process. By clicking "Run crawler", the system detected our SEO fields (timestamp, country, clicks, etc.) and prepared them for instant analysis. This serverless approach ensures that even if our data structure changes slightly in the future, the Crawler can adapt and update the catalog without manual intervention.',
         keyActions: [
-  'Executed a successful crawler run that mapped raw CSV objects into a relational table structure within the seo_data_pipeline_db.',
-  'Created a centralized Data Catalog that maps raw files into a structured SQL table.'
-],
-        imagePath: 'pipeline-phase3.png',
-        figureCaption: 'Figure 3: Successful execution of the AWS Glue Crawler, showing the "Completed" status after discovering data schema.'
+          'Executed a successful crawler run that mapped raw CSV objects into a relational table structure within the seo_data_pipeline_db.',
+          'Created a centralized Data Catalog that maps raw files into a structured SQL table.'
+        ],
+        imagePath: 'Real-Time SEO Analytics Data Pipeline/S3-Bucket3.webp',
+        figureCaption: 'Figure 3: Successful execution of the AWS Glue Crawler, showing the Completed status after discovering the data schema and updating the Data Catalog.'
       },
       {
         name: 'Phase 4: Serverless SQL Analytics',
@@ -99,7 +100,7 @@ const cloudProjects: CloudProject[] = [
         realValueTitle: 'The Real Value (Cost & Speed):',
         realValue:
           'The real advantage of Athena is its "Pay-per-query" model. It only charges for the amount of data scanned. Because I partitioned the data earlier, any future complex queries will be extremely fast and cost-effective, making it the perfect tool for big data analytics.',
-        imagePath: 'pipeline-phase4.png',
+        imagePath: 'Real-Time SEO Analytics Data Pipeline/Athena4.webp',
         figureCaption: 'Figure 4: Using Amazon Athena to execute SQL queries on the SEO dataset. The results window shows the successfully retrieved records (Country, Clicks, Device, etc.) directly from the S3 Data Lake.'
       },
 
@@ -115,90 +116,33 @@ const cloudProjects: CloudProject[] = [
         keyActions: [
           'Designed an interactive dashboard that provides stakeholders with a 360-degree view of SEO performance, enabling data-driven decision-making.'
         ],
-        imagePath: 'pipeline-phase5.png',
-        figureCaption: 'Figure 5: QuickSight interactive visual dashboard tracking geographic traffic concentration.'
+        imagePath: 'Real-Time SEO Analytics Data Pipeline/AWS-Quick5.webp',
+        figureCaption: ''
       },
-      {
-        name: 'Phase 6: Preparing the Project for the Cloud',
-        tools: 'GitHub & Python & Requirements file',
-        content: (
-    <div className="space-y-4 text-xs md:text-sm text-zinc-300 leading-relaxed">
-      <div>
-        <h4 className="text-white font-bold text-sm mb-1">Moving from Local to Global:</h4>
-        <p>
-          After finishing the code on my laptop, it was time to move it to the cloud so anyone could see it. I uploaded everything to <strong className="text-white">GitHub</strong>. This wasn&apos;t just about saving the files; it was about making the code &quot;Cloud-Ready.&quot; I made sure the code is clean and doesn&apos;t rely on any specific folders on my personal computer, so it can run smoothly on any server.
-        </p>
-      </div>
-
-      <div>
-        <h4 className="text-white font-bold text-sm mb-1">The &quot;Requirements&quot; List:</h4>
-        <p>
-          Every cloud server needs to know which tools to use. I created a simple file called{' '}
-          <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
-            requirements.txt
-          </code>
-          . Think of it as a &quot;Manual&quot; for the server; it lists everything the project needs to run, like{' '}
-          <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
-            streamlit
-          </code>{' '}
-          and{' '}
-          <code className="text-emerald-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
-            Pandas
-          </code>
-          . This way, the server installs everything automatically, and the project works perfectly from the first second.
-        </p>
-      </div>
-    </div>
-  ),
-        imagePath: 'pipeline-phase6.png',
-        figureCaption: 'Figure 6: Preparing the project for deployment in the cloud environment.'
-      },
-      {
-        name: 'Phase 7: The Live Dashboard & Full Automation',
-        tools: 'Streamlit Cloud, GitHub & Automation Script',
-        content: (
-    <div className="space-y-4 text-xs md:text-sm text-zinc-300 leading-relaxed">
-      <div>
-        <h4 className="text-white font-bold text-sm mb-1">Bringing the App to Life:</h4>
-        <p>
-          This is the final step where everything comes together. I linked my <strong className="text-white">GitHub</strong> repository to <strong className="text-white">Streamlit Cloud</strong>. Now, the dashboard is live on the internet and accessible via a public URL. In the setup (as shown in the screenshot), I pointed Streamlit to my main file{' '}
-          <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
-            my_seo_dashboard.py
-          </code>
-          , and it automatically built the entire interface.
-        </p>
-      </div>
-
-      <div className="space-y-2">
-        <h4 className="text-white font-bold text-sm mb-1">Magic Background Automation:</h4>
-        <p>
-          The best part of this project is that I don&apos;t need to touch any code anymore. I don&apos;t even need to open VS Code or Streamlit to update the data.
-        </p>
-        <ul className="list-disc list-inside space-y-2 pl-2">
+    ],
+    conclusionContent: (
+      <div className="space-y-4 text-xs md:text-sm text-zinc-300 leading-relaxed pt-2">
+        <ul className="list-disc list-inside space-y-3 pl-2 text-zinc-300">
           <li>
-            <strong className="text-white">How it works: </strong>
-            I just open my local{' '}
-            <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
-              backlinks.csv
-            </code>{' '}
-            file, add a new link, and save it.
+            <strong className="text-white">Scalability: </strong>
+            The system architecture is built to scale automatically[cite: 20]. Whether it&apos;s 100 or 1,000,000 records, the serverless components handle the load without any manual intervention[cite: 20].
           </li>
           <li>
-            <strong className="text-white">The Result: </strong>
-            My automation script detects the change, checks if the link is &quot;Live (200)&quot; or &quot;Broken,&quot; and pushes it to the AWS cloud. Seconds later, the live dashboard updates itself automatically with the new data.
+            <strong className="text-white">Cost-Efficiency (FinOps): </strong>
+            By leveraging a 100% serverless approach, I ensured a &quot;Pay-as-you-go&quot; model[cite: 20]. Costs are only incurred during active data processing, eliminating wasted budget on idle servers[cite: 20].
+          </li>
+          <li>
+            <strong className="text-white">End-to-End Automation: </strong>
+            The entire data journey—from a raw website click to a visual insight on a dashboard—is fully automated, ensuring real-time data availability for decision-makers[cite: 20].
+          </li>
+          <li>
+            <strong className="text-white">Cloud Best Practices: </strong>
+            Implemented industry standards, including date-based partitioning in S3 and automated schema discovery via Glue, ensuring the Data Lake is both high-performing and organized[cite: 20].
           </li>
         </ul>
       </div>
-    </div>
-  ),
-  realValue:
-          'This creates a seamless workflow. I can manage my entire SEO backlink portfolio just by editing a simple spreadsheet, while the complex AWS infrastructure and the Streamlit app handle all the heavy lifting in the background.',
-        imagePath: 'pipeline-phase2.png',
-        figureCaption: 'Figure 2: Automated date-based partitioning (Year/Month/Day) within the S3 Data Lake for optimized query performance and cost-efficiency.'
-      },
-    ],
-    keyTakeaway: 'Scalable, 100% serverless data pipeline delivering sub-second business intelligence with pay-per-query FinOps cost governance.',
-    coverImage: 'pipeline-hero.png'
+    ),
+    coverImage: 'Real-Time SEO Analytics Data Pipeline/AWS-Quick5.webp'
   },
   {
     id: 'zero-touch-pipeline',
@@ -218,146 +162,503 @@ const cloudProjects: CloudProject[] = [
         tools: 'AWS Aurora RDS (PostgreSQL/MariaDB) & Boto3 (Python SDK)',
         desc: 'The first and most critical step was establishing a secure "source of truth" for the data. I deployed an Amazon RDS instance to serve as the projects cloud database. To enable my Python application to communicate with AWS services, I integrated the Boto3 library, which is the official AWS SDK for Python.',
         detailedStepsTitle: 'Detailed Technical Steps:',
-  detailedSteps: [
-    {
-      title: 'Database Provisioning',
-      desc: 'I launched a managed database instance on AWS RDS, ensuring high availability and secure storage for our datasets.'
-    },
-    {
-      title: 'SDK Integration',
-      desc: 'Installed and configured boto3 to bridge the gap between my local Python code and the AWS Cloud infrastructure.'
-    },
-    {
-      title: 'Endpoint Configuration',
-      desc: 'I retrieved the unique Database Endpoint from the RDS Connectivity dashboard.',
-      subPoints: [
-        'This endpoint acts as the digital address that allows my application to find and connect to the database in the cloud.'
-      ]
-    },
-    {
-      title: 'Security & IAM Roles',
-      desc: 'I configured an IAM Role (Identity and Access Management) with the necessary permissions.',
-      subPoints: [
-        'This was a crucial security step to authorize my application to access RDS resources without exposing sensitive credentials.'
-      ]
-    }
-  ],
-  realValueTitle: 'The Real Value (Cloud-Native Development):',
-  realValue: 'By connecting the Python backend directly to a cloud-managed database (RDS), I moved away from local storage limitations. This approach ensures the application is "Cloud-Native," meaning it is scalable, secure, and accessible from anywhere in the world while maintaining peak performance.',
-        imagePath: 'zero-touch-phase1.png',
-        figureCaption: 'Figure 1: Managed database instance provisioning and endpoint connection routing.'
+        detailedSteps: [
+          {
+            title: 'Database Provisioning',
+            desc: 'I launched a managed database instance on AWS RDS, ensuring high availability and secure storage for our datasets.'
+          },
+          {
+            title: 'SDK Integration',
+            desc: 'Installed and configured boto3 to bridge the gap between my local Python code and the AWS Cloud infrastructure.'
+          },
+          {
+            title: 'Endpoint Configuration',
+            desc: 'I retrieved the unique Database Endpoint from the RDS Connectivity dashboard.',
+            subPoints: [
+              'This endpoint acts as the digital address that allows my application to find and connect to the database in the cloud.'
+            ]
+          },
+          {
+            title: 'Security & IAM Roles',
+            desc: 'I configured an IAM Role (Identity and Access Management) with the necessary permissions.',
+            subPoints: [
+              'This was a crucial security step to authorize my application to access RDS resources without exposing sensitive credentials.'
+            ]
+          }
+        ],
+        realValueTitle: 'The Real Value (Cloud-Native Development):',
+        realValue: 'By connecting the Python backend directly to a cloud-managed database (RDS), I moved away from local storage limitations. This approach ensures the application is "Cloud-Native," meaning it is scalable, secure, and accessible from anywhere in the world while maintaining peak performance.',
+        imagePath: ['AWS Serverless Architecture The Zero-Touch Data Pipeline/RDS1.webp', 'AWS Serverless Architecture The Zero-Touch Data Pipeline/RDS11.webp'],
+        figureCaption: ['Figure 1: Provisioning the Amazon RDS instance (Aurora/PostgreSQL) and enabling IAM Database Authentication for enhanced cloud security and managed access control.', 'Figure 2: Identifying the unique Database Endpoints and Port settings (5432) to establish a secure link between the Python backend and the AWS cloud-hosted database.'],
       },
       {
         name: 'Phase 2: High-Performance NoSQL Storage Setup',
         tools: 'Amazon DynamoDB',
         desc: 'To support the real-time requirements of the dashboard, I implemented a NoSQL storage layer using Amazon DynamoDB. This was chosen specifically for its ability to handle high-frequency read/write operations with single-digit millisecond latency.',
         keyActions: [
-  'Table Schema: I created a table named Backlinks designed to store SEO metric attributes.',
-  'Performance Advantage: Unlike traditional RDS, DynamoDB’s serverless nature allows it to scale instantly with the applications traffic, making it the perfect backbone for a live SEO monitoring tool.'
-],
-        imagePath: 'zero-touch-phase2.png',
-        figureCaption: 'Figure 2: DynamoDB table configuration and primary partition indexing.'
+          'Table Schema: I created a table named Backlinks designed to store SEO metric attributes.',
+          'Performance Advantage: Unlike traditional RDS, DynamoDB’s serverless nature allows it to scale instantly with the applications traffic, making it the perfect backbone for a live SEO monitoring tool.'
+        ],
+        imagePath: ['AWS Serverless Architecture The Zero-Touch Data Pipeline/Dynamodp-2.webp', 'AWS Serverless Architecture The Zero-Touch Data Pipeline/dynamodp-22.webp'],
+        figureCaption: ['Figure 3: Overview of the Amazon DynamoDB (Backlinks) table configuration, showing the partition key and storage metrics.', 'Figure 4: Verifying the successful data migration by exploring the table items, confirming that all SEO metrics have been correctly populated in DynamoDB.']
       },
       {
         name: 'Phase 3: Automated Data Ingestion (Python ETL Script)',
         tools: 'Python (Boto3, Watchdog, Pandas), CSV Dataset',
-        desc: 'In this phase, I developed a custom Python ETL (Extract, Transform, Load) script to bridge the gap between local data and the AWS Cloud. Instead of manual entry, the script automatically parses the backlinks.csv file and prepares it for the cloud environment.',
-        keyActions: [
-  'Data Extraction: The script reads raw SEO metrics (DA, DR, Traffic, etc.) directly from the local file system.',
-  'Schema Mapping: It dynamically maps CSV columns into a Python Dictionary format compatible with Amazon DynamoDB NoSQL structure.',
-  'Batch Ingestion: Using the Boto3 SDK, the script performs automated PutItem operations, ensuring that every backlink is accurately stored with its unique LinkID.',    
-  'Automation Logic: This script serves as the engine for (the Save-to-Update) workflow, allowing for seamless data synchronization without touching the AWS Console."'
-],
-        imagePath: 'zero-touch-phase3.png',
-        figureCaption: 'Figure 3: Python ingestion script executing batch transforms and cloud synchronization.'
+        desc: 'In this phase, I developed a custom Python ETL (Extract, Transform, Load) script to bridge the gap between local data and the AWS Cloud. Instead of manual data entry, the system detects updates in real-time and automates ingestion into Amazon DynamoDB.',
+        content: (
+          <div className="space-y-6 text-xs md:text-sm text-zinc-300 leading-relaxed">
+            {/* Key Actions */}
+            <div>
+              <h4 className="text-sm font-semibold text-emerald-400 font-mono mb-2">
+                Key Actions:
+              </h4>
+              <ul className="list-disc list-inside space-y-2 pl-2 text-zinc-300">
+                <li>
+                  <strong className="text-white">Data Extraction: </strong>
+                  The script reads raw SEO metrics (DA, DR, Traffic, etc.) directly from the local file system.
+                </li>
+                <li>
+                  <strong className="text-white">Schema Mapping: </strong>
+                  It dynamically maps CSV columns into a Python Dictionary format compatible with Amazon DynamoDB NoSQL structure.
+                </li>
+                <li>
+                  <strong className="text-white">Batch Ingestion: </strong>
+                  Using the <strong className="text-white">Boto3 SDK</strong>, the script performs automated <code className="text-amber-400 bg-zinc-900 px-1 py-0.5 rounded font-mono text-xs">PutItem</code> operations, ensuring that every backlink is accurately stored with its unique LinkID.
+                </li>
+                <li>
+                  <strong className="text-white">Automation Logic: </strong>
+                  This script serves as the engine for the &quot;Save-to-Update&quot; workflow, allowing for seamless data synchronization without touching the AWS Console.
+                </li>
+              </ul>
+            </div>
+
+            {/* 1. بلوك الكود بعرض كامل */}
+            <div className="rounded-xl border border-zinc-800 bg-[#0d1117] p-4 overflow-hidden shadow-lg">
+              <div className="flex items-center justify-between pb-3 mb-3 border-b border-zinc-800/80 font-mono text-xs text-zinc-400">
+                <span className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block"></span>
+                  Cloud-based SEO Dashboard.py
+                </span>
+                <span className="text-zinc-500 text-[11px]">Python 3.x</span>
+              </div>
+
+              <pre className="font-mono text-[11px] md:text-xs leading-relaxed text-zinc-200 overflow-x-auto scrollbar-thin max-h-[380px]">
+                <code>{`import boto3
+import pandas as pd
+from decimal import Decimal
+
+# 1. Connect to AWS
+dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+table = dynamodb.Table('Backlinks')
+
+# 2. Read the file
+df = pd.read_csv('backlinks.csv')
+df = df.fillna('')
+
+print(f"Discovery: {len(df)} links found. Starting upload...")
+
+# Get last registered ID to avoid duplicates
+response = table.scan(ProjectionExpression='LinkID')
+items = response.get('Items', [])
+last_aws_id = max([int(i['LinkID']) for i in items]) if items else 0
+
+# 3. Auto Upload Loop
+for index, row in df.iterrows():
+    current_id = index + 1
+    if current_id <= last_aws_id:
+        continue
+
+    item = {
+        'LinkID': current_id,
+        'URL': str(row['Website URL']),
+        'DR': Decimal(str(row['DR (Ahrefs)'] or 0)),
+        'DA': Decimal(str(row['DA (Mangools)'] or 0)),
+        'Traffic': str(row['Organic Traffic']),
+        'SpamScore': str(row['Spam Score (%)']),
+        'Status': str(row['Status']),
+        'Country': str(row['Country'])
+    }
+    table.put_item(Item=item)`}</code>
+              </pre>
+            </div>
+
+            {/* 2. الصورة تحت الكود بعرض كامل وواضح */}
+            <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3">
+              <div className="rounded-lg overflow-hidden border border-zinc-900 bg-black/50">
+                <img
+                  src="/AWS Serverless Architecture The Zero-Touch Data Pipeline/Automated-Data-Ingestion3.webp"
+                  alt="Python ETL script in VS Code"
+                  className="w-full h-auto object-contain max-h-[600px] mx-auto rounded-md"
+                />
+              </div>
+              <p className="mt-2.5 text-center font-mono text-[11px] text-zinc-400">
+                Figure 5: The Python ETL script implemented in VS Code, featuring automated data cleaning and deduplication logic using Boto3.
+              </p>
+            </div>
+          </div>
+        )
       },
       {
         name: 'Phase 4: Serverless Backend with AWS Lambda',
         tools: 'AWS Lambda (Python Runtime)',
         desc: 'Configured event-driven Lambda microservices to process inbound payloads, validate URL status codes, and atomically update destination records in DynamoDB.',
         content: (
-    <div className="space-y-4 text-xs md:text-sm text-zinc-300 leading-relaxed">
-      
-      <div>
-        <h4 className="text-white font-bold text-sm mb-1">How Lambda Connects the Whole Pipeline:</h4>
-        <p className="italic text-zinc-400">
-          &quot;The real power of this Lambda function is that it acts as the <strong className="text-white">bridge</strong> between the data storage and the final application. I configured a <strong className="text-[#ff2e7e]">DynamoDB Stream Trigger</strong> for this function.&quot;
-        </p>
-      </div>
+          <div className="space-y-6 text-xs md:text-sm text-zinc-300 leading-relaxed">
+            {/* قسم النصوص والشرح */}
+            <div className="space-y-4">
+              <div>
+                <h4 className="text-white font-bold text-sm mb-1">How Lambda Connects the Whole Pipeline:</h4>
+                <p className="italic text-zinc-400">
+                  &quot;The real power of this Lambda function is that it acts as the <strong className="text-white">bridge</strong> between the data storage and the final application. I configured a <strong className="text-[#ff2e7e]">DynamoDB Stream Trigger</strong> for this function.&quot;
+                </p>
+              </div>
 
-      <div>
-        <h5 className="text-amber-400 font-semibold mb-2">The Automated Workflow:</h5>
-        <ol className="list-decimal list-inside space-y-1.5 pl-2 text-zinc-300">
-          <li><strong className="text-white">The Trigger:</strong> The moment my Python script saves a new link into DynamoDB, an &apos;Insert Event&apos; is created.</li>
-          <li><strong className="text-white">The Execution:</strong> AWS Lambda detects this event instantly and starts running my code to validate the link.</li>
-          <li><strong className="text-white">The Result:</strong> It updates the &apos;Status&apos; column in the database, which then reflects immediately on the <strong className="text-white">Streamlit Dashboard</strong>.</li>
-        </ol>
-      </div>
+              <div>
+                <h5 className="text-amber-400 font-semibold mb-2">The Automated Workflow:</h5>
+                <ol className="list-decimal list-inside space-y-1.5 pl-2 text-zinc-300">
+                  <li><strong className="text-white">The Trigger:</strong> The moment my Python script saves a new link into DynamoDB, an &apos;Insert Event&apos; is created.</li>
+                  <li><strong className="text-white">The Execution:</strong> AWS Lambda detects this event instantly and starts running my code to validate the link.</li>
+                  <li><strong className="text-white">The Result:</strong> It updates the &apos;Status&apos; column in the database, which then reflects immediately on the <strong className="text-white">Streamlit Dashboard</strong>.</li>
+                </ol>
+              </div>
 
-      <div>
-        <h5 className="text-white font-bold mb-1">What did I do here?</h5>
-        <p>
-          I developed a serverless backend function using <strong className="text-white">AWS Lambda</strong>. Instead of having the Streamlit dashboard talk directly to the database (which can be slow or insecure), Lambda acts as an intermediary layer. It fetches the required data from DynamoDB, processes it, and sends it back to the application.
-        </p>
-      </div>
+              <div>
+                <h5 className="text-white font-bold mb-1">What did I do here?</h5>
+                <p>
+                  I developed a serverless backend function using <strong className="text-white">AWS Lambda</strong>. Instead of having the Streamlit dashboard talk directly to the database (which can be slow or insecure), Lambda acts as an intermediary layer. It fetches the required data from DynamoDB, processes it, and sends it back to the application.
+                </p>
+              </div>
 
-      <div>
-        <h5 className="text-emerald-400 font-semibold mb-2">The Benefits (Why Lambda?):</h5>
-        <ol className="list-decimal list-inside space-y-1.5 pl-2 text-zinc-300">
-          <li><strong className="text-white">Event-Driven Execution:</strong> The code runs only when the dashboard requests data, so we don&apos;t pay for idle server time.</li>
-          <li><strong className="text-white">Zero Management:</strong> AWS handles all the infrastructure, scaling, and availability automatically.</li>
-          <li><strong className="text-white">Security:</strong> By using Lambda, we keep our database credentials and complex logic hidden from the front-end.</li>
-        </ol>
-      </div>
+              <div>
+                <h5 className="text-emerald-400 font-semibold mb-2">The Benefits (Why Lambda?):</h5>
+                <ol className="list-decimal list-inside space-y-1.5 pl-2 text-zinc-300">
+                  <li><strong className="text-white">Event-Driven Execution:</strong> The code runs only when the dashboard requests data, so we don&apos;t pay for idle server time.</li>
+                  <li><strong className="text-white">Zero Management:</strong> AWS handles all the infrastructure, scaling, and availability automatically.</li>
+                  <li><strong className="text-white">Security:</strong> By using Lambda, we keep our database credentials and complex logic hidden from the front-end.</li>
+                </ol>
+              </div>
 
-      <p className="border-l-2 border-[#ff2e7e] pl-3 py-1 italic text-zinc-400">
-        &quot;Without Lambda, the system would just be a static database. With it, the entire pipeline—from the local CSV file to the cloud dashboard—becomes a <strong className="text-white">fully automated, living ecosystem</strong>.&quot;
-      </p>
+              <p className="border-l-2 border-[#ff2e7e] pl-3 py-1 italic text-zinc-400">
+                &quot;Without Lambda, the system would just be a static database. With it, the entire pipeline—from the local CSV file to the cloud dashboard—becomes a <strong className="text-white">fully automated, living ecosystem</strong>.&quot;
+              </p>
 
-      <div>
-        <h5 className="text-white font-bold mb-2">Permissions &amp; IAM Roles:</h5>
-        <ul className="list-disc list-inside space-y-1 pl-2 text-zinc-300">
-          <li><strong className="text-white">What I did:</strong> I manually attached an IAM Role to this Lambda function.</li>
-          <li><strong className="text-white">The Permission:</strong> I added a policy (like <code className="text-[#ff2e7e] bg-zinc-900 px-1.5 py-0.5 rounded">AmazonDynamoDBReadOnlyAccess</code>) that grants this specific Lambda function the &quot;right&quot; to read data from our <code className="text-amber-400 bg-zinc-900 px-1.5 py-0.5 rounded">Backlinks</code> table.</li>
-        </ul>
-      </div>
+              <div>
+                <h5 className="text-white font-bold mb-2">Permissions &amp; IAM Roles:</h5>
+                <ul className="list-disc list-inside space-y-1 pl-2 text-zinc-300">
+                  <li><strong className="text-white">What I did:</strong> I manually attached an IAM Role to this Lambda function.</li>
+                  <li><strong className="text-white">The Permission:</strong> I added a policy (like <code className="text-[#ff2e7e] bg-zinc-900 px-1.5 py-0.5 rounded">AmazonDynamoDBReadOnlyAccess</code>) that grants this specific Lambda function the &quot;right&quot; to read data from our <code className="text-amber-400 bg-zinc-900 px-1.5 py-0.5 rounded">Backlinks</code> table.</li>
+                </ul>
+              </div>
+            </div>
 
-    </div>
-  ),
-        imagePath: 'zero-touch-phase4.png',
-        figureCaption: 'Figure 4: Lambda function execution graph and IAM permission mapping.'
+            {/* 1. الصورة الأولى: واجهة Lambda في كونسول AWS */}
+            <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3">
+              <div className="rounded-lg overflow-hidden border border-zinc-900 bg-black/50">
+                <img
+                  src="/AWS Serverless Architecture The Zero-Touch Data Pipeline/lambda4.webp"
+                  alt="Figure 6: The AWS Lambda function written in Python, acting as a serverless API to query SEO metrics from DynamoDB."
+                  className="w-full h-auto object-contain max-h-[600px] mx-auto rounded-md"
+                />
+              </div>
+              <p className="mt-2.5 text-center font-mono text-[11px] text-zinc-400">
+                Figure 6: The AWS Lambda function written in Python, acting as a serverless API to query SEO metrics from DynamoDB.
+              </p>
+            </div>
+
+            {/* 2. بلوك الكود البرمجي لكود دالة Lambda */}
+            <div className="rounded-xl border border-zinc-800 bg-[#0d1117] p-4 overflow-hidden shadow-lg">
+              <div className="flex items-center justify-between pb-3 mb-3 border-b border-zinc-800/80 font-mono text-xs text-zinc-400">
+                <span className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block"></span>
+                  lambda_function.py
+                </span>
+                <span className="text-zinc-500 text-[11px]">Python 3.x</span>
+              </div>
+
+              <pre className="font-mono text-[11px] md:text-xs leading-relaxed text-zinc-200 overflow-x-auto scrollbar-thin max-h-[420px]">
+                <code>{`import boto3
+import json
+from decimal import Decimal
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('Backlinks')
+
+def decimal_default(obj):
+    if isinstance(obj, Decimal):
+        return int(obj) if obj % 1 == 0 else float(obj)
+    raise TypeError
+
+def lambda_handler(event, context):
+    try:
+        response = table.scan()
+        items = response.get('Items', [])
+        
+        while 'LastEvaluatedKey' in response:
+            response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
+            items.extend(response.get('Items', []))
+            
+        return {
+            'statusCode': 200,
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            'body': json.dumps(items, default=decimal_default)
+        }
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            'body': json.dumps({'error': str(e)})
+        }`}</code>
+              </pre>
+            </div>
+
+            {/* 3. الصورة الثانية: إعدادات وصلاحيات IAM Role */}
+            <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3">
+              <div className="rounded-lg overflow-hidden border border-zinc-900 bg-black/50">
+                <img
+                  src="/AWS Serverless Architecture The Zero-Touch Data Pipeline/lambda44.webp"
+                  alt="Figure 7: Configuring IAM Roles and Permissions to authorize the Lambda function to securely access DynamoDB resources."
+                  className="w-full h-auto object-contain max-h-[600px] mx-auto rounded-md"
+                />
+              </div>
+              <p className="mt-2.5 text-center font-mono text-[11px] text-zinc-400">
+                Figure 7: Configuring IAM Roles and Permissions to authorize the Lambda function to securely access DynamoDB resources.
+              </p>
+            </div>
+          </div>
+        )
       },
       {
-        name: 'Phase 5: Live Dashboard & Full Automation',
+        name: 'Phase 5: Local Automation with Python Watchdog',
         tools: 'Python, Watchdog Library & Subprocess',
         desc: 'To ensure the dashboard is always up-to-date without manual intervention, I developed an automation script (auto_uploader.py). This script acts as a "File Watcher" that monitors the local dataset for any changes.',
         content: (
-    <div className="space-y-4 text-xs md:text-sm text-zinc-300 leading-relaxed">
-      <div>
-        <h4 className="text-white font-bold text-sm mb-2">How it works:</h4>
-        <ul className="list-disc list-inside space-y-2 pl-2">
-          <li>
-            <strong className="text-white">Real-time Monitoring: </strong>
-            Using the <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">watchdog</code> library, the script tracks the <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">backlinks.csv</code> file.
-          </li>
-          <li>
-            <strong className="text-white">Automatic Execution: </strong>
-            The moment a change is saved in the CSV file, the script triggers the main upload logic (<code className="text-emerald-400 bg-zinc-900 border border-zinc-850 px-1.5 py-0.5 rounded font-mono text-xs">Cloud-based SEO Dashboard.py</code>) via the <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">subprocess</code> module.
-          </li>
-          <li>
-            <strong className="text-white">The Real Value: </strong>
-            This eliminates the need for manual uploads, ensuring that any new SEO data added locally is reflected in the AWS Cloud environment and the Streamlit dashboard instantly.
-          </li>
-        </ul>
-      </div>
-    </div>
-  ),
-        imagePath: 'zero-touch-phase5.png',
-        figureCaption: 'Figure 5: Live Streamlit cloud interface reflecting real-time backlink audit metrics.'
-      }
+          <div className="space-y-6 text-xs md:text-sm text-zinc-300 leading-relaxed">
+            {/* قسم الشرح وطريقة العمل */}
+            <div>
+              <h4 className="text-white font-bold text-sm mb-2">How it works:</h4>
+              <ul className="list-disc list-inside space-y-2 pl-2 text-zinc-300">
+                <li>
+                  <strong className="text-white">Real-time Monitoring: </strong>
+                  Using the{' '}
+                  <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                    watchdog
+                  </code>{' '}
+                  library, the script tracks the{' '}
+                  <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                    backlinks.csv
+                  </code>{' '}
+                  file.
+                </li>
+                <li>
+                  <strong className="text-white">Automatic Execution: </strong>
+                  The moment a change is saved in the CSV file, the script triggers the main upload logic ({' '}
+                  <code className="text-emerald-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                    Cloud-based SEO Dashboard.py
+                  </code>{' '}
+                  ) via the{' '}
+                  <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                    subprocess
+                  </code>{' '}
+                  module.
+                </li>
+                <li>
+                  <strong className="text-white">The Real Value: </strong>
+                  This eliminates the need for manual uploads, ensuring that any new SEO data added locally is reflected in the AWS Cloud environment and the Streamlit dashboard instantly.
+                </li>
+              </ul>
+            </div>
+
+            {/* 1. نافذة الكود البرمجي بعرض كامل */}
+            <div className="rounded-xl border border-zinc-800 bg-[#0d1117] p-4 overflow-hidden shadow-lg">
+              <div className="flex items-center justify-between pb-3 mb-3 border-b border-zinc-800/80 font-mono text-xs text-zinc-400">
+                <span className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block"></span>
+                  auto_uploader.py
+                </span>
+                <span className="text-zinc-500 text-[11px]">Python 3.x</span>
+              </div>
+
+              <pre className="font-mono text-[11px] md:text-xs leading-relaxed text-zinc-200 overflow-x-auto scrollbar-thin max-h-[380px]">
+                <code>{`import time
+import subprocess
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+
+FILE_TO_WATCH = "backlinks.csv" 
+UPLOAD_SCRIPT = "Cloud-based SEO Dashboard.py"
+
+class MyHandler(FileSystemEventHandler):
+    def on_modified(self, event):
+        print(f"File modified: {event.src_path}")
+        
+        if event.src_path.endswith(FILE_TO_WATCH):
+            print(f"🚀 Detected change in {FILE_TO_WATCH}... Uploading to AWS!")
+            subprocess.run(["python", UPLOAD_SCRIPT])
+            print("✅ Done! Changes uploaded to AWS.")
+
+if __name__ == "__main__":
+    event_handler = MyHandler()
+    observer = Observer()
+    observer.schedule(event_handler, path='.', recursive=False)
+    observer.start()
+    print(f"👀 Watcher is active! Waiting for saves on {FILE_TO_WATCH}...")
+    
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        observer.stop()
+    observer.join()`}</code>
+              </pre>
+            </div>
+
+            {/* 2. الصورة تحت الكود بعرض كامل وواضح */}
+            <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3">
+              <div className="rounded-lg overflow-hidden border border-zinc-900 bg-black/50">
+                <img
+                  src="/AWS Serverless Architecture The Zero-Touch Data Pipeline/CODE_5.webp"
+                  alt="Figure 8: Implementing a Python-based File Watcher to automate the data ingestion process whenever local records are updated."
+                  className="w-full h-auto object-contain max-h-[600px] mx-auto rounded-md"
+                />
+              </div>
+              <p className="mt-2.5 text-center font-mono text-[11px] text-zinc-400">
+                Figure 8: Implementing a Python-based File Watcher to automate the data ingestion process whenever local records are updated.
+              </p>
+            </div>
+          </div>
+        ),
+      },
+      {
+        name: 'Phase 6: Preparing the Project for the Cloud',
+        tools: 'GitHub & Python & Requirements file',
+        content: (
+          <div className="space-y-4 text-xs md:text-sm text-zinc-300 leading-relaxed">
+            <div>
+              <h4 className="text-white font-bold text-sm mb-1">Moving from Local to Global:</h4>
+              <p>
+                After finishing the code on my laptop, it was time to move it to the cloud so anyone could see it. I uploaded everything to <strong className="text-white">GitHub</strong>. This wasn&apos;t just about saving the files; it was about making the code &quot;Cloud-Ready.&quot; I made sure the code is clean and doesn&apos;t rely on any specific folders on my personal computer, so it can run smoothly on any server.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="text-white font-bold text-sm mb-1">The &quot;Requirements&quot; List:</h4>
+              <p>
+                Every cloud server needs to know which tools to use. I created a simple file called{' '}
+                <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                  requirements.txt
+                </code>
+                . Think of it as a &quot;Manual&quot; for the server; it lists everything the project needs to run, like{' '}
+                <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                  streamlit
+                </code>{' '}
+                and{' '}
+                <code className="text-emerald-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                  Pandas
+                </code>
+                . This way, the server installs everything automatically, and the project works perfectly from the first second.
+              </p>
+            </div>
+          </div>
+        ),
+        imagePath: ['AWS Serverless Architecture The Zero-Touch Data Pipeline/GITHUB6.webp', 'AWS Serverless Architecture The Zero-Touch Data Pipeline/GITHUB-66.webp'],
+        figureCaption: ['Figure 9: My GitHub repository where I keep the final version of the code ready for the world to see.', 'Figure 9: A list of the Python tools the server needs to install to run the dashboard correctly.'],
+      },
+      {
+        name: 'Phase 7: The Live Dashboard & Full Automation',
+        tools: 'Streamlit Cloud, GitHub & Automation Script',
+        content: (
+          <div className="space-y-4 text-xs md:text-sm text-zinc-300 leading-relaxed">
+            <div>
+              <h4 className="text-white font-bold text-sm mb-1">Bringing the App to Life:</h4>
+              <p>
+                This is the final step where everything comes together. I linked my <strong className="text-white">GitHub</strong> repository to <strong className="text-white">Streamlit Cloud</strong>. Now, the dashboard is live on the internet and accessible via a public URL. In the setup (as shown in the screenshot), I pointed Streamlit to my main file{' '}
+                <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                  my_seo_dashboard.py
+                </code>
+                , and it automatically built the entire interface.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <h4 className="text-white font-bold text-sm mb-1">Magic Background Automation:</h4>
+              <p>
+                The best part of this project is that I don&apos;t need to touch any code anymore. I don&apos;t even need to open VS Code or Streamlit to update the data.
+              </p>
+              <ul className="list-disc list-inside space-y-2 pl-2">
+                <li>
+                  <strong className="text-white">How it works: </strong>
+                  I just open my local{' '}
+                  <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                    backlinks.csv
+                  </code>{' '}
+                  file, add a new link, and save it.
+                </li>
+                <li>
+                  <strong className="text-white">The Result: </strong>
+                  My automation script detects the change, checks if the link is &quot;Live (200)&quot; or &quot;Broken,&quot; and pushes it to the AWS cloud. Seconds later, the live dashboard updates itself automatically with the new data.
+                </li>
+              </ul>
+            </div>
+          </div>
+        ),
+        realValue:
+          'This creates a seamless workflow. I can manage my entire SEO backlink portfolio just by editing a simple spreadsheet, while the complex AWS infrastructure and the Streamlit app handle all the heavy lifting in the background.',
+        imagePath: ['AWS Serverless Architecture The Zero-Touch Data Pipeline/streamlit-7.webp', 'AWS Serverless Architecture The Zero-Touch Data Pipeline/STREAMLIT8.webp'],
+        figureCaption: ['Figure 10: Connecting my GitHub code to Streamlit Cloud to launch the live web application.', 'Figure 11: The final step where the app is running live, perfectly synced with my GitHub repository and AWS database.'],
+      },
     ],
-    keyTakeaway: 'Completely autonomous event-driven architecture turning static local audits into zero-touch cloud-synchronized intelligence.',
-    coverImage: 'cloud-project-2.jpg'
+    conclusionContent: (
+      <div className="space-y-6 text-xs md:text-sm text-zinc-300 leading-relaxed pt-2">
+        <div>
+          <h4 className="text-sm font-semibold text-emerald-400 font-mono mb-2">
+            The &quot;Save-to-Update&quot; Workflow:
+          </h4>
+          <p className="mb-3">
+            The true innovation in this system is the <strong className="text-white">hands-off automation</strong>[cite: 25]. It transforms a simple manual task into a sophisticated cloud operation:[cite: 25]
+          </p>
+          <ul className="list-disc list-inside space-y-2.5 pl-2 text-zinc-300">
+            <li>
+              <strong className="text-white">One-Click Update: </strong>
+              I don&apos;t need to open VS Code, Streamlit, or the AWS Console[cite: 25]. The moment I edit the local{' '}
+              <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                backlinks.csv
+              </code>{' '}
+              and press <strong className="text-white">Save</strong>, the background automation script instantly detects the change[cite: 25].
+            </li>
+            <li>
+              <strong className="text-white">Instant Cloud Ingestion: </strong>
+              The script automatically validates each link (checking for 200 OK vs. Broken status) and pushes the fresh data to the <strong className="text-white">AWS Cloud</strong> backend[cite: 25].
+            </li>
+            <li>
+              <strong className="text-white">Real-Time Sync: </strong>
+              The Live Dashboard reflects these changes immediately, ensuring that stakeholders always have access to the most accurate and up-to-date SEO metrics[cite: 25].
+            </li>
+          </ul>
+        </div>
+
+        <div className="pt-2 border-t border-zinc-800/60">
+          <h4 className="text-sm font-semibold text-amber-400 font-mono mb-2">
+            See it in Action:
+          </h4>
+          <p className="text-zinc-300 mb-3">
+            You can explore the live, interactive version of the dashboard and see the results of this AWS automation here:[cite: 25]
+          </p>
+          <a
+            href="https://your-live-demo-url-here.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 text-amber-300 hover:text-amber-200 font-mono text-xs transition-colors"
+          >
+            <span>👉</span>
+            <span className="underline underline-offset-4">Live SEO Backlinks Dashboard</span>[cite: 25]
+          </a>
+        </div>
+      </div>
+    ),
+    coverImage: '/AWS Serverless Architecture The Zero-Touch Data Pipeline/STREAMLIT8.webp',
   },
   {
     id: 'conversational-agent',
@@ -377,20 +678,20 @@ const cloudProjects: CloudProject[] = [
         tools: 'AWS Budgets',
         desc: 'The first and most critical step was establishing a "Safety First" environment. Before deploying any AI services, I prioritized cost management and cloud governance to ensure the project remains sustainable and within the Free Tier limits.',
         detailedStepsTitle: 'Detailed Technical Steps:',
-  detailedSteps: [
-    {
-      title: 'Implementing "My Zero-Spend Budget"',
-      desc: 'I designed a custom budget monitoring system to prevent any unintended cloud expenditures.'
-    },
-    {
-      title: 'Threshold Configuration',
-      desc: 'I set a strict budget limit of $1.00, allowing me to experiment with advanced AI services without financial risk.'
-    },
-    {
-      title: 'Anomaly Detection & Alerts',
-      desc: 'The system was configured to monitor usage in real-time, sending immediate notifications if the forecasted spending approached the defined threshold. This proactive approach ensures 100% financial visibility throughout the development lifecycle.'
-    }
-  ],
+        detailedSteps: [
+          {
+            title: 'Implementing "My Zero-Spend Budget"',
+            desc: 'I designed a custom budget monitoring system to prevent any unintended cloud expenditures.'
+          },
+          {
+            title: 'Threshold Configuration',
+            desc: 'I set a strict budget limit of $1.00, allowing me to experiment with advanced AI services without financial risk.'
+          },
+          {
+            title: 'Anomaly Detection & Alerts',
+            desc: 'The system was configured to monitor usage in real-time, sending immediate notifications if the forecasted spending approached the defined threshold. This proactive approach ensures 100% financial visibility throughout the development lifecycle.'
+          }
+        ],
         imagePath: 'lex-phase1.png',
         figureCaption: 'Figure 1: AWS Budgets threshold parameters established for zero-cost sandbox execution.'
       },
@@ -399,20 +700,20 @@ const cloudProjects: CloudProject[] = [
         tools: 'Amazon Lex (V2)',
         desc: 'Once the financial safeguards were in place, I moved to the core infrastructure phase. This involved provisioning the Amazon Lex V2 engine, which serves as the "brain" of the conversational agent, capable of understanding natural language and managing complex dialogue flows.',
         detailedStepsTitle: 'Key Technical Details:',
-  detailedSteps: [
-    {
-      title: 'Bot Instance Deployment',
-      desc: 'I initiated the deployment of the AI agent, specifically tailored for self-service automation. This involved choosing the V2 console for its advanced NLU (Natural Language Understanding) capabilities.'
-    },
-    {
-      title: 'Localized Configuration',
-      desc: 'I configured the bot instance, named "BaitAlNokhada_Helper", specifically to support the linguistic nuances of the target audience.'
-    },
-    {
-      title: 'Availability Verification',
-      desc: 'I successfully validated the bot\'s status as "Available", confirming that the cloud resources were correctly provisioned and the environment was ready for the logic and integration phases.'
-    }
-  ],
+        detailedSteps: [
+          {
+            title: 'Bot Instance Deployment',
+            desc: 'I initiated the deployment of the AI agent, specifically tailored for self-service automation. This involved choosing the V2 console for its advanced NLU (Natural Language Understanding) capabilities.'
+          },
+          {
+            title: 'Localized Configuration',
+            desc: 'I configured the bot instance, named "BaitAlNokhada_Helper", specifically to support the linguistic nuances of the target audience.'
+          },
+          {
+            title: 'Availability Verification',
+            desc: 'I successfully validated the bot\'s status as "Available", confirming that the cloud resources were correctly provisioned and the environment was ready for the logic and integration phases.'
+          }
+        ],
         imagePath: 'lex-phase2.png',
         figureCaption: 'Figure 2: Amazon Lex intent modeling and sample Arabic utterance training sets.'
       },
@@ -421,20 +722,20 @@ const cloudProjects: CloudProject[] = [
         tools: 'Amazon Lex (V2) - Language Support: Arabic (UAE)',
         desc: 'In this stage, I architected the interaction model by defining specific Intents to categorize user goals. A crucial part of this phase was localizing the bot to support Arabic (UAE), ensuring the agent can effectively process regional dialects and cultural nuances within the conversational flow.',
         detailedStepsTitle: 'Detailed Technical Steps:',
-  detailedSteps: [
-    {
-      title: 'Intent Categorization',
-      desc: 'I established a set of core intents, including GreetingIntent for initial engagement and the primary business intent: OrderTent.'
-    },
-    {
-      title: 'Dynamic Language Processing',
-      desc: 'By selecting the UAE-specific Arabic model, I enabled the bot to handle localized phrasing, which is essential for a high-quality user experience in the regional market.'
-    },
-    {
-      title: 'Intent Build Verification',
-      desc: 'I successfully executed the build process, as confirmed by the "Successfully built" status, ensuring the NLU model was ready for utterance training.'
-    }
-  ],
+        detailedSteps: [
+          {
+            title: 'Intent Categorization',
+            desc: 'I established a set of core intents, including GreetingIntent for initial engagement and the primary business intent: OrderTent.'
+          },
+          {
+            title: 'Dynamic Language Processing',
+            desc: 'By selecting the UAE-specific Arabic model, I enabled the bot to handle localized phrasing, which is essential for a high-quality user experience in the regional market.'
+          },
+          {
+            title: 'Intent Build Verification',
+            desc: 'I successfully executed the build process, as confirmed by the "Successfully built" status, ensuring the NLU model was ready for utterance training.'
+          }
+        ],
         imagePath: 'lex-phase3.png',
         figureCaption: 'Figure 3: Multi-turn slot definition and user input confirmation rules.'
       },
@@ -443,20 +744,20 @@ const cloudProjects: CloudProject[] = [
         tools: 'Natural Language Understanding (NLU) - Sample Utterances',
         desc: 'To ensure high accuracy in user request recognition, I implemented "Utterance Engineering." This involved training the bot on a diverse set of sample phrases while fine-tuning the NLU engines sensitivity to handle variations in human speech.',
         detailedStepsTitle: 'Key Technical Details:',
-  detailedSteps: [
-    {
-      title: 'Sample Utterance Development',
-      desc: 'I curated 13 high-impact sample utterances in Arabic, ranging from direct requests like "أريد خيمة" to complex inquiries involving specific variables like {TentType} and {TentSize}.'
-    },
-    {
-      title: 'Confidence Threshold Optimization',
-      desc: 'I configured the bot with a 40% Confidence Threshold. This allows the Lex engine to intelligently predict user intent even when the input isn\'t a 100% match, recognizing phrases that are conceptually close to the trained samples (e.g., identifying "أسعار" as a trigger for a pricing or ordering inquiry).'
-    },
-    {
-      title: 'Contextual Slot Integration',
-      desc: 'I integrated dynamic slots within the utterances to capture essential data points in real-time, allowing for a more natural and fluid interaction during the tent ordering process.'
-    }
-  ],
+        detailedSteps: [
+          {
+            title: 'Sample Utterance Development',
+            desc: 'I curated 13 high-impact sample utterances in Arabic, ranging from direct requests like "أريد خيمة" to complex inquiries involving specific variables like {TentType} and {TentSize}.'
+          },
+          {
+            title: 'Confidence Threshold Optimization',
+            desc: 'I configured the bot with a 40% Confidence Threshold. This allows the Lex engine to intelligently predict user intent even when the input isn\'t a 100% match, recognizing phrases that are conceptually close to the trained samples (e.g., identifying "أسعار" as a trigger for a pricing or ordering inquiry).'
+          },
+          {
+            title: 'Contextual Slot Integration',
+            desc: 'I integrated dynamic slots within the utterances to capture essential data points in real-time, allowing for a more natural and fluid interaction during the tent ordering process.'
+          }
+        ],
         imagePath: 'lex-phase4.png',
         figureCaption: 'Figure 4: Twilio WhatsApp sandbox integration verifying message roundtrips.'
       },
@@ -465,72 +766,72 @@ const cloudProjects: CloudProject[] = [
         tools: 'Amazon Lex (V2) - Custom & Built-in Slot Types',
         desc: 'In this phase, I engineered the "Slots" system, which acts as the data-gathering engine of the bot. I configured a multi-turn dialogue flow to ensure the agent captures all necessary variables required to fulfill a tent reservation inquiry accurately.',
         content: (
-    <div className="space-y-4 text-xs md:text-sm text-zinc-300 leading-relaxed">
-      <div>
-        <h4 className="text-white font-bold text-sm mb-2 font-mono text-emerald-400">
-          Detailed Technical Steps:
-        </h4>
-        <ul className="list-disc list-inside space-y-3 pl-2 text-zinc-300">
-          <li>
-            <strong className="text-white">Custom Slot Type Engineering ( </strong>
-            <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
-              TentType
-            </code>
-            <strong className="text-white"> ): </strong>
-            I manually created a custom slot type named{' '}
-            <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
-              Tent_Kinds
-            </code>{' '}
-            to categorize specific inventory (e.g., Wedding, Events, Majesty). This ensures the bot only accepts valid categories predefined by the business.
-          </li>
-
-          <li className="space-y-2">
+          <div className="space-y-4 text-xs md:text-sm text-zinc-300 leading-relaxed">
             <div>
-              <strong className="text-white">Built-in Entity Extraction: </strong>
-              I leveraged Amazon&apos;s built-in slot types for high-precision data extraction:
-            </div>
-            <ul className="pl-6 space-y-1.5 list-circle list-inside text-zinc-400">
-              <li>
-                <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
-                  TentSize
-                </code>
-                {' '}: Using{' '}
-                <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
-                  AMAZON.AlphaNumeric
-                </code>{' '}
-                to capture dimensions.
-              </li>
-              <li>
-                <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
-                  Location
-                </code>
-                {' '}: Using{' '}
-                <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
-                  AMAZON.City
-                </code>{' '}
-                to identify the specific emirate or city.
-              </li>
-              <li>
-                <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
-                  PhoneNumber
-                </code>
-                {' '}: Using{' '}
-                <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
-                  AMAZON.PhoneNumber
-                </code>{' '}
-                to ensure the contact data is in the correct format for follow-ups.
-              </li>
-            </ul>
-          </li>
+              <h4 className="text-white font-bold text-sm mb-2 font-mono text-emerald-400">
+                Detailed Technical Steps:
+              </h4>
+              <ul className="list-disc list-inside space-y-3 pl-2 text-zinc-300">
+                <li>
+                  <strong className="text-white">Custom Slot Type Engineering ( </strong>
+                  <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                    TentType
+                  </code>
+                  <strong className="text-white"> ): </strong>
+                  I manually created a custom slot type named{' '}
+                  <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                    Tent_Kinds
+                  </code>{' '}
+                  to categorize specific inventory (e.g., Wedding, Events, Majesty). This ensures the bot only accepts valid categories predefined by the business.
+                </li>
 
-          <li>
-            <strong className="text-white">Contextual Prompting: </strong>
-            For each slot, I designed localized Arabic prompts (e.g., &quot;في أي إمارة محتاج الخيمة؟&quot;) to guide the user naturally through the data collection process.
-          </li>
-        </ul>
-      </div>
-    </div>
-  ),
+                <li className="space-y-2">
+                  <div>
+                    <strong className="text-white">Built-in Entity Extraction: </strong>
+                    I leveraged Amazon&apos;s built-in slot types for high-precision data extraction:
+                  </div>
+                  <ul className="pl-6 space-y-1.5 list-circle list-inside text-zinc-400">
+                    <li>
+                      <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                        TentSize
+                      </code>
+                      {' '}: Using{' '}
+                      <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                        AMAZON.AlphaNumeric
+                      </code>{' '}
+                      to capture dimensions.
+                    </li>
+                    <li>
+                      <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                        Location
+                      </code>
+                      {' '}: Using{' '}
+                      <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                        AMAZON.City
+                      </code>{' '}
+                      to identify the specific emirate or city.
+                    </li>
+                    <li>
+                      <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                        PhoneNumber
+                      </code>
+                      {' '}: Using{' '}
+                      <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                        AMAZON.PhoneNumber
+                      </code>{' '}
+                      to ensure the contact data is in the correct format for follow-ups.
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  <strong className="text-white">Contextual Prompting: </strong>
+                  For each slot, I designed localized Arabic prompts (e.g., &quot;في أي إمارة محتاج الخيمة؟&quot;) to guide the user naturally through the data collection process.
+                </li>
+              </ul>
+            </div>
+          </div>
+        ),
         imagePath: 'lex-phase5.png',
         figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
       },
@@ -539,24 +840,24 @@ const cloudProjects: CloudProject[] = [
         tools: 'Confirmation Prompts, Fulfillment Logic, Closing Responses',
         desc: 'The final stage of the intent design focused on the "Handshake" between the user and the system. I implemented a robust verification and fulfillment flow to transition the conversation from data gathering to successful service execution.',
         detailedStepsTitle: 'Detailed Technical Steps:',
-  detailedSteps: [
-    {
-      title: 'Confirmation Management',
-      desc: 'I activated a Confirmation Prompt to act as a final checkpoint. The bot summarizes the user\'s choices (e.g., "...تمام يا فندم، هل نود تأكيد طلب خيمة") before proceeding, reducing errors and improving user trust.'
-    },
-    {
-      title: 'Fulfillment Strategy',
-      desc: 'I configured the Fulfillment layer to trigger once the user confirms. This stage is designed to bridge the Lex bot with backend logic (like AWS Lambda) to record the order in a database.'
-    },
-    {
-      title: 'Closing Response & Dynamic Variables',
-      desc: 'I designed a professional Closing Response that dynamically references captured data, such as the user\'s phone number {PhoneNumber}, to provide a personalized exit message (e.g., "...تم استلام طلبك بنجاح... سنتواصل معك على الرقم").'
-    },
-    {
-      title: 'Session Termination',
-      desc: 'Configured the "Next step in conversation" to End Conversation, ensuring a clean session closure and resource optimization.'
-    }
-  ],
+        detailedSteps: [
+          {
+            title: 'Confirmation Management',
+            desc: 'I activated a Confirmation Prompt to act as a final checkpoint. The bot summarizes the user\'s choices (e.g., "...تمام يا فندم، هل نود تأكيد طلب خيمة") before proceeding, reducing errors and improving user trust.'
+          },
+          {
+            title: 'Fulfillment Strategy',
+            desc: 'I configured the Fulfillment layer to trigger once the user confirms. This stage is designed to bridge the Lex bot with backend logic (like AWS Lambda) to record the order in a database.'
+          },
+          {
+            title: 'Closing Response & Dynamic Variables',
+            desc: 'I designed a professional Closing Response that dynamically references captured data, such as the user\'s phone number {PhoneNumber}, to provide a personalized exit message (e.g., "...تم استلام طلبك بنجاح... سنتواصل معك على الرقم").'
+          },
+          {
+            title: 'Session Termination',
+            desc: 'Configured the "Next step in conversation" to End Conversation, ensuring a clean session closure and resource optimization.'
+          }
+        ],
         imagePath: 'lex-phase5.png',
         figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
       },
@@ -565,55 +866,55 @@ const cloudProjects: CloudProject[] = [
         tools: 'Amazon Lex (V2) - Greeting Intent Configuration',
         desc: 'To enhance the User Experience (UX) and ensure a natural conversational flow, I implemented a dedicated GreetingIntent. This phase was crucial to prevent interaction failures when users initiate conversations with social cues (like "Hello" or "Good Morning") rather than direct service requests. By handling these introductory utterances, the bot creates a welcoming environment and maintains high engagement levels.',
         content: (
-    <div className="space-y-4 text-xs md:text-sm text-zinc-300 leading-relaxed">
-      <div>
-        <h4 className="text-white font-bold text-sm mb-2 font-mono text-emerald-400">
-          How it works:
-        </h4>
-        <ul className="list-disc list-inside space-y-3 pl-2 text-zinc-300">
-          <li>
-            <strong className="text-white">Intent Design ( </strong>
-            <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
-              GreetingIntent
-            </code>
-            <strong className="text-white"> ): </strong>
-            I created a specific intent to capture all forms of introductory salutations. This acts as a &quot;Gatekeeper&quot; that recognizes the start of a conversation and prepares the bot for subsequent business requests.
-          </li>
-
-          <li className="space-y-2">
+          <div className="space-y-4 text-xs md:text-sm text-zinc-300 leading-relaxed">
             <div>
-              <strong className="text-white">Multilingual Utterance Training: </strong>
-              I trained the intent on a diverse range of social triggers in both Arabic and English (as shown in the configuration), such as:
+              <h4 className="text-white font-bold text-sm mb-2 font-mono text-emerald-400">
+                How it works:
+              </h4>
+              <ul className="list-disc list-inside space-y-3 pl-2 text-zinc-300">
+                <li>
+                  <strong className="text-white">Intent Design ( </strong>
+                  <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                    GreetingIntent
+                  </code>
+                  <strong className="text-white"> ): </strong>
+                  I created a specific intent to capture all forms of introductory salutations. This acts as a &quot;Gatekeeper&quot; that recognizes the start of a conversation and prepares the bot for subsequent business requests.
+                </li>
+
+                <li className="space-y-2">
+                  <div>
+                    <strong className="text-white">Multilingual Utterance Training: </strong>
+                    I trained the intent on a diverse range of social triggers in both Arabic and English (as shown in the configuration), such as:
+                  </div>
+                  <ul className="pl-6 space-y-1.5 list-circle list-inside text-zinc-400">
+                    <li>
+                      <strong className="text-zinc-300">Arabic (UAE): </strong>
+                      &quot;السلام عليكم&quot;, &quot;صباح الخير&quot;, &quot;مرحبا&quot;, &quot;هلا&quot;.
+                    </li>
+                    <li>
+                      <strong className="text-zinc-300">English/Transliterated: </strong>
+                      &quot;Good Morning&quot;, &quot;Hello&quot;.
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  <strong className="text-white">Contextual Response Logic: </strong>
+                  I configured the bot to respond with appropriate counter-greetings (e.g., &quot;وعليكم السلام&quot;) while subtly prompting the user toward the main service intent (
+                  <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                    OrderTent
+                  </code>
+                  ). This ensures the conversation doesn&apos;t hit a dead-end and guides the user smoothly to the goal.
+                </li>
+
+                <li>
+                  <strong className="text-white">NLU Accuracy Optimization: </strong>
+                  By separating social greetings from business logic, I reduced the &quot;Noise&quot; in the NLU model, ensuring that the primary ordering intent remains highly accurate and focused only on booking-related phrases.
+                </li>
+              </ul>
             </div>
-            <ul className="pl-6 space-y-1.5 list-circle list-inside text-zinc-400">
-              <li>
-                <strong className="text-zinc-300">Arabic (UAE): </strong>
-                &quot;السلام عليكم&quot;, &quot;صباح الخير&quot;, &quot;مرحبا&quot;, &quot;هلا&quot;.
-              </li>
-              <li>
-                <strong className="text-zinc-300">English/Transliterated: </strong>
-                &quot;Good Morning&quot;, &quot;Hello&quot;.
-              </li>
-            </ul>
-          </li>
-
-          <li>
-            <strong className="text-white">Contextual Response Logic: </strong>
-            I configured the bot to respond with appropriate counter-greetings (e.g., &quot;وعليكم السلام&quot;) while subtly prompting the user toward the main service intent (
-            <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
-              OrderTent
-            </code>
-            ). This ensures the conversation doesn&apos;t hit a dead-end and guides the user smoothly to the goal.
-          </li>
-
-          <li>
-            <strong className="text-white">NLU Accuracy Optimization: </strong>
-            By separating social greetings from business logic, I reduced the &quot;Noise&quot; in the NLU model, ensuring that the primary ordering intent remains highly accurate and focused only on booking-related phrases.
-          </li>
-        </ul>
-      </div>
-    </div>
-  ),
+          </div>
+        ),
         imagePath: 'lex-phase5.png',
         figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
       },
@@ -636,20 +937,20 @@ const cloudProjects: CloudProject[] = [
         tools: 'Twilio WhatsApp Sandbox',
         desc: 'The final integration step involved the "Digital Handshake" between my device and the Twilio server. I utilized the Twilio Sandbox for WhatsApp, which allows for real-time testing in a developer environment. By scanning the unique QR code and sending the activation command, I successfully linked my phone number to the service. This activation allows the bot to send and receive automated messages, effectively turning a cloud-native AI into a mobile-accessible tool.',
         detailedStepsTitle: 'Detailed Technical Steps:',
-  detailedSteps: [
-    {
-      title: 'Sandbox Initiation',
-      desc: 'Accessed the "Try it out" messaging suite to initiate the WhatsApp environment.'
-    },
-    {
-      title: 'Device Handshake',
-      desc: 'Scanned the QR code and sent the verification string to establish a secure link with the sandbox.'
-    },
-    {
-      title: 'Outbound Validation',
-      desc: 'Verified the integration by triggering a Business-Initiated message from the console to my device, confirming the API\'s ability to deliver content templates.'
-    }
-  ],
+        detailedSteps: [
+          {
+            title: 'Sandbox Initiation',
+            desc: 'Accessed the "Try it out" messaging suite to initiate the WhatsApp environment.'
+          },
+          {
+            title: 'Device Handshake',
+            desc: 'Scanned the QR code and sent the verification string to establish a secure link with the sandbox.'
+          },
+          {
+            title: 'Outbound Validation',
+            desc: 'Verified the integration by triggering a Business-Initiated message from the console to my device, confirming the API\'s ability to deliver content templates.'
+          }
+        ],
         imagePath: 'lex-phase5.png',
         figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
       },
@@ -657,51 +958,151 @@ const cloudProjects: CloudProject[] = [
         name: 'Phase 11: Serverless Logic & Real-Time Alert Automation',
         tools: 'AWS Lambda (Python 3.x), Twilio REST API, JSON, Base64 Encoding',
         desc: 'This phase represents the "Central Processing Unit" of the system. I developed a serverless Python function deployed via AWS Lambda to bridge the gap between AI understanding and real-world communication. The function is designed to handle "Exceptions" or "Fallback" scenarios. When the bot encounters an unknown query, the Lambda function triggers an automated WhatsApp API call to notify the administrator with the exact transcript of the user\'s message, ensuring no customer inquiry goes unnoticed.',
-        detailedStepsTitle: 'Detailed Technical Steps:',
-  detailedSteps: [
-    {
-      title: 'Transcript Extraction',
-      desc: "The function dynamically extracts the inputTranscript from the Lex event, capturing the user's raw input for analysis."
-    },
-    {
-      title: 'API Authentication (Basic Auth)',
-      desc: "I implemented a secure Base64 encoding mechanism to handle Twilio's HTTP Basic Authentication, ensuring that the account_sid and auth_token are transmitted securely via the request headers."
-    },
-    {
-      title: 'Payload Engineering',
-      desc: "Using urllib.parse, I engineered a URL-encoded payload containing the destination number, the Twilio source number, and a custom alert message that includes the user's query."
-    },
-    {
-      title: 'Asynchronous Error Handling',
-      desc: 'Integrated a try-except block to manage API request failures gracefully, ensuring that any communication errors with Twilio are logged without crashing the bot session.'
-    },
-    {
-      title: 'Dynamic Response Management',
-      desc: 'I configured the function to return a structured JSON response back to Amazon Lex, using the ElicitIntent or close dialog actions to provide the user with a personalized message while the administrator is being notified.'
-    }
-  ],
-        imagePath: 'lex-phase5.png',
-        figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
+        content: (
+          <div className="space-y-6 text-xs md:text-sm text-zinc-300 leading-relaxed">
+            {/* قسم الخطوات الفنية التفصيلية */}
+            <div>
+              <h4 className="text-white font-bold text-sm mb-3 font-mono text-emerald-400">
+                Detailed Technical Steps:
+              </h4>
+              <ul className="list-disc list-inside space-y-2.5 pl-2 text-zinc-300">
+                <li>
+                  <strong className="text-white">Transcript Extraction: </strong>
+                  The function dynamically extracts the{' '}
+                  <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                    inputTranscript
+                  </code>{' '}
+                  from the Lex event, capturing the user&apos;s raw input for analysis.
+                </li>
+                <li>
+                  <strong className="text-white">API Authentication (Basic Auth): </strong>
+                  I implemented a secure Base64 encoding mechanism to handle Twilio&apos;s HTTP Basic Authentication, ensuring that the{' '}
+                  <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                    account_sid
+                  </code>{' '}
+                  and{' '}
+                  <code className="text-amber-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                    auth_token
+                  </code>{' '}
+                  are transmitted securely via the request headers.
+                </li>
+                <li>
+                  <strong className="text-white">Payload Engineering: </strong>
+                  Using <code className="text-emerald-400 font-mono text-xs">urllib.parse</code>, I engineered a URL-encoded payload containing the destination number, the Twilio source number, and a custom alert message that includes the user&apos;s query.
+                </li>
+                <li>
+                  <strong className="text-white">Asynchronous Error Handling: </strong>
+                  Integrated a <code className="text-amber-400 font-mono text-xs">try-except</code> block to manage API request failures gracefully, ensuring that any communication errors with Twilio are logged without crashing the bot session.
+                </li>
+                <li>
+                  <strong className="text-white">Dynamic Response Management: </strong>
+                  I configured the function to return a structured JSON response back to Amazon Lex, using the <code className="text-cyan-400 font-mono text-xs">Close</code> dialog action to provide the user with a personalized message while the administrator is being notified.
+                </li>
+              </ul>
+            </div>
+
+            {/* 1. صورة شاشة كونسول AWS Lambda */}
+            <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3">
+              <div className="rounded-lg overflow-hidden border border-zinc-900 bg-black/50">
+                <img
+                  src="/lex-phase11-console.png"
+                  alt="Figure 11: Developing the Python-based Lambda handler to process Lex events and automate outbound WhatsApp notifications via Twilio's REST API using secure HTTP Basic Authentication."
+                  className="w-full h-auto object-contain max-h-[600px] mx-auto rounded-md"
+                />
+              </div>
+              <p className="mt-2.5 text-center font-mono text-[11px] text-zinc-400">
+                Figure 11: Developing the Python-based Lambda handler to process Lex events and automate outbound WhatsApp notifications via Twilio&apos;s REST API using secure HTTP Basic Authentication.
+              </p>
+            </div>
+
+            {/* 2. نافذة كود الـ Lambda البرمجي */}
+            <div className="rounded-xl border border-zinc-800 bg-[#0d1117] p-4 overflow-hidden shadow-lg">
+              <div className="flex items-center justify-between pb-3 mb-3 border-b border-zinc-800/80 font-mono text-xs text-zinc-400">
+                <span className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block"></span>
+                  lambda_function.py
+                </span>
+                <span className="text-zinc-500 text-[11px]">Python 3.x</span>
+              </div>
+
+              <pre className="font-mono text-[11px] md:text-xs leading-relaxed text-zinc-200 overflow-x-auto scrollbar-thin max-h-[460px]">
+                <code>{`import json
+import urllib.parse
+import urllib.request
+import os
+import base64
+
+def lambda_handler(event, context):
+    user_msg = event.get('inputTranscript', 'Unknown question')
+    
+    account_sid = os.environ.get('TWILIO_ACCOUNT_SID', 'ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+auth_token = os.environ.get('TWILIO_AUTH_TOKEN', 'your_twilio_auth_token_here')
+to_number = os.environ.get('MANAGER_WHATSAPP_NUMBER', 'whatsapp:+201000000000')
+from_number = 'whatsapp:+14155238886'
+    
+    alert_text = f"🚨 A user asked an unhandled question: \\"{user_msg}\\""
+    
+    data = urllib.parse.urlencode({
+        'To': to_number,
+        'From': from_number,
+        'Body': alert_text
+    }).encode()
+    
+    request = urllib.request.Request(
+        f"https://api.twilio.com/2010-04-01/Accounts/{account_sid}/Messages.json",
+        data=data,
+        method="POST"
+    )
+    
+    auth_str = base64.b64encode(f"{account_sid}:{auth_token}".encode()).decode()
+    request.add_header("Authorization", f"Basic {auth_str}")
+    
+    try:
+        urllib.request.urlopen(request)
+    except Exception as e:
+        print(f"Error sending alert: {e}")
+
+    return {
+        "sessionState": {
+            "dialogAction": {
+                "type": "Close"
+            },
+            "intent": {
+                "name": event['sessionState']['intent']['name'],
+                "state": "Fulfilled"
+            }
+        },
+        "messages": [
+            {
+                "contentType": "PlainText",
+                "content": "Thank you for reaching out! Our team has been notified via WhatsApp and will follow up shortly."
+            }
+        ]
+    }`}</code>
+              </pre>
+            </div>
+          </div>
+        ),
       },
       {
         name: 'Phase 12: Omnichannel Deployment & Channel Integration',
         tools: 'Amazon Lex (V2) - Channel Integrations',
         desc: 'To make the AI agent accessible to end-users, I executed an Omnichannel deployment strategy. This involved creating a dedicated communication channel within the Amazon Lex console to bridge the bot with external messaging platforms. By choosing the Twilio SMS/WhatsApp platform, I enabled the bot to send and receive real-time data beyond the AWS management console.',
         detailedStepsTitle: 'Detailed Technical Steps:',
-  detailedSteps: [
-    {
-      title: 'Channel Provisioning',
-      desc: 'I navigated to the Deployment section and initiated a new Channel Integration named WhatsApp_BaitAlNokhada.'
-    },
-    {
-      title: 'IAM Role Configuration',
-      desc: 'I associated the integration with the necessary IAM roles to grant Lex the permissions required to communicate with third-party APIs.'
-    },
-    {
-      title: 'Endpoint Generation',
-      desc: 'Successfully generated a unique Callback URL (Endpoint). This URL serves as the secure "Digital Address" where Lex listens for incoming messages from the Twilio gateway.'
-    }
-  ],
+        detailedSteps: [
+          {
+            title: 'Channel Provisioning',
+            desc: 'I navigated to the Deployment section and initiated a new Channel Integration named WhatsApp_BaitAlNokhada.'
+          },
+          {
+            title: 'IAM Role Configuration',
+            desc: 'I associated the integration with the necessary IAM roles to grant Lex the permissions required to communicate with third-party APIs.'
+          },
+          {
+            title: 'Endpoint Generation',
+            desc: 'Successfully generated a unique Callback URL (Endpoint). This URL serves as the secure "Digital Address" where Lex listens for incoming messages from the Twilio gateway.'
+          }
+        ],
         imagePath: 'lex-phase5.png',
         figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
       },
@@ -710,20 +1111,20 @@ const cloudProjects: CloudProject[] = [
         tools: 'Amazon Lex (V2) - Channel Integrations',
         desc: 'The final step in the integration architecture was establishing a Two-Way Webhook. This "Handshake" ensures that every message a customer sends on WhatsApp is instantly routed to the Amazon Lex NLU engine for processing and that the AI\'s response is sent back to the user\'s phone.',
         detailedStepsTitle: 'Detailed Technical Steps:',
-  detailedSteps: [
-    {
-      title: 'Webhook Configuration',
-      desc: 'I integrated the Lex Callback URL into the Twilio Sandbox settings under the "When a message comes in" field.'
-    },
-    {
-      title: 'Protocol Alignment',
-      desc: 'Configured the communication method to HTTP POST, ensuring that the message payload (text, sender ID, and metadata) is transmitted securely and efficiently.'
-    },
-    {
-      title: 'Verification & Synchronization',
-      desc: 'Saved the configuration to synchronize the two platforms. This established a live, event-driven connection where Twilio acts as the delivery agent and Lex acts as the intelligent processor.'
-    }
-  ],
+        detailedSteps: [
+          {
+            title: 'Webhook Configuration',
+            desc: 'I integrated the Lex Callback URL into the Twilio Sandbox settings under the "When a message comes in" field.'
+          },
+          {
+            title: 'Protocol Alignment',
+            desc: 'Configured the communication method to HTTP POST, ensuring that the message payload (text, sender ID, and metadata) is transmitted securely and efficiently.'
+          },
+          {
+            title: 'Verification & Synchronization',
+            desc: 'Saved the configuration to synchronize the two platforms. This established a live, event-driven connection where Twilio acts as the delivery agent and Lex acts as the intelligent processor.'
+          }
+        ],
         imagePath: 'lex-phase5.png',
         figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
       },
@@ -735,7 +1136,62 @@ const cloudProjects: CloudProject[] = [
         figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
       },
     ],
-    keyTakeaway: '24/7 automated Arabic conversational sales conduit processing customer requirements with zero infrastructure overhead.',
+    conclusionContent: (
+      <div className="space-y-6 text-xs md:text-sm text-zinc-300 leading-relaxed pt-2">
+        <div>
+          <p className="mb-3">
+            The Bait Al-Nokhedha AI Project showcases the power of combining Serverless Cloud Architecture with Conversational AI to solve real-world business challenges[cite: 24]. By bridging <strong className="text-white">Amazon Lex, AWS Lambda, and Twilio</strong>, I built a solution that is not only highly intelligent but also 100% cost-efficient[cite: 24].
+          </p>
+        </div>
+
+        <div>
+          <h4 className="text-sm font-semibold text-emerald-400 font-mono mb-2">
+            Key Achievements:
+          </h4>
+          <ul className="list-disc list-inside space-y-2 pl-2 text-zinc-300">
+            <li>
+              <strong className="text-white">Zero-Maintenance Scalability: </strong>
+              Built on a serverless stack that handles thousands of users with zero infrastructure management[cite: 24].
+            </li>
+            <li>
+              <strong className="text-white">Localized User Experience: </strong>
+              Optimized the NLU model to support regional dialects, ensuring a frictionless experience for the local UAE market[cite: 24].
+            </li>
+            <li>
+              <strong className="text-white">Operational Efficiency: </strong>
+              Automated the lead generation and booking process, reducing administrative overhead and increasing response speed[cite: 24].
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="text-sm font-semibold text-amber-400 font-mono mb-1">
+            Future Scalability &amp; Use Cases:
+          </h4>
+          <p className="text-xs text-zinc-400 mb-2">
+            This architecture is highly adaptable and can be further expanded to:
+          </p>
+          <ol className="list-decimal list-inside space-y-2 pl-2 text-zinc-300">
+            <li>
+              <strong className="text-white">Website Lead Integration: </strong>
+              Connecting the bot to a professional WordPress/WooCommerce site to sync leads directly into a CRM or Database[cite: 24].
+            </li>
+            <li>
+              <strong className="text-white">Automated Customer Support: </strong>
+              Expanding the intent library to handle FAQs, order tracking, and payment processing[cite: 24].
+            </li>
+            <li>
+              <strong className="text-white">Multi-Channel Deployment: </strong>
+              Deploying the same AI logic across Facebook Messenger, Instagram, and Telegram to reach a wider audience[cite: 24].
+            </li>
+            <li>
+              <strong className="text-white">AI-Driven Analytics: </strong>
+              Using <strong className="text-white">AWS CloudWatch</strong> to analyze conversation patterns and further optimize the marketing funnel[cite: 24].
+            </li>
+          </ol>
+        </div>
+      </div>
+    ),
     coverImage: 'cloud-project-3.jpg'
   },
   {
@@ -753,35 +1209,337 @@ The core of this solution lies in its automated ETL architecture: simply uploadi
       'Manual monitoring of enterprise search data fails to deliver timely notifications on rankings. Uniting EventBridge automated schedules, S3 storage, and Athena SQL queries allows daily organic movements to be evaluated and delivered automatically before business hours.',
     phases: [
       {
-        name: 'Phase 1: Automated GSC Landing Zone',
-        tools: 'Amazon S3 & EventBridge',
-        desc: 'Engineered daily automated cron triggers that fetch fresh Search Console keyword impressions and ranking logs into structured S3 landing zones.',
+        name: 'Phase 1: Precision Data Ingestion & SEO Performance Extraction',
+        tools: 'Google Search Console (GSC)',
+        desc: 'The foundation of the automated pipeline begins with strategic data ingestion. I extracted granular search performance data directly from Google Search Console to capture the core metrics that drive organic growth. This process ensures that the "Raw Data" layer of our pipeline is populated with high-fidelity information, enabling precise analysis of how users discover the brand online.',
+        detailedStepsTitle: 'Detailed Technical Steps:',
+        detailedSteps: [
+          {
+            title: 'Performance Metrics Targeting',
+            desc: 'I focused on exporting the "Queries" report, which includes critical KPIs such as Clicks, Impressions, CTR, and Average Position.'
+          },
+          {
+            title: 'Format Standardization',
+            desc: 'I exported the data as a CSV (Comma Separated Values) file, ensuring a standardized format that is natively compatible with cloud storage and automation scripts.'
+          },
+          {
+            title: 'Data Integrity',
+            desc: 'By utilizing the "Queries.csv" file as the primary source, I established a consistent data schema for the serverless pipeline, capturing a 3-month performance snapshot for comprehensive trend analysis.'
+          }
+        ],
         imagePath: 'slack-phase1.png',
         figureCaption: 'Figure 1: S3 object landing zone structured by date for automated consumption.'
       },
       {
-        name: 'Phase 2: Automated Schema Evolution & Cataloging',
-        tools: 'AWS Glue',
-        desc: 'Employed AWS Glue crawlers to catalog newly deposited GSC data daily, ensuring relational Athena queries accurately reflect newly indexed keyword queries.',
+        name: 'Phase 2: Data Lake Provisioning & S3 Architecture',
+        tools: 'Amazon S3 (Simple Storage Service)',
+        desc: 'In this phase, I architected the storage layer by provisioning a scalable Data Lake on Amazon S3. This involves creating a highly durable and secure environment to host our raw SEO data. By establishing a structured folder hierarchy, I ensured that the data is organized for efficient discovery and processing by downstream AWS services.',
+        detailedStepsTitle: 'Key Technical Details:',
+        detailedSteps: [
+          {
+            title: 'Bucket Creation',
+            desc: 'I provisioned a dedicated S3 bucket named quires-seo to serve as the centralized repository for all SEO-related datasets.'
+          },
+          {
+            title: 'Storage Hierarchical Design',
+            desc: 'Within the bucket, I created a specific directory named gsc_queries/ to isolate Search Console data from other potential data sources.'
+          },
+          {
+            title: 'Data Landing',
+            desc: 'I successfully uploaded the Queries.csv file into the designated folder, establishing the "Bronze" or raw layer of the data lake, ready for cataloging and analysis.'
+          }
+        ],
         imagePath: 'slack-phase2.png',
         figureCaption: 'Figure 2: Glue crawler schedule maintaining synchronicity with incoming search datasets.'
       },
       {
-        name: 'Phase 3: Diagnostic SQL Execution',
-        tools: 'Amazon Athena',
-        desc: 'Ran automated analytical SQL queries comparing day-over-day impressions, identifying high-performing commercial terms, and surfacing critical ranking drops.',
+        name: 'Phase 3: Automated Data Cataloging & Schema Discovery',
+        tools: 'AWS Glue & AWS Glue Crawler',
+        desc: 'In this phase, I transitioned the raw data from a storage state to a queryable state. I implemented an AWS Glue Crawler to automate the process of "Schema Discovery." This service acts as a bridge, scanning the S3 Data Lake to infer the data types, headers, and structures of the CSV files, then cataloging them into a centralized metadata repository.',
+        detailedStepsTitle: 'Detailed Technical Steps:',
+        detailedSteps: [
+          {
+            title: 'Database Provisioning',
+            desc: 'I created a dedicated logical database named seo_analytics_db within the AWS Glue Data Catalog to serve as the structural home for our SEO tables.'
+          },
+          {
+            title: 'Crawler Configuration ( gsc_crawler )',
+            desc: 'I engineered a crawler specifically targeted at the s3://quires-seo/gsc_queries/ path. I assigned a secure IAM Role ( AWSGlueServiceRole-Ahmed... ) to grant the crawler the necessary permissions to read and classify the data.'
+          },
+          {
+            title: 'Schema Inference',
+            desc: 'Upon execution, the crawler successfully analyzed the Queries.csv file, automatically identifying column headers like Query, Clicks, and Impressions, and mapped them to their respective data formats (String, Integer, etc.).'
+          },
+          {
+            title: 'Metadata Synchronization',
+            desc: 'I executed the crawler (Run Crawler), which automatically created the data table in our database, as confirmed by the "Succeeded" status and the "Table changes: 1 created" log.'
+          }
+        ],
         imagePath: 'slack-phase3.png',
         figureCaption: 'Figure 3: Athena analytical query isolating commercial query volatility.'
       },
       {
-        name: 'Phase 4: Instant Morning Executive Digest',
-        tools: 'Slack Webhooks API & AWS Lambda',
-        desc: 'Formatted SQL analytical findings into visual digest cards and transmitted morning alerts directly to engineering and executive Slack channels.',
+        name: 'Phase 4: Serverless Analytics & SQL Intelligence',
+        tools: 'Amazon Athena & SQL (Standard Query Language)',
+        desc: 'In this strategic phase, I unlocked the true value of the SEO data by implementing a Serverless Analytics layer. Using Amazon Athena, I executed standard SQL queries directly against the data cataloged by AWS Glue. This approach allows for high-speed analysis of organic search trends without the overhead of managing database infrastructure, providing a cost-efficient way to derive business insights.',
+        detailedStepsTitle: 'Key Technical Details:',
+        detailedSteps: [
+          {
+            title: 'Query Environment Setup',
+            desc: 'I configured Athena to point to the seo_analytics_db database. I also designated a specific S3 location to store the results of the queries, ensuring a clean and organized output history.'
+          },
+          {
+            title: 'Data Validation',
+            desc: 'I executed the initial SELECT * FROM "gsc_queries" query (as seen in the screenshot) to validate the data integrity. This confirmed that the column mapping—including Query, Clicks, Impressions, CTR, and Position—was perfectly synchronized between S3 and the Glue Data Catalog.'
+          },
+          {
+            title: 'Metric Analysis',
+            desc: 'By running SQL commands, I transformed raw CSV rows into a structured result set. This allows for complex filtering, such as identifying "Striking Distance" keywords (keywords with high impressions but ranking on page 2) that require immediate SEO optimization.'
+          },
+          {
+            title: 'Execution Efficiency',
+            desc: 'The query engine processed the dataset in milliseconds, demonstrating the scalability of the architecture to handle millions of rows of SEO data as the project grows.'
+          }
+        ],
+        imagePath: 'slack-phase4.png',
+        figureCaption: 'Figure 4: Automated Slack notification card detailing live keyword clicks and commercial metrics.'
+      },
+      {
+        name: 'Phase 5: API Integration & Messaging Gateway',
+        tools: 'Slack API (Incoming Webhooks',
+        desc: 'To transform cloud analytics into accessible business intelligence, I established a dedicated communication gateway using the Slack API. By configuring a secure outbound webhook, I enabled the AWS environment to push automated reports directly into the corporate environment. This bridge is the final link in the data pipeline, ensuring that SEO insights reach the decision-makers in real-time.',
+        detailedStepsTitle: 'Detailed Technical Steps:',
+        detailedSteps: [
+          {
+            title: 'Slack App Provisioning',
+            desc: 'I created a custom application within the Slack API console specifically for the "Bait Al-Nokhada" workspace.'
+          },
+          {
+            title: 'Incoming Webhook Configuration',
+            desc: 'I activated and configured an Incoming Webhook unique to the #bait-al-nokhada channel, providing a secure URL for automated data delivery.'
+          },
+          {
+            title: 'Security Scoping',
+            desc: 'Assigned specific OAuth scopes to the app, ensuring it has the minimum necessary permissions to post formatted messages and rich-text reports to the designated channel.'
+          }
+        ],
+        imagePath: 'slack-phase4.png',
+        figureCaption: 'Figure 4: Automated Slack notification card detailing live keyword clicks and commercial metrics.'
+      },
+      {
+        name: 'Phase 6: Serverless Orchestration & Secure Automation',
+        tools: 'AWS Lambda (Python 3.x) & AWS IAM',
+        desc: 'In this phase, I developed the "Orchestrator" of the entire pipeline using AWS Lambda. I engineered a serverless Python function that fetches the latest SEO metrics from the Data Lake and processes them into a human-readable format. I prioritized security by implementing a custom IAM Execution Role, ensuring the function operates within a highly secure, "Least Privilege" cloud environment.',
+        content: (
+          <div className="space-y-6 text-xs md:text-sm text-zinc-300 leading-relaxed">
+            {/* Detailed Technical Steps */}
+            <div>
+              <h4 className="text-white font-bold text-sm mb-3 font-mono text-emerald-400">
+                Detailed Technical Steps:
+              </h4>
+              <ul className="list-disc list-inside space-y-2.5 pl-2 text-zinc-300">
+                <li>
+                  <strong className="text-white">Serverless Logic Development: </strong>
+                  I wrote a Python script using the <strong className="text-white">Boto3 SDK</strong> to retrieve raw CSV data from S3 and execute structured query results from Athena.
+                </li>
+                <li>
+                  <strong className="text-white">Identity &amp; Access Management (IAM): </strong>
+                  I configured a specific Execution Role (e.g.,{' '}
+                  <code className="text-[#ff2e7e] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">
+                    SEO_Slack_Alert-role
+                  </code>{' '}
+                  ) with tailored policies, allowing the function to securely interact with S3 and Athena services.
+                </li>
+                <li>
+                  <strong className="text-white">Payload Formatting: </strong>
+                  The function processes the raw SEO data, identifies the top-performing queries, and formats them into a rich-text payload—complete with emojis and headers—for a professional Slack presentation.
+                </li>
+              </ul>
+            </div>
+
+            {/* 1. الصورة الأولى: كونسول دالة AWS Lambda و Code Source */}
+            <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3">
+              <div className="rounded-lg overflow-hidden border border-zinc-900 bg-black/50">
+                <img
+                  src="/seo-pipeline-phase6-lambda.png"
+                  alt="Figure 6A: AWS Lambda function configuration and integrated code source for SEO Slack alerts"
+                  className="w-full h-auto object-contain max-h-[600px] mx-auto rounded-md"
+                />
+              </div>
+              <p className="mt-2.5 text-center font-mono text-[11px] text-zinc-400">
+                Figure 6A: The AWS Lambda console interface showing trigger configuration and the serverless execution environment.
+              </p>
+            </div>
+
+            {/* 2. نافذة الكود البرمجي لدالة Lambda */}
+            <div className="rounded-xl border border-zinc-800 bg-[#0d1117] p-4 overflow-hidden shadow-lg">
+              <div className="flex items-center justify-between pb-3 mb-3 border-b border-zinc-800/80 font-mono text-xs text-zinc-400">
+                <span className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block"></span>
+                  lambda_function.py
+                </span>
+                <span className="text-zinc-500 text-[11px]">Python 3.x</span>
+              </div>
+
+              <pre className="font-mono text-[11px] md:text-xs leading-relaxed text-zinc-200 overflow-x-auto scrollbar-thin max-h-[440px]">
+                <code>{`import boto3
+import os
+import json
+import urllib3
+import csv
+from io import StringIO
+
+def lambda_handler(event, context):
+    s3 = boto3.client('s3')
+    slack_url = os.environ.get("SLACK_WEBHOOK_URL") # Configured via AWS Lambda Env Vars
+    http = urllib3.PoolManager()
+    
+    bucket = 'quires-seo'
+    key = 'gsc_queries/Queries.csv'
+    
+    try:
+        # 1. Fetch CSV file from S3
+        response = s3.get_object(Bucket=bucket, Key=key)
+        content = response['Body'].read().decode('utf-8')
+        
+        # 2. Parse CSV dataset
+        f = StringIO(content)
+        reader = csv.DictReader(f)
+        
+        report = "🚀 *BAIT AL NOKHADA - DAILY SEO REPORT* \\n"
+        report += "📅 تقرير أهم الكلمات من ملف الـ CSV الخاص بك:\\n"
+        report += "------------------------------------------\\n"
+        
+        # Extract top 5 performing queries
+        count = 0
+        for row in reader:
+            if count < 5:
+                query = row.get('Top queries', 'N/A')
+                clicks = row.get('Clicks', '0')
+                report += f"🔹 *Keyword:* {query} | *Clicks:* {clicks}\\n"
+                count += 1
+        
+        # 3. Dispatch alert payload to Slack incoming webhook
+        msg = {'text': report}
+        encoded_msg = json.dumps(msg).encode('utf-8')
+        resp = http.request('POST', slack_url, body=encoded_msg)
+        
+        return {
+            'statusCode': 200,
+            'body': "Report sent successfully to Slack!"
+        }
+        
+    except Exception as e:
+        print(f"Error: {e}")
+        return {
+            'statusCode': 500,
+            'body': str(e)
+        }`}</code>
+              </pre>
+            </div>
+
+            {/* 3. الصورة الثانية: إعدادات IAM Execution Role */}
+            <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3">
+              <div className="rounded-lg overflow-hidden border border-zinc-900 bg-black/50">
+                <img
+                  src="/seo-pipeline-phase6-iam.png"
+                  alt="Figure 6B: Execution role and IAM least-privilege security policies attached to the Lambda function"
+                  className="w-full h-auto object-contain max-h-[600px] mx-auto rounded-md"
+                />
+              </div>
+              <p className="mt-2.5 text-center font-mono text-[11px] text-zinc-400">
+                Figure 6B: IAM Execution Role configuration (`SEO_Slack_Alert-role`) implementing least-privilege policies for S3 and Athena services[cite: 22].
+              </p>
+            </div>
+          </div>
+        ),
+      },
+      {
+        name: 'Phase 7: Final Delivery & Stakeholder Communication',
+        tools: 'Slack Messenger',
+        desc: 'The final stage of the pipeline translates complex cloud operations into simplified, actionable business intelligence. By delivering formatted reports directly into the corporate communication stream, the system empowers stakeholders to monitor organic growth without technical barriers. This phase validates the entire architecture, proving that raw search data can be autonomously converted into strategic daily alerts.',
+        detailedStepsTitle: 'Detailed Technical Steps:',
+        detailedSteps: [
+          {
+            title: 'Real-World Validation',
+            desc: 'As demonstrated in the final Slack output, the system successfully processes Arabic (UAE) search queries, maintaining full encoding integrity for regional dialects.'
+          },
+          {
+            title: 'KPI Visualization',
+            desc: 'The report highlights critical performance metrics, specifically focusing on "Top Queries" and their corresponding "Clicks," providing a snapshot of daily brand visibility.'
+          },
+          {
+            title: 'Operational Impact',
+            desc: 'By providing these automated updates every morning at 9:00 AM, the project reduces manual reporting time by 100%, allowing the marketing team to focus on optimization rather than data collection.'
+          }
+        ],
         imagePath: 'slack-phase4.png',
         figureCaption: 'Figure 4: Automated Slack notification card detailing live keyword clicks and commercial metrics.'
       }
     ],
-    keyTakeaway: 'Turned passive search console logs into an proactive, automated enterprise decision-support pipeline.',
+    conclusionContent: (
+      <div className="space-y-6 text-xs md:text-sm text-zinc-300 leading-relaxed border-t border-zinc-800/80 pt-6 mt-8">
+        <div>
+          <h3 className="text-lg font-bold text-white mb-3">
+            Conclusion &amp; Key Takeaways
+          </h3>
+          <p className="mb-3">
+            The AWS-Powered SEO Data Lake represents a paradigm shift in how digital marketing data is handled[cite: 20]. By moving away from static spreadsheets and embracing a <strong className="text-white">Cloud-Native, Serverless architecture</strong>, I have built a system that not only analyzes the past but provides a foundation for real-time strategic action[cite: 20].
+          </p>
+          <p>
+            This project proves that the synergy between <strong className="text-white">SEO expertise</strong> and <strong className="text-white">Cloud Engineering</strong> can drastically reduce operational overhead while increasing data accuracy and accessibility[cite: 20].
+          </p>
+        </div>
+
+        <div>
+          <h4 className="text-sm font-semibold text-emerald-400 font-mono mb-2">
+            Key Achievements:
+          </h4>
+          <ul className="list-disc list-inside space-y-2 pl-2 text-zinc-300">
+            <li>
+              <strong className="text-white">Infrastructure as a Solution: </strong>
+              Built a fully scalable data repository using Amazon S3 and Glue, capable of handling years of search data with near-zero maintenance[cite: 20].
+            </li>
+            <li>
+              <strong className="text-white">Actionable Intelligence: </strong>
+              Automated the transformation of raw GSC exports into meaningful SQL-driven insights via Amazon Athena[cite: 20].
+            </li>
+            <li>
+              <strong className="text-white">Zero-Latency Reporting: </strong>
+              Eliminated the &quot;reporting lag&quot; by implementing a serverless Python orchestrator that delivers results directly to the team&apos;s communication hub (Slack)[cite: 20].
+            </li>
+            <li>
+              <strong className="text-white">Cost Optimization: </strong>
+              Leveraged the AWS Pay-as-you-go model, ensuring that the entire analytics suite costs only a few cents per month[cite: 20].
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="text-sm font-semibold text-amber-400 font-mono mb-2">
+            Future Scalability &amp; Use Cases:
+          </h4>
+          <ol className="list-decimal list-inside space-y-2 pl-2 text-zinc-300">
+            <li>
+              <strong className="text-white">Multi-Source Integration: </strong>
+              Expanding the Data Lake to ingest data from Google Ads, SEMrush, and Screaming Frog for a 360-degree digital marketing view[cite: 20].
+            </li>
+            <li>
+              <strong className="text-white">Machine Learning Forecaster: </strong>
+              Implementing Amazon SageMaker to predict future traffic trends based on historical search patterns and seasonality[cite: 20].
+            </li>
+            <li>
+              <strong className="text-white">Automated On-Page Suggestions: </strong>
+              Enhancing the Lambda function to not only report drops in ranking but also suggest specific on-page optimizations via AI[cite: 20].
+            </li>
+            <li>
+              <strong className="text-white">Executive Dashboards: </strong>
+              Connecting the Athena data source to <strong className="text-white">Amazon QuickSight</strong> for interactive, high-level visual reporting for stakeholders[cite: 20].
+            </li>
+          </ol>
+        </div>
+      </div>
+    ),
     coverImage: 'cloud-project-4.jpg'
   }
 ];
@@ -798,7 +1556,7 @@ export default function CloudEngineeringPage() {
       <Navbar />
 
       <main className="max-w-5xl mx-auto px-6 md:px-8 pt-12 pb-28">
-        
+
         {/* Back Link */}
         <Link
           href="/"
@@ -1007,7 +1765,7 @@ export default function CloudEngineeringPage() {
               {/* Project Deep Dive Context */}
               <div className="space-y-4">
                 <h3 className="text-xs font-mono uppercase tracking-widest text-[#ff2e7e]">
-                  Architecture Overview 
+                  Architecture Overview
                 </h3>
                 <p className="text-sm text-zinc-300 leading-relaxed font-normal">
                   {selectedProject.detailedOverview}
@@ -1023,110 +1781,145 @@ export default function CloudEngineeringPage() {
                 <h3 className="text-xs font-mono uppercase tracking-widest text-zinc-400">
                   Execution Phases & Technical Details
                 </h3>
+              </div>
 
-                <div className="space-y-8">
-                  {selectedProject.phases.map((phase, pIdx) => (
-                    <div
-                      key={pIdx}
-                      className="p-6 md:p-8 rounded-2xl bg-zinc-950 border border-zinc-850 space-y-4"
-                    >
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-zinc-900">
-                        <span className="text-base font-bold text-white">{phase.name}</span>
-                        <span className="text-xs font-mono text-[#ff2e7e]">{phase.tools}</span>
+              <div className="space-y-8">
+                {selectedProject.phases.map((phase, pIdx) => (
+                  <div
+                    key={pIdx}
+                    className="p-6 md:p-8 rounded-2xl bg-zinc-950 border border-zinc-850 space-y-4"
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-zinc-900">
+                      <span className="text-base font-bold text-white">{phase.name}</span>
+                      <span className="text-xs font-mono text-[#ff2e7e]">{phase.tools}</span>
+                    </div>
+
+
+                    <p className="text-xs md:text-sm text-zinc-300 leading-relaxed">
+                      {phase.desc}
+                    </p>
+                    {/* إذا كانت المرحلة مكتوبة بنظام content الجديد ستظهر هنا */}
+                    {phase.content}
+                    {/* How the Data is Read (إذا وجد) */}
+                    {phase.howDataIsRead && (
+                      <div className="space-y-1">
+                        <strong className="text-white text-xs md:text-sm block">How the Data is Read:</strong>
+                        <p className="text-xs md:text-sm text-zinc-300 leading-relaxed">
+                          {phase.howDataIsRead}
+                        </p>
                       </div>
-                      
-                      <p className="text-xs md:text-sm text-zinc-300 leading-relaxed">
-                        {phase.desc}
-                      </p>
-                      {/* إذا كانت المرحلة مكتوبة بنظام content الجديد ستظهر هنا */}
-        {phase.content}
-                      {/* How the Data is Read (إذا وجد) */}
-      {phase.howDataIsRead && (
-        <div className="space-y-1">
-          <strong className="text-white text-xs md:text-sm block">How the Data is Read:</strong>
-          <p className="text-xs md:text-sm text-zinc-300 leading-relaxed">
-            {phase.howDataIsRead}
-          </p>
-        </div>
-      )}
 
-      {/* The SQL Query Block (إذا وجد) */}
-      {phase.sqlQuery && (
-        <div className="space-y-2">
-          {phase.sqlQueryIntro && (
-            <p className="text-xs md:text-sm text-zinc-300">
-              <strong className="text-white">The SQL Query: </strong>
-              {phase.sqlQueryIntro}
-            </p>
-          )}
-          <div className="p-4 rounded-xl bg-black border border-zinc-800 font-mono text-xs text-emerald-400 overflow-x-auto">
-            {phase.sqlQuery}
-          </div>
-        </div>
-      )}
+                    )}
 
-      {/* The Power of Visualization (إذا وجد) */}
-      {phase.thePowerOfVisualization && (
-        <div className="space-y-1">
-          <strong className="text-white text-xs md:text-sm block">The Power of Visualization:</strong>
-          <p className="text-xs md:text-sm text-zinc-300 leading-relaxed">
-            {phase.thePowerOfVisualization}
-          </p>
-        </div>
-      )}
+                    {/* The SQL Query Block (إذا وجد) */}
+                    {phase.sqlQuery && (
+                      <div className="space-y-2">
+                        {phase.sqlQueryIntro && (
+                          <p className="text-xs md:text-sm text-zinc-300">
+                            <strong className="text-white">The SQL Query: </strong>
+                            {phase.sqlQueryIntro}
+                          </p>
+                        )}
+                        <div className="p-4 rounded-xl bg-black border border-zinc-800 font-mono text-xs text-emerald-400 overflow-x-auto">
+                          {phase.sqlQuery}
+                        </div>
+                      </div>
 
-      {/* Detailed Technical Steps (إن وُجدت) */}
-{phase.detailedSteps && (
-  <div className="space-y-3 pt-2">
-    <strong className="text-white text-xs md:text-sm block font-mono text-emerald-400">
-      {phase.detailedStepsTitle || 'Detailed Technical Steps:'}
-    </strong>
-    <ol className="space-y-3 text-xs md:text-sm text-zinc-300 list-decimal list-inside leading-relaxed">
-      {phase.detailedSteps.map((step, sIdx) => (
-        <li key={sIdx} className="space-y-1">
-          <strong className="text-white font-semibold">{step.title}: </strong>
-          <span>{step.desc}</span>
-          {step.subPoints && (
-            <ul className="pl-6 pt-1 space-y-1 list-disc list-inside text-zinc-400 text-xs">
-              {step.subPoints.map((sub, subIdx) => (
-                <li key={subIdx}>{sub}</li>
-              ))}
-            </ul>
-          )}
-        </li>
-      ))}
-    </ol>
-  </div>
-)}
+                    )}
 
-      {/* Real Value Box (إذا وجد) */}
-      {phase.realValue && (
-        <div className="p-4 rounded-xl bg-zinc-900/60 border border-zinc-850 text-xs md:text-sm text-zinc-300 leading-relaxed">
-          <strong className="text-amber-400 block mb-1">
-            {phase.realValueTitle || 'The Real Value:'}
-          </strong>
-          {phase.realValue}
-        </div>
-      )}
+                    {/* The Power of Visualization (إذا وجد) */}
+                    {phase.thePowerOfVisualization && (
+                      <div className="space-y-1">
+                        <strong className="text-white text-xs md:text-sm block">The Power of Visualization:</strong>
+                        <p className="text-xs md:text-sm text-zinc-300 leading-relaxed">
+                          {phase.thePowerOfVisualization}
+                        </p>
+                      </div>
 
-      {/* Key Actions List (إذا وجد) */}
-      {phase.keyActions && phase.keyActions.map((action, aIdx) => (
-        <div key={aIdx} className="text-xs font-mono text-emerald-400 flex items-start gap-1.5 pt-1">
-          <span className="font-bold">Key Action:</span>
-          <span>{action}</span>
-        </div>
-      ))}
+                    )}
 
-                      {/* Phase Image Container */}
-                      {phase.imagePath && (
-                        <div className="space-y-2 pt-2">
+                    {/* Detailed Technical Steps (إن وُجدت) */}
+                    {phase.detailedSteps && (
+                      <div className="space-y-3 pt-2">
+                        <strong className="text-white text-xs md:text-sm block font-mono text-emerald-400">
+                          {phase.detailedStepsTitle || 'Detailed Technical Steps:'}
+                        </strong>
+                        <ol className="space-y-3 text-xs md:text-sm text-zinc-300 list-decimal list-inside leading-relaxed">
+                          {phase.detailedSteps.map((step, sIdx) => (
+                            <li key={sIdx} className="space-y-1">
+                              <strong className="text-white font-semibold">{step.title}: </strong>
+                              <span>{step.desc}</span>
+                              {step.subPoints && (
+                                <ul className="pl-6 pt-1 space-y-1 list-disc list-inside text-zinc-400 text-xs">
+                                  {step.subPoints.map((sub, subIdx) => (
+                                    <li key={subIdx}>{sub}</li>
+                                  ))}
+                                </ul>
+                              )}
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+
+                    )}
+
+                    {/* Real Value Box (إذا وجد) */}
+                    {phase.realValue && (
+                      <div className="p-4 rounded-xl bg-zinc-900/60 border border-zinc-850 text-xs md:text-sm text-zinc-300 leading-relaxed">
+                        <strong className="text-amber-400 block mb-1">
+                          {phase.realValueTitle || 'The Real Value:'}
+                        </strong>
+                        {phase.realValue}
+                      </div>
+                    )}
+
+                    {/* Key Actions List (إذا وجد) */}
+                    {phase.keyActions && phase.keyActions.map((action, aIdx) => (
+                      <div key={aIdx} className="text-xs font-mono text-emerald-400 flex items-start gap-1.5 pt-1">
+                        <span className="font-bold">Key Action:</span>
+                        <span>{action}</span>
+                      </div>
+
+                    ))}
+
+                    {/* Phase Image Container */}
+                    {phase.imagePath && (
+                      <div className="space-y-2 pt-2">
+                        {Array.isArray(phase.imagePath) ? (
+                          /* إذا كانت مصفوفة صور (صورتين أو أكثر) */
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            {phase.imagePath.map((img, idx) => (
+                              <div
+                                key={idx}
+                                onClick={() => setLightboxImg(img ? getImgSrc(img) : null)}
+                                className="group relative h-56 md:h-64 w-full rounded-xl overflow-hidden border border-zinc-800 bg-[#070709] cursor-pointer"
+                              >
+                                <img
+                                  src={getImgSrc(img)}
+                                  alt={`${phase.name || 'Phase screenshot'} ${idx + 1}`}
+                                  className="w-full h-full object-contain group-hover:scale-101 transition-transform"
+                                  onError={(e) => {
+                                    (e.target as HTMLImageElement).src = '/Website audit.jpg';
+                                  }}
+                                />
+                                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                  <span className="text-xs font-mono text-white bg-black/80 px-3 py-1.5 rounded-lg border border-zinc-700">
+                                    Click to inspect screenshot ↗
+                                  </span>
+                                </div>
+                              </div>
+
+                            ))}
+                          </div>
+                        ) : (
+                          /* إذا كانت صورة واحدة فقط كالمعتاد */
                           <div
-                            onClick={() => setLightboxImg(phase.imagePath ? getImgSrc(phase.imagePath) : null)}
-                            className="relative h-64 md:h-80 w-full rounded-xl overflow-hidden border border-zinc-800 bg-[#070709] cursor-pointer group"
+                            onClick={() => setLightboxImg(phase.imagePath ? getImgSrc(phase.imagePath as string) : null)}
+                            className="group relative h-64 md:h-80 w-full rounded-xl overflow-hidden border border-zinc-800 bg-[#070709] cursor-pointer"
                           >
                             <img
-                              src={getImgSrc(phase.imagePath)}
-                              alt={phase.name}
+                              src={getImgSrc(phase.imagePath as string)}
+                              alt={phase.name || 'Phase screenshot'}
                               className="w-full h-full object-contain group-hover:scale-101 transition-transform"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).src = '/Website audit.jpg';
@@ -1138,28 +1931,38 @@ export default function CloudEngineeringPage() {
                               </span>
                             </div>
                           </div>
-                          {phase.figureCaption && (
-                            <div className="text-[11px] font-mono text-zinc-500 italic">
-                              {phase.figureCaption}
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
+                        )}
+
+                        {/* Caption */}
+                        {phase.figureCaption && (
+                          <p className="text-center font-mono text-xs text-zinc-400 mt-2">
+                            {Array.isArray(phase.figureCaption)
+                              ? phase.figureCaption.join(' | ')
+                              : phase.figureCaption}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
 
               {/* Key Takeaways */}
               <div className="p-6 rounded-2xl bg-gradient-to-r from-zinc-950 via-zinc-900 to-zinc-950 border border-zinc-800 flex items-start gap-4">
                 <span className="text-xl">⚡</span>
-                <div>
+                <div className="w-full">
                   <div className="text-xs font-mono uppercase tracking-widest text-emerald-400">
                     Conclusion & Key Deliverables
                   </div>
-                  <p className="text-xs md:text-sm text-zinc-300 mt-1 font-medium">
-                    {selectedProject.keyTakeaway}
-                  </p>
+                  {selectedProject.conclusionContent ? (
+                    <div className="mt-3">
+                      {selectedProject.conclusionContent}
+                    </div>
+                  ) : (
+                    <p className="text-xs md:text-sm text-zinc-300 mt-1 font-medium">
+                      {selectedProject.keyTakeaway}
+                    </p>
+                  )}
                 </div>
               </div>
             </motion.div>
