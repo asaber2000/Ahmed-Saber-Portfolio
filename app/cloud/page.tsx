@@ -658,7 +658,7 @@ if __name__ == "__main__":
         </div>
       </div>
     ),
-    coverImage: '/AWS Serverless Architecture The Zero-Touch Data Pipeline/STREAMLIT8.webp',
+    coverImage: 'AWS Serverless Architecture The Zero-Touch Data Pipeline/STREAMLIT8.webp',
   },
   {
     id: 'conversational-agent',
@@ -692,7 +692,8 @@ if __name__ == "__main__":
             desc: 'The system was configured to monitor usage in real-time, sending immediate notifications if the forecasted spending approached the defined threshold. This proactive approach ensures 100% financial visibility throughout the development lifecycle.'
           }
         ],
-        imagePath: 'lex-phase1.png',
+        imagePath: 'AI Conversational Agent Automated Booking Solution (Arabic Project)/1.webp',
+        
         figureCaption: 'Figure 1: AWS Budgets threshold parameters established for zero-cost sandbox execution.'
       },
       {
@@ -714,8 +715,8 @@ if __name__ == "__main__":
             desc: 'I successfully validated the bot\'s status as "Available", confirming that the cloud resources were correctly provisioned and the environment was ready for the logic and integration phases.'
           }
         ],
-        imagePath: 'lex-phase2.png',
-        figureCaption: 'Figure 2: Amazon Lex intent modeling and sample Arabic utterance training sets.'
+        imagePath: ['AI Conversational Agent Automated Booking Solution (Arabic Project)/2.webp', 'AI Conversational Agent Automated Booking Solution (Arabic Project)/22.webp'],
+        figureCaption: ['Figure 9: My GitHub repository where I keep the final version of the code ready for the world to see.', 'Figure 9: A list of the Python tools the server needs to install to run the dashboard correctly.'],
       },
       {
         name: 'Phase 3: Intent Architecture & Language Localization',
@@ -736,7 +737,7 @@ if __name__ == "__main__":
             desc: 'I successfully executed the build process, as confirmed by the "Successfully built" status, ensuring the NLU model was ready for utterance training.'
           }
         ],
-        imagePath: 'lex-phase3.png',
+        imagePath: 'AI Conversational Agent Automated Booking Solution (Arabic Project)/3(1).webp',
         figureCaption: 'Figure 3: Multi-turn slot definition and user input confirmation rules.'
       },
       {
@@ -758,8 +759,8 @@ if __name__ == "__main__":
             desc: 'I integrated dynamic slots within the utterances to capture essential data points in real-time, allowing for a more natural and fluid interaction during the tent ordering process.'
           }
         ],
-        imagePath: 'lex-phase4.png',
-        figureCaption: 'Figure 4: Twilio WhatsApp sandbox integration verifying message roundtrips.'
+        imagePath: ['AI Conversational Agent Automated Booking Solution (Arabic Project)/4.webp', 'AI Conversational Agent Automated Booking Solution (Arabic Project)/44.webp'],
+        figureCaption: ['Figure 9: My GitHub repository where I keep the final version of the code ready for the world to see.', 'Figure 9: A list of the Python tools the server needs to install to run the dashboard correctly.'],
       },
       {
         name: 'Phase 5: Advanced Slot Architecture & Multi-Turn Data Collection',
@@ -832,8 +833,8 @@ if __name__ == "__main__":
             </div>
           </div>
         ),
-        imagePath: 'lex-phase5.png',
-        figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
+        imagePath: '',
+        figureCaption: ''
       },
       {
         name: 'Phase 6: Fulfillment Logic & Transactional Confirmation',
@@ -858,7 +859,7 @@ if __name__ == "__main__":
             desc: 'Configured the "Next step in conversation" to End Conversation, ensuring a clean session closure and resource optimization.'
           }
         ],
-        imagePath: 'lex-phase5.png',
+        imagePath: 'AI Conversational Agent Automated Booking Solution (Arabic Project)/6.webp',
         figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
       },
       {
@@ -915,21 +916,21 @@ if __name__ == "__main__":
             </div>
           </div>
         ),
-        imagePath: 'lex-phase5.png',
-        figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
+        imagePath: ['AI Conversational Agent Automated Booking Solution (Arabic Project)/7.webp', 'AI Conversational Agent Automated Booking Solution (Arabic Project)/77.webp'],
+        figureCaption: ['Figure 9: My GitHub repository where I keep the final version of the code ready for the world to see.', 'Figure 9: A list of the Python tools the server needs to install to run the dashboard correctly.'],
       },
       {
         name: 'Phase 8: Error Handling & Fallback Strategy',
         tools: 'Amazon Lex (V2) - FallbackIntent',
         desc: 'To ensure the bot never leaves a user without a response, I configured the FallbackIntent. This is the (Safety Net) of the conversational flow. If the user input doesn\'t match any trained intents, this intent triggers a polite response, maintaining the professional image of the bot and preventing (dead-end)conversations. It’s a critical step for maintaining a robust User Experience (UX).',
-        imagePath: 'lex-phase5.png',
+        imagePath: 'AI Conversational Agent Automated Booking Solution (Arabic Project)/8(1).webp',
         figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
       },
       {
         name: 'Phase 9: API Gateway Provisioning & Security',
         tools: 'Twilio Console & REST API Credentials',
         desc: 'To enable external communication, I provisioned a Twilio Cloud Communications account. This served as the primary gateway for the WhatsApp integration. I secured the essential API credentials, including the Account SID and Auth Token, which are required to authenticate and authorize requests sent from the AWS environment. This step ensures that the communication channel is both private and secure.',
-        imagePath: 'lex-phase5.png',
+        imagePath: 'AI Conversational Agent Automated Booking Solution (Arabic Project)/9.webp',
         figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
       },
       {
@@ -951,8 +952,8 @@ if __name__ == "__main__":
             desc: 'Verified the integration by triggering a Business-Initiated message from the console to my device, confirming the API\'s ability to deliver content templates.'
           }
         ],
-        imagePath: 'lex-phase5.png',
-        figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
+        imagePath: ['AI Conversational Agent Automated Booking Solution (Arabic Project)/10.webp', 'AI Conversational Agent Automated Booking Solution (Arabic Project)/1010.webp'],
+        figureCaption: ['Figure 9: My GitHub repository where I keep the final version of the code ready for the world to see.', 'Figure 9: A list of the Python tools the server needs to install to run the dashboard correctly.'],
       },
       {
         name: 'Phase 11: Serverless Logic & Real-Time Alert Automation',
@@ -1005,7 +1006,7 @@ if __name__ == "__main__":
             <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3">
               <div className="rounded-lg overflow-hidden border border-zinc-900 bg-black/50">
                 <img
-                  src="/lex-phase11-console.png"
+                  src="/AI Conversational Agent Automated Booking Solution (Arabic Project)/11.webp"
                   alt="Figure 11: Developing the Python-based Lambda handler to process Lex events and automate outbound WhatsApp notifications via Twilio's REST API using secure HTTP Basic Authentication."
                   className="w-full h-auto object-contain max-h-[600px] mx-auto rounded-md"
                 />
@@ -1103,8 +1104,8 @@ from_number = 'whatsapp:+14155238886'
             desc: 'Successfully generated a unique Callback URL (Endpoint). This URL serves as the secure "Digital Address" where Lex listens for incoming messages from the Twilio gateway.'
           }
         ],
-        imagePath: 'lex-phase5.png',
-        figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
+        imagePath: ['AI Conversational Agent Automated Booking Solution (Arabic Project)/12.webp', 'AI Conversational Agent Automated Booking Solution (Arabic Project)/1212.webp'],
+        figureCaption: ['Figure 9: My GitHub repository where I keep the final version of the code ready for the world to see.', 'Figure 9: A list of the Python tools the server needs to install to run the dashboard correctly.'],
       },
       {
         name: 'Phase 13: Omnichannel Deployment & Channel Integration',
@@ -1125,14 +1126,14 @@ from_number = 'whatsapp:+14155238886'
             desc: 'Saved the configuration to synchronize the two platforms. This established a live, event-driven connection where Twilio acts as the delivery agent and Lex acts as the intelligent processor.'
           }
         ],
-        imagePath: 'lex-phase5.png',
+        imagePath: 'AI Conversational Agent Automated Booking Solution (Arabic Project)/13(1).webp',
         figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
       },
       {
         name: 'Final Phase: Live Demonstration & Real-World Validation',
         tools: 'WhatsApp Messenger & Amazon Lex Runtime',
         desc: 'The culmination of this project is a fully functional, localized AI agent operating within WhatsApp. As shown in the final demonstration, the bot seamlessly handles the end-to-end booking journey in Arabic (UAE). It initiates the conversation, collects specific requirements through structured slots, and provides a personalized confirmation—all within seconds and without any manual intervention.',
-        imagePath: 'lex-phase5.png',
+        imagePath: 'AI Conversational Agent Automated Booking Solution (Arabic Project)/14.webp',
         figureCaption: 'Figure 5: Lambda fulfillment handler processing structured customer booking records.'
       },
     ],
@@ -1192,7 +1193,7 @@ from_number = 'whatsapp:+14155238886'
         </div>
       </div>
     ),
-    coverImage: 'cloud-project-3.jpg'
+    coverImage: 'AI Conversational Agent Automated Booking Solution (Arabic Project)/14.webp'
   },
   {
     id: 'slack-performance-engine',
