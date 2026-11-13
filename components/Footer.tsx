@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import { ArrowUp } from 'lucide-react';
 export default function Footer() {
   // حالة لعبة Tic-Tac-Toe التفاعلية
+
   const [board, setBoard] = useState<(string | null)[]>(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState<boolean>(true);
   const [winner, setWinner] = useState<string | null>(null);
-
   // حساب الفائز
   const checkWinner = (squares: (string | null)[]) => {
     const lines = [
@@ -30,16 +30,15 @@ export default function Footer() {
     const newBoard = [...board];
     newBoard[index] = 'X';
     setBoard(newBoard);
-
     const win = checkWinner(newBoard);
     if (win) {
       setWinner(win);
       return;
     }
-
     // حركة الذكاء الاصطناعي التلقائية السريعة (O)
     setIsXNext(false);
     setTimeout(() => {
+
       const emptyIndices = newBoard
         .map((val, idx) => (val === null ? idx : null))
         .filter((val): val is number => val !== null);
@@ -59,19 +58,18 @@ export default function Footer() {
     setBoard(Array(9).fill(null));
     setWinner(null);
     setIsXNext(true);
+
   };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
+  };
   return (
     <footer className="relative w-full bg-black text-white border-t border-zinc-900 pt-20 pb-28 selection:bg-[#ff2e7e] selection:text-white">
       <div className="max-w-5xl mx-auto px-6 md:px-8 flex flex-col md:flex-row justify-between items-start gap-12">
-        
         {/* Left Column: Brand, Socials, Visitor Counter */}
         <div className="flex-1 space-y-6">
-          
           {/* Logo with Pink Overlay Icon */}
           <div className="flex items-center gap-2">
             <div className="relative w-4 h-4">
@@ -82,11 +80,9 @@ export default function Footer() {
               ahmedsaber.dev/
             </span>
           </div>
-
           <p className="text-xs md:text-sm text-zinc-400 font-sans max-w-sm leading-relaxed">
             Technical SEO, generative search optimization & modern web engineering by Ahmed Saber.
           </p>
-
           {/* Social Icons (Inline Clean SVGs) */}
           <div className="flex items-center gap-5 text-zinc-400">
             {/* LinkedIn */}
@@ -101,7 +97,6 @@ export default function Footer() {
                 <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.66 1.66 0 1 0 0 3.32 1.66 1.66 0 0 0 0-3.32z" />
               </svg>
             </a>
-
             {/* GitHub */}
             <a
               href="https://github.com"
@@ -127,7 +122,6 @@ export default function Footer() {
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
               </svg>
             </a>
-
             {/* Email */}
             <a
               href="mailto:contact@ahmedsaber.dev"
@@ -140,9 +134,9 @@ export default function Footer() {
               </svg>
             </a>
           </div>
-
           {/* Visitor Counter */}
           <div className="pt-4 text-xs md:text-sm font-sans text-zinc-400">
+
             You were visitor number{' '}
             <span className="font-mono font-bold text-white tracking-wide">
               248,190
@@ -153,6 +147,7 @@ export default function Footer() {
         {/* Right Column: Interactive Tic-Tac-Toe Widget */}
         <div className="flex flex-col items-start md:items-end w-full md:w-auto">
           <div className="text-xs md:text-sm text-zinc-400 mb-4 font-sans flex items-center gap-2">
+
             <span>By the way, can you beat me? :)</span>
             {winner && (
               <button
@@ -160,10 +155,11 @@ export default function Footer() {
                 className="text-[11px] font-mono text-[#ff2e7e] underline underline-offset-2 ml-1"
               >
                 Reset
+
               </button>
             )}
-          </div>
 
+          </div>
           {/* Tic-Tac-Toe Grid */}
           <div className="relative w-44 h-44 grid grid-cols-3 grid-rows-3 border-collapse">
             {/* Grid Lines */}
@@ -171,7 +167,6 @@ export default function Footer() {
             <div className="absolute right-1/3 top-0 bottom-0 w-[1px] bg-zinc-800 pointer-events-none" />
             <div className="absolute top-1/3 left-0 right-0 h-[1px] bg-zinc-800 pointer-events-none" />
             <div className="absolute bottom-1/3 left-0 right-0 h-[1px] bg-zinc-800 pointer-events-none" />
-
             {board.map((cell, idx) => (
               <button
                 key={idx}
@@ -180,13 +175,15 @@ export default function Footer() {
               >
                 {cell === 'X' && <span className="text-[#ff2e7e]">X</span>}
                 {cell === 'O' && <span className="text-zinc-200">O</span>}
+
               </button>
             ))}
           </div>
-
           {winner && (
             <div className="mt-2 text-[11px] font-mono text-[#ff2e7e]">
+
               {winner === 'Tie' ? "It's a tie!" : `Winner: ${winner}!`}
+
             </div>
           )}
         </div>
@@ -203,4 +200,4 @@ export default function Footer() {
       </button>
     </footer>
   );
-}
+} 
