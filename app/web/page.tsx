@@ -14,6 +14,7 @@ interface ProjectShowcase {
   title: string;
   category: string;
   status: string;
+  liveUrl?: string;
   description: string;
   architecturePoints: string[];
   stack: string[];
@@ -24,79 +25,127 @@ interface ProjectShowcase {
 const webProjects: ProjectShowcase[] = [
   {
     id: 'nokhada-rebuild',
-    tag: 'NEXT-GEN ARCHITECTURE',
-    title: 'Bait Al Nokhada Enterprise Web Platform',
-    category: 'Decoupled Full-Stack Architecture',
-    status: 'In Active Development',
+    tag: 'FULL-STACK REBUILD & CLOUD MIGRATION',
+    title: 'Bait Al Nokhada Enterprise Web Platform (baitalnokhada.com)',
+    category: 'Bilingual Next.js, Sanity CMS & AWS Cloud Architecture',
+    status: 'Live in Production',
+    liveUrl: 'https://baitalnokhada.com',
     description:
-      'Recognizing the creeping latency and architectural decay of the legacy monolithic platform, I initiated and engineered a ground-up rebuild. Decoupling the frontend with Next.js App Router and connecting it with a headless Sanity CMS provides enterprise editorial teams complete visual agility while enforcing strict sub-second Edge caching across the GCC.',
+      'Built from scratch using React, Next.js, and Sanity Headless CMS to replace a slow legacy site with a modern bilingual (AR/EN) platform. Deployed on Vercel with AWS S3 & CloudFront media delivery, achieving top GTmetrix speeds and a zero-loss GoDaddy DNS migration from Kinsta that preserved 25+ years of SEO authority.',
     architecturePoints: [
-      'Next.js 15 App Router with full Server Components (RSC) to minimize client-side JavaScript.',
-      'Headless Sanity CMS integration with automated webhook-driven on-demand ISR revalidation.',
-      'Global Edge deployment on Vercel ensuring <150ms TTFB for visitors in Dubai, Riyadh, and Cairo.',
-      'Built-in structured metadata generators matching Google Rich Results & Knowledge Graph schemas.'
+      'Scratch-Coded Bilingual Architecture: Organized modular folder structure (/app, /ar, /components, /components-ar) with smooth modern animations and clean reusable UI components.',
+      'Hybrid Cloud & CDN Media Delivery: Hosted on Vercel Edge and connected to AWS S3 + CloudFront CDN for videos/static assets, paired with Sanity CDN for CMS-managed images.',
+      'No-Code Sanity Headless CMS (/Admin): Built a complete content studio allowing teams to publish and manage Articles, Products, Solutions, and Projects in Arabic & English without touching code.',
+      'Zero-Loss DNS & SEO Migration (GoDaddy & Kinsta): Migrated all data, dynamic sitemaps, and redirects, switching GoDaddy DNS from Kinsta to Vercel while protecting 25 years of SEO authority and rankings.',
+      'Blazing GTmetrix & Core Web Vitals Speed: Eliminated legacy server bottlenecks, delivering near-instant page loads and fluid user experience across desktop and mobile.'
     ],
-    stack: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Sanity Studio', 'Vercel Edge', 'Node.js'],
-    imagePath: 'web-nokhada-preview.jpg',
-    imageCaption: 'Next.js Frontend Architecture & Sanity CMS Visual Studio Interface'
+    stack: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'Node.js',
+      'Sanity Headless CMS',
+      'Vercel',
+      'AWS S3 & CloudFront',
+      'Framer Motion',
+      'GoDaddy DNS'
+    ],
+    imagePath: 'ahmed/baitalnokhada-site.jpeg',
+    imageCaption: 'Bait Al Nokhada Live Bilingual Platform (baitalnokhada.com) & Sanity CMS Architecture'
   },
   {
     id: 'high-velocity-landings',
-    tag: 'COMMERCIAL CAMPAIGN ENGINES',
-    title: 'Tactical High-Velocity Next.js Landing Pages',
-    category: 'Rapid Event Procurement Engines',
-    status: 'Shipped to Production',
+    tag: 'B2B LEAD-GEN & AD CAMPAIGN ENGINE',
+    title: 'Bait Al Nokhada Solutions Landing Page (tents.baitalnokhada.com)',
+    category: 'Subdomain Next.js App, Ad Tracking & Conversion Funnel',
+    status: 'Live in Production',
+    liveUrl: 'https://tents.baitalnokhada.com',
     description:
-      'When high-intent commercial seasons hit the UAE and Saudi Arabia, speed of execution is critical. I engineered two standalone, ultra-lean landing pages built exclusively with React and Next.js. Engineered without heavy CMS bloat, these pages achieved instant mobile loading speeds and high conversion rates for rental inquiries.',
+      'Engineered a standalone, conversion-focused landing page on a dedicated subdomain (tents.baitalnokhada.com) via GoDaddy CNAME DNS linked to Vercel. Built with Next.js App Router, TypeScript, and Tailwind CSS, it combines interactive solution tickers, a featured mega-projects showcase (GITEX, Gulfood, Netflix), multi-channel CTAs (WhatsApp, direct call, server-side quote API), and custom LinkedIn & OpenAI ad conversion trackers.',
     architecturePoints: [
-      'Zero unnecessary third-party scripts resulting in a flawless 98+ Mobile Lighthouse score.',
-      'Custom frictionless lead-capture forms integrated with instant email notifications and Google Sheets API.',
-      'Dynamic OpenGraph and Twitter cards generated on-the-fly for commercial social distribution.',
-      'Direct conversion tracking with lightweight custom event listeners in Google Analytics 4.'
+      'Subdomain & DNS Isolation: Configured GoDaddy CNAME DNS records pointing tents.baitalnokhada.com to Vercel Edge, isolating paid ad traffic from the main corporate site.',
+      'Custom Ad Attribution (LinkedIn & OpenAI): Built dedicated client tracking components (LinkedInPageView & OpenAIPageView) to measure B2B ad campaign conversions accurately.',
+      'Server-Side Lead Capture (/app/api): Developed Next.js API routes powering the Get Free Quote form alongside instant WhatsApp Widget and direct phone CTAs.',
+      'Interactive UI & Mega-Project Showcase: Built smooth Framer Motion & CSS marquees (SolutionsTicker) and an interactive case-study slider highlighting covered area, location, and delivery metrics.',
+      'Technical SEO Ready: Implemented programmatic sitemap.ts, robots.ts, custom font optimization (fonts.ts), and sub-second mobile load speeds.'
     ],
-    stack: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'Google Cloud API'],
-    imagePath: 'web-landing-preview.jpg',
-    imageCaption: 'Tactical Landing Page Interface & Dynamic Lead Intake Funnel'
+    stack: [
+      'Next.js App Router',
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'Next.js API Routes',
+      'Vercel',
+      'GoDaddy CNAME DNS',
+      'LinkedIn & OpenAI Tracking',
+      'Framer Motion'
+    ],
+    imagePath: 'ahmed/tents-landing-page.jpeg',
+    imageCaption: 'Bait Al Nokhada Solutions Campaign Landing Page (tents.baitalnokhada.com)'
+  },
+  
+  {
+    id: 'sales-centers-platform',
+    tag: 'PROPTECH & REAL ESTATE LEAD ENGINE',
+    title: 'Real Estate Sales Centers Landing Page (sales-centers.baitalnokhada.com)',
+    category: 'Subdomain Next.js App, Interactive Showcase & REST API Lead Funnel',
+    status: 'Live in Production',
+    liveUrl: 'https://sales-centers.baitalnokhada.com',
+    description:
+      'Engineered a dedicated B2B landing page targeting real estate developers and trade centers on sales-centers.baitalnokhada.com via GoDaddy CNAME DNS connected to Vercel. Built with Next.js App Router, TypeScript, and Tailwind CSS, featuring a full-bleed video hero, interactive multi-tab developer showcases (Amaal × Mansory, Imtiaz, Al Marwan) with technical spec breakdowns, and a server-side REST API quote & site-layout funnel.',
+    architecturePoints: [
+      'Subdomain & DNS Architecture: Linked sales-centers.baitalnokhada.com to Vercel Edge via GoDaddy CNAME DNS records for isolated real-estate ad campaign routing.',
+      'Interactive Developer Project Tabs & Galleries: Built dynamic tabbed showcases with multi-image carousels, thumbnail navigation, and live technical specs (covered area, glazing, HVAC, and structural finishes).',
+      'Server-Side REST API Lead Funnel (/api/contact): Created a custom Next.js API route handling B2B developer inquiries (SalesCentersLeadForm) with instant RFP email, direct engineer call, and WhatsApp widget CTAs.',
+      'Modular Component Architecture & SSR: Structured clean, maintainable React components (SalesCentersHero, NewDesign, SalesCentersWhatsAppWidget) with programmatic sitemap.ts and robots.ts SEO files.'
+    ],
+    stack: [
+      'Next.js App Router',
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'REST API (/api/contact)',
+      'Server-Side Rendering (SSR)',
+      'Vercel',
+      'GoDaddy CNAME DNS',
+      'Responsive Web Design'
+    ],
+    imagePath: 'ahmed/sales-centers-landing-page.png',
+    imageCaption: 'Real Estate Sales Centers Landing Page (sales-centers.baitalnokhada.com)'
   },
   {
-    id: 'real-estate-wordpress',
-    tag: 'CUSTOM CMS ENGINEERING',
-    title: 'Custom-Engineered Real Estate Marketing Platform',
-    category: 'PropTech Custom WordPress Architecture',
-    status: 'Production Deployed',
+    id: 'mirage-heights-wordpress',
+    tag: 'BILINGUAL WORDPRESS & PROPTECH',
+    title: 'Mirage Heights Real Estate Portal (mirage-heights.com)',
+    category: 'Custom WordPress, Elementor Template Kit & Rank Math SEO',
+    status: 'Live in Production',
+    liveUrl: 'https://mirage-heights.com',
     description:
-      'Engineered an enterprise real estate listing platform from scratch on WordPress without using bloated, slow visual page builders. Designed custom PHP post types, taxonomies, and high-performance relational database queries allowing users to search, filter, and explore commercial and residential properties with minimal DOM weight.',
+      'Built a complete bilingual (Arabic RTL & English LTR) real estate brokerage website from scratch for Mirage Heights in Dubai & Abu Dhabi. Hosted on Bluehost with SSL/HTTPS and Google Workspace DNS, the platform combines the lightweight Astra theme, Elementor with Envato Template Kits, Polylang multi-language routing with hreflang tags, and full Rank Math Schema & SEO architecture.',
     architecturePoints: [
-      'Custom-coded PHP templates avoiding commercial page-builder bloat and unnecessary database queries.',
-      'Tailored custom taxonomies and meta fields for property types, pricing tiers, and regional locations.',
-      'Optimized MySQL indexing and query caching for instant property archive rendering.',
-      'Fully automated responsive WebP image pipelines with strict lazy-loading protocols.'
+      'Bilingual Localization (Polylang + Hreflang): Engineered seamless Arabic (/ar/) RTL and English LTR experiences with automated hreflang tags for regional UAE search indexing.',
+      'Property Listing & Detail Architecture: Designed dedicated For Sale, For Rent, and Off-Plan project hubs featuring interactive maps, floor/handover specs, amenities, and FAQ accordions.',
+      'Rank Math SEO & Structured Schema: Configured Rank Math with Organization & Sitelinks Search Box schemas, clean permalinks, and Google Analytics tracking via MonsterInsights.',
+      'Bluehost Infrastructure & Lead Channels: Deployed on Bluehost with Let’s Encrypt SSL, SPF/DMARC email authentication, custom CSS/JS refinements, and floating WhatsApp lead capture.'
     ],
-    stack: ['WordPress Core', 'PHP 8.2', 'MySQL Optimization', 'Tailwind CSS', 'JavaScript'],
-    imagePath: 'web-realestate-preview.jpg',
-    imageCaption: 'Custom Property Architecture, Query Filtering & Responsive UI'
+    stack: [
+      'WordPress',
+      'Astra Theme',
+      'Elementor & Envato Kit',
+      'Polylang (AR/EN)',
+      'Rank Math SEO',
+      'Schema Markup',
+      'Bluehost & SSL',
+      'MonsterInsights',
+      'WhatsApp Integration'
+    ],
+    imagePath: 'ahmed/mirage-heights-site.png',
+    imageCaption: 'Mirage Heights UAE Real Estate Platform (mirage-heights.com)'
   },
-  {
-    id: 'server-hardening',
-    tag: 'INFRASTRUCTURE & RELIABILITY',
-    title: 'Production Server Hardening & Vulnerability Mitigation',
-    category: 'Server Security & Reverse Proxy Engineering',
-    status: 'Operational Standard',
-    description:
-      'Continuous hands-on research in cloud infrastructure revealed that server-level configurations directly determine search crawler efficiency and system resilience. I configured hardened Nginx reverse proxies, isolated databases, implemented strict SSL/TLS cryptographic policies, and successfully upgraded domain security posture to Grade B.',
-    architecturePoints: [
-      'Implemented Strict-Transport-Security (HSTS), X-Content-Type-Options, and anti-clickjacking frame rules.',
-      'Configured Nginx reverse proxy micro-caching to protect backend nodes during traffic surges.',
-      'Crawl-budget preservation by rate-limiting bad scrapers and prioritizing verified search bots.',
-      'Eliminated open port vulnerabilities and hardened SSH key-based access authentication.'
-    ],
-    stack: ['Nginx', 'Ubuntu Linux', 'SSL/TLS Cryptography', 'Cloudflare Edge', 'Bash Scripting'],
-    imagePath: 'web-server-preview.jpg',
-    imageCaption: 'Production HTTP Response Headers & Server Hardening Diagnostics'
-  }
 ];
 
 export default function WebEngineeringPage() {
+  const [expandedId, setExpandedId] = useState<string | null>(null);  
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
 
   return (
@@ -116,164 +165,210 @@ export default function WebEngineeringPage() {
           ← BACK TO HOME
         </Link>
 
-        {/* 1. HERO SECTION: THE CONTINUOUS LEARNING JOURNEY */}
-        <section className="relative p-8 md:p-14 rounded-3xl bg-gradient-to-b from-[#0e0e12] via-[#09090b] to-black border border-zinc-850 shadow-2xl mb-24 overflow-hidden">
+        {/* 1. HERO SECTION: REAL-WORLD WEB DEVELOPMENT */}
+        <section className="relative p-8 md:p-14 rounded-3xl bg-gradient-to-b from-[#0e0e12] via-[#09090b] to-black border border-zinc-850 shadow-2xl mb-20 overflow-hidden">
           <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#ff2e7e]/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="space-y-6 max-w-4xl">
             <div className="flex flex-wrap items-center gap-3">
               <span className="px-3.5 py-1 rounded-full bg-[#ff2e7e]/15 border border-[#ff2e7e]/30 text-[#ff2e7e] font-mono text-xs font-semibold">
-                FULL-STACK CRAFT & CODE
+                WEB DEVELOPMENT & SEO ENGINEERING
               </span>
               <span className="px-3.5 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 font-mono text-xs">
-                Self-Taught • Hands-On Practice
+                Multi-Language • Fast • Built to Convert
               </span>
             </div>
 
-            <h1 
+            <h1
               className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight"
               style={{ fontFamily: 'var(--font-heading-en), Cinzel, serif' }}
             >
-              Continuous Engineering & Modern Web Architecture
+              Building Modern Websites & High-Converting Landing Pages
             </h1>
 
-            <p className="text-sm md:text-base text-zinc-300 leading-relaxed font-normal max-w-3xl">
-              I never treated search intelligence as an isolated discipline. Driven by curiosity and dedicated hours of hands-on study in my spare time, I delved deep into modern software engineering—building custom web applications, exploring backend nodes, and mastering server infrastructure.
-            </p>
+            <div className="space-y-4 text-sm md:text-base text-zinc-300 leading-relaxed font-normal max-w-3xl">
+              <p>
+                As an SEO Specialist who builds from the ground up, I don't just optimize websites—I design, develop, and launch them from scratch. Whether a business needs a custom-coded modern web application or a fast, scalable WordPress site, I handle the complete build with clean code, multi-language support (Arabic & English), and search-engine readiness baked in from day one.
+              </p>
+              <p className="text-zinc-400 text-xs md:text-sm">
+                My hands-on development spans two core approaches depending on project goals and speed-to-market: building full-stack React & Next.js platforms connected to Sanity Headless CMS and deployed on Vercel, or crafting tailored multi-language WordPress websites using Template Kits, custom code enhancements, and Rank Math SEO optimization—alongside high-impact landing pages engineered with both stacks.
+              </p>
+            </div>
 
-            <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal max-w-3xl">
-              Today, this dual expertise allows me not just to recommend architectural fixes, but to actively write the code, configure headless content management, deploy edge microservices, and secure production servers.
-            </p>
-
-            {/* Quick Specs Ticker */}
-            <div className="pt-4 flex flex-wrap items-center gap-6 text-xs font-mono text-zinc-400 border-t border-zinc-850">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Next.js 15 & React 19</span>
+            {/* 3 Simple Pillars Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+              <div className="p-4 rounded-2xl bg-zinc-950/80 border border-zinc-850 space-y-1.5">
+                <div className="text-xs font-mono text-[#ff2e7e] font-semibold">01 / MODERN STACK</div>
+                <div className="text-sm font-bold text-white">Next.js, React & Sanity CMS</div>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Full-stack, multi-language web platforms built with React, Next.js, Node.js, and Headless Sanity CMS, deployed on Vercel for instant global speed.
+                </p>
               </div>
-              <div>•</div>
-              <div>Headless Sanity CMS</div>
-              <div>•</div>
-              <div>Custom WordPress Architecture</div>
-              <div>•</div>
-              <div className="text-[#ff2e7e]">Linux & Nginx Hardening</div>
+
+              <div className="p-4 rounded-2xl bg-zinc-950/80 border border-zinc-850 space-y-1.5">
+                <div className="text-xs font-mono text-emerald-400 font-semibold">02 / WORDPRESS & SEO</div>
+                <div className="text-sm font-bold text-white">Tailored WordPress Builds</div>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Complete multi-language WordPress sites built with Template Kits, custom CSS/JS/PHP tweaks, and full Rank Math technical SEO setup.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-zinc-950/80 border border-zinc-850 space-y-1.5">
+                <div className="text-xs font-mono text-amber-400 font-semibold">03 / CONVERSION ENGINES</div>
+                <div className="text-sm font-bold text-white">High-Impact Landing Pages</div>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Eye-catching, fast-loading campaign landing pages built with either Next.js or WordPress to maximize ad ROI and capture leads.
+                </p>
+              </div>
+            </div>
+
+            {/* Quick Tech Stack Strip */}
+            <div className="pt-4 flex flex-wrap items-center gap-3 text-xs font-mono text-zinc-400 border-t border-zinc-850">
+              <span className="text-zinc-500">Core Stack:</span>
+              {['React & Next.js', 'Node.js', 'Sanity Headless CMS', 'Vercel', 'WordPress & Template Kits', 'Rank Math SEO', 'Multi-Language (AR/EN)'].map(
+                (item, i) => (
+                  <span
+                    key={i}
+                    className="px-2.5 py-1 rounded-md bg-zinc-900/90 border border-zinc-800 text-zinc-300 text-[11px]"
+                  >
+                    {item}
+                  </span>
+                )
+              )}
             </div>
           </div>
         </section>
 
-        {/* 2. THE SHOWCASE OF WEB PROJECTS (WIDE, IN-DEPTH CARDS) */}
-        <section className="space-y-28">
-          {webProjects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="p-8 md:p-12 rounded-3xl bg-[#0a0a0c] border border-zinc-850 space-y-8 shadow-2xl relative"
-            >
-              
-              {/* Project Header */}
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-zinc-850">
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="px-3 py-0.5 rounded-full bg-[#ff2e7e]/10 border border-[#ff2e7e]/20 text-[#ff2e7e] font-mono text-xs font-semibold">
-                      {project.tag}
-                    </span>
-                    <span className="text-zinc-500 font-mono text-xs">•</span>
-                    <span className="text-zinc-400 font-mono text-xs">{project.category}</span>
-                  </div>
-                  <h2 
-                    className="text-2xl md:text-4xl font-bold text-white tracking-wide mt-1"
-                    style={{ fontFamily: 'var(--font-heading-en), Cinzel, serif' }}
-                  >
-                    {project.title}
-                  </h2>
-                </div>
+        {/* 2. THE SHOWCASE OF WEB PROJECTS (CLEAN, MINIMAL & SCANNABLE) */}
+        <section className="space-y-12">
+          {webProjects.map((project, index) => {
+            const isExpanded = expandedId === project.id;
 
-                <div className="flex items-center gap-2 self-start md:self-auto">
-                  <span className="px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-mono text-emerald-400 font-semibold">
-                    {project.status}
-                  </span>
-                </div>
-              </div>
-
-              {/* Narrative Story */}
-              <div className="space-y-4">
-                <h3 className="text-xs font-mono uppercase tracking-widest text-zinc-400">
-                  Engineering Context & Intent
-                </h3>
-                <p className="text-sm md:text-base text-zinc-300 leading-relaxed font-normal">
-                  {project.description}
-                </p>
-              </div>
-
-              {/* HUGE FEATURED IMAGE CANVAS (WIDE & CLEAR) */}
-              <div className="space-y-3">
-                <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-                  <span className="text-zinc-300">{project.imageCaption}</span>
-                  <span className="text-[#ff2e7e]">Click image to inspect ↗</span>
-                </div>
-
-                <motion.div
-                  whileHover={{ scale: 1.008 }}
-                  transition={{ duration: 0.3 }}
-                  onClick={() => setLightboxImg(getImgSrc(project.imagePath))}
-                  className="relative h-[360px] md:h-[480px] w-full rounded-2xl overflow-hidden border border-zinc-800 bg-[#070709] cursor-zoom-in group shadow-2xl flex items-center justify-center"
-                >
-                  <img
-                    src={getImgSrc(project.imagePath)}
-                    alt={project.title}
-                    className="w-full h-full object-contain group-hover:scale-102 transition-transform duration-500"
-                    onError={(e) => {
-                      // صورة احتياطية توضيحية حتى تضيف صورتك المخصصة بنفس الاسم
-                      const target = e.target as HTMLImageElement;
-                      target.src = getImgSrc('vercel.jpg');
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                    <span className="text-xs font-mono text-white bg-black/85 px-3 py-1.5 rounded-lg border border-zinc-700">
-                      Expand High-Resolution Architecture Screenshot
-                    </span>
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Architectural Breakthroughs */}
-              <div className="space-y-4 pt-4 border-t border-zinc-850">
-                <h3 className="text-xs font-mono uppercase tracking-widest text-[#ff2e7e]">
-                  Key Technical Deliverables
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {project.architecturePoints.map((point, pIdx) => (
-                    <div
-                      key={pIdx}
-                      className="p-4 rounded-xl bg-zinc-950/80 border border-zinc-850 text-xs md:text-sm text-zinc-300 leading-relaxed flex items-start gap-2.5"
-                    >
-                      <span className="text-[#ff2e7e] font-bold mt-0.5">▹</span>
-                      <span>{point}</span>
+            return (
+              <motion.article
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                className="p-6 md:p-8 rounded-3xl bg-[#0a0a0c] border border-zinc-850 hover:border-zinc-700/80 transition-all shadow-xl"
+              >
+                {/* MAIN 2-COLUMN CLEAN GRID */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                  {/* LEFT: Title, Concise Summary, Stack & Actions (7 Cols) */}
+                  <div className="lg:col-span-7 space-y-5">
+                    {/* Tag & Status */}
+                    <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono">
+                      <span className="text-[#ff2e7e] font-bold">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <span className="text-zinc-600">/</span>
+                      <span className="text-[#ff2e7e] font-medium">{project.tag}</span>
+                      <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[11px]">
+                        ● {project.status}
+                      </span>
                     </div>
-                  ))}
+
+                    {/* Title */}
+                    <h2
+                      className="text-2xl md:text-3xl font-bold text-white leading-snug"
+                      style={{ fontFamily: 'var(--font-heading-en), Cinzel, serif' }}
+                    >
+                      {project.title}
+                    </h2>
+
+                    {/* Clean, Readable Summary (Short & Direct) */}
+                    <p className="text-sm text-zinc-400 leading-relaxed">
+                      {project.description}
+                    </p>
+
+                    {/* Compact Tech Stack */}
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {project.stack.map((tech, tIdx) => (
+                        <span
+                          key={tIdx}
+                          className="px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800/80 text-[11px] font-mono text-zinc-300"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="pt-2 flex flex-wrap items-center gap-3">
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-4 py-2 rounded-xl bg-white text-black hover:bg-[#ff2e7e] hover:text-white text-xs font-mono font-bold transition-all inline-flex items-center gap-1.5"
+                        >
+                          <span>Live Preview</span>
+                          <span>↗</span>
+                        </a>
+                      )}
+
+                      <button
+                        type="button"
+                        onClick={() => setExpandedId(isExpanded ? null : project.id)}
+                        className="px-4 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs font-mono text-zinc-300 transition-colors"
+                      >
+                        {isExpanded ? 'Hide Architecture Details −' : 'Architecture & Migration Details +'}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* RIGHT: Clean Compact Preview Image (5 Cols) */}
+                  <div className="lg:col-span-5">
+                    <div
+                      onClick={() => setLightboxImg(getImgSrc(project.imagePath))}
+                      className="group relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-950 cursor-zoom-in shadow-lg"
+                    >
+                      <img
+                        src={getImgSrc(project.imagePath)}
+                        alt={project.title}
+                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = getImgSrc('vercel.jpg');
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span className="px-3 py-1.5 rounded-full bg-black/85 border border-zinc-700 text-[11px] font-mono text-white">
+                          Zoom ⤢
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
 
-              {/* Technology Stack Tags */}
-              <div className="flex flex-wrap items-center gap-2 pt-2">
-                <span className="text-xs font-mono text-zinc-500 mr-2">Built with:</span>
-                {project.stack.map((tech, tIdx) => (
-                  <span
-                    key={tIdx}
-                    className="px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-300"
+                {/* COLLAPSIBLE ARCHITECTURE DETAILS (Clean & On-Demand) */}
+                {isExpanded && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    className="mt-6 pt-6 border-t border-zinc-850"
                   >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-            </motion.div>
-          ))}
+                    <div className="text-xs font-mono uppercase tracking-wider text-[#ff2e7e] mb-3">
+                      Key Architecture & Migration Highlights
+                    </div>
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {project.architecturePoints.map((point, pIdx) => (
+                        <li
+                          key={pIdx}
+                          className="p-3.5 rounded-xl bg-zinc-950 border border-zinc-900 text-xs text-zinc-300 leading-relaxed flex items-start gap-2.5"
+                        >
+                          <span className="text-[#ff2e7e] font-bold">•</span>
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                )}
+              </motion.article>
+            );
+          })}
         </section>
-
       </main>
 
       {/* LIGHTBOX MODAL */}
