@@ -277,7 +277,7 @@ export default function ArabicSeoCaseStudies() {
                   metricRight="GTmetrix Grade C (67%) • 2.4s LCP"
                   title="نتيجة التدخل الهندسي: تقليص التحميل لأكثر من النصف (2.4 ثانية)"
                   subtitle="ضغط ملفات CSS الحرجة، تفعيل التحميل الكسول للصور والوسائط، وتحسين مؤشرات Core Web Vitals للهواتف."
-                  imgName="gtmetrix-after.jpg"
+                  imgName="gtmetrix-baitalnokhada.webp"
                   alt="تقرير GTmetrix بعد التحسين"
                   footerLeft="تقليص التحميل إلى 2.4 ثانية (-51%)"
                   footerCenter="ارتفاع التقييم إلى 67% (Grade C)"
@@ -435,7 +435,7 @@ export default function ArabicSeoCaseStudies() {
                   metricRight="Security Headers Grade B"
                   title="تأمين ترويسات الاستجابة (HTTP Security Headers)"
                   subtitle="تفعيل بروتوكولات Strict-Transport-Security و X-Frame-Options و Referrer-Policy لحماية الموقع ورفع موثوقيته."
-                  imgName="4http-headers.png"
+                  imgName="Security-headers-baitalnokhada.webp"
                   alt="ترويسات HTTP بعد التحسين"
                   onOpenZoom={openLightbox}
                 />

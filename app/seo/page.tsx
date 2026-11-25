@@ -259,7 +259,7 @@ export default function SeoCaseStudies() {
                   metricRight="GTmetrix Grade C (67%) • Load Cut to 2.4s"
                   title="Post-Engineering Performance Breakthrough"
                   subtitle="Optimized critical CSS delivery, deferred non-essential JavaScript, and lazy-loaded off-screen media—cutting Largest Contentful Paint by more than 50%."
-                  imgName="gtmetrix-after.jpg"
+                  imgName="gtmetrix-baitalnokhada.webp"
                   alt="GTmetrix After"
                   footerLeft="LCP Cut to 2.4 Seconds (-51%)"
                   footerCenter="Performance Upgraded to 67% (Grade C)"
@@ -417,7 +417,7 @@ export default function SeoCaseStudies() {
                   metricRight="Security Headers Grade B Verified"
                   title="Enterprise HTTP Security Response Headers Deployed"
                   subtitle="Configured Strict-Transport-Security (HSTS), X-Frame-Options, Referrer-Policy, and X-Content-Type-Options at the server edge."
-                  imgName="4http-headers.png"
+                  imgName="Security-headers-baitalnokhada.webp"
                   alt="Security Headers After"
                   onOpenZoom={openLightbox}
                 />
