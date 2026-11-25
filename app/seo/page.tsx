@@ -9,15 +9,127 @@ import Footer from '@/components/Footer';
 // دالة لمعالجة المسافات والحروف في مسار الصورة لتظهر بدون أي خطأ 404
 const getImgSrc = (name: string) => encodeURI(`/${name}`);
 
+interface ProofBlockProps {
+  badge: string;
+  badgeColor?: 'red' | 'emerald' | 'pink' | 'amber';
+  title: string;
+  subtitle?: string;
+  metricRight?: string;
+  imgName: string;
+  alt: string;
+  footerLeft?: string;
+  footerCenter?: string;
+  footerRight?: string;
+  onOpenZoom: (src: string) => void;
+}
+
+function CinemaProofCard({
+  badge,
+  badgeColor = 'emerald',
+  title,
+  subtitle,
+  metricRight,
+  imgName,
+  alt,
+  footerLeft,
+  footerCenter,
+  footerRight,
+  onOpenZoom,
+}: ProofBlockProps) {
+  const badgeStyles = {
+    red: 'bg-red-500/10 border-red-500/30 text-red-400',
+    emerald: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400',
+    pink: 'bg-[#ff2e7e]/10 border-[#ff2e7e]/30 text-[#ff2e7e]',
+    amber: 'bg-amber-500/10 border-amber-500/30 text-amber-400',
+  };
+
+  const borderHighlight =
+    badgeColor === 'red'
+      ? 'border-zinc-800 hover:border-red-500/40'
+      : badgeColor === 'pink'
+      ? 'border-zinc-800 hover:border-[#ff2e7e]/40'
+      : 'border-zinc-800 hover:border-emerald-500/40';
+
+  return (
+    <div
+      className={`p-5 sm:p-8 rounded-3xl bg-[#0a0a0c] border ${borderHighlight} shadow-2xl transition-colors space-y-5`}
+    >
+      {/* Top Info Bar */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <div className="space-y-1.5">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <span
+              className={`px-3 py-1 rounded-full border text-[11px] font-mono font-bold uppercase tracking-wider ${badgeStyles[badgeColor]}`}
+            >
+              {badge}
+            </span>
+            {metricRight && (
+              <span className="text-xs font-mono font-bold text-zinc-300">
+                {metricRight}
+              </span>
+            )}
+          </div>
+          <h4 className="text-xl md:text-2xl font-bold text-white">{title}</h4>
+          {subtitle && (
+            <p className="text-xs md:text-sm text-zinc-400 max-w-4xl leading-relaxed">
+              {subtitle}
+            </p>
+          )}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => onOpenZoom(getImgSrc(imgName))}
+          className="self-start md:self-center shrink-0 px-4 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-mono text-zinc-200 hover:text-white transition"
+        >
+          Inspect Full HD ↗
+        </button>
+      </div>
+
+      {/* FULL-WIDTH UNCONSTRAINED SCREENSHOT */}
+      <div
+        onClick={() => onOpenZoom(getImgSrc(imgName))}
+        className="w-full rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-950 cursor-zoom-in group shadow-inner"
+      >
+        <img
+          src={getImgSrc(imgName)}
+          alt={alt}
+          className="w-full h-auto block object-contain group-hover:scale-[1.005] transition-transform duration-300"
+        />
+      </div>
+
+      {/* Optional Bottom Metrics Strip */}
+      {(footerLeft || footerCenter || footerRight) && (
+        <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-zinc-400 border-t border-zinc-900">
+          <span>{footerLeft}</span>
+          <span className="text-emerald-400 font-bold">{footerCenter}</span>
+          <span className="text-[#ff2e7e] font-bold">{footerRight}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function SeoCaseStudies() {
-  const [activeTab, setActiveTab] = useState<'nokhada' | 'ksa' | 'lloyds'>('nokhada');
+  const [activeTab, setActiveTab] = useState<'nokhada' | 'lloyds'>('nokhada');
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
+  const [zoomLevel, setZoomLevel] = useState<number>(1);
+
+  const openLightbox = (src: string) => {
+    setZoomLevel(1);
+    setLightboxImg(src);
+  };
+
+  const closeLightbox = () => {
+    setLightboxImg(null);
+    setZoomLevel(1);
+  };
 
   return (
     <div className="min-h-screen bg-black text-white font-sans selection:bg-[#ff2e7e] selection:text-white">
       <Navbar />
 
-      <main className="max-w-5xl mx-auto px-6 md:px-8 pt-10 pb-24">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 pt-10 pb-28">
         
         {/* Back Button */}
         <Link
@@ -30,537 +142,423 @@ export default function SeoCaseStudies() {
         {/* Header */}
         <div className="mb-10">
           <div className="text-xs font-mono uppercase tracking-widest text-[#ff2e7e] mb-2">
-            Production Track Record
+            Production Track Record • Full-Resolution Evidence
           </div>
           <h1 className="text-4xl md:text-6xl font-black tracking-tight text-white">
             Search Intelligence & GEO<span className="text-[#ff2e7e]">.</span>
           </h1>
-          <p className="text-sm md:text-base text-zinc-400 mt-3 max-w-2xl">
-            Live technical audits, SERP dominance, and generative AI search indexing across UAE, KSA, and Egypt.
+          <p className="text-sm md:text-base text-zinc-400 mt-3 max-w-3xl">
+            Full-screen technical audits, core speed engineering, organic traffic explosions, SERP #1 dominance, and generative AI search citations across UAE, KSA, and Egypt.
           </p>
         </div>
 
-        {/* 3 Main Companies Switcher */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-1.5 rounded-2xl bg-[#0c0c0e] border border-zinc-900 mb-14">
+        {/* 2 Main Companies Switcher */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-1.5 rounded-2xl bg-[#0c0c0e] border border-zinc-900 mb-14 max-w-2xl">
           <button
             onClick={() => setActiveTab('nokhada')}
-            className={`py-3 px-4 rounded-xl text-xs font-mono font-medium transition-all ${
+            className={`py-3.5 px-5 rounded-xl text-xs font-mono font-medium transition-all ${
               activeTab === 'nokhada'
                 ? 'bg-zinc-800 text-white font-bold border border-zinc-700 shadow-lg'
                 : 'text-zinc-500 hover:text-zinc-300'
             }`}
           >
-            01. Bait Al Nokhada (UAE)
+            01. Bait Al Nokhada (UAE & KSA)
           </button>
 
           <button
             onClick={() => setActiveTab('lloyds')}
-            className={`py-3 px-4 rounded-xl text-xs font-mono font-medium transition-all ${
+            className={`py-3.5 px-5 rounded-xl text-xs font-mono font-medium transition-all ${
               activeTab === 'lloyds'
                 ? 'bg-zinc-800 text-white font-bold border border-zinc-700 shadow-lg'
                 : 'text-zinc-500 hover:text-zinc-300'
             }`}
           >
-            03. Lloyds British (Egypt)
+            02. Lloyds British (Egypt)
           </button>
         </div>
 
         {/* ========================================================= */}
-        {/* TAB 1: BAIT AL NOKHADA (DETAILED CASE STUDY)             */}
+        {/* TAB 1: BAIT AL NOKHADA (FULL-WIDTH CINEMA CASE STUDY)     */}
         {/* ========================================================= */}
         {activeTab === 'nokhada' && (
-          <div className="space-y-20">
+          <div className="space-y-24">
 
-            {/* Overview Card */}
-            <div className="p-8 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-              <span className="text-[11px] font-mono text-[#ff2e7e] uppercase tracking-wider">
-                Flagship Case Study • UAE Market Leader
-              </span>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mt-1">
-                Bait Al Nokhada Tents & Fabric Shades
-              </h2>
-              <p className="text-xs md:text-sm text-zinc-400 mt-2 leading-relaxed max-w-3xl">
-                One of the Middle East&apos;s largest manufacturing powerhouses with 26+ years of heritage. Complete technical SEO re-architecture, core web speed optimization, and generative AI search authority.
-              </p>
-            </div>
-
-            {/* 1. INITIAL AUDIT (لما مسكت الموقع) */}
-            <section className="space-y-6">
+            {/* Overview & Executive KPIs */}
+            <div className="p-8 md:p-10 rounded-3xl bg-gradient-to-br from-[#0e0e12] to-[#08080a] border border-zinc-800 space-y-8">
               <div>
-                <div className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-1">
-                  Phase 01 / Diagnostics
-                </div>
-                <h3 className="text-xl md:text-2xl font-bold text-white">
-                  Baseline Audit: The Bottlenecks Found on Arrival
-                </h3>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
-                {/* Speed Before */}
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900 flex flex-col justify-between">
-                  <div>
-                    <div className="flex justify-between text-xs font-mono text-red-400 mb-2">
-                      <span>GTmetrix Score</span>
-                      <span>Grade E (36%)</span>
-                    </div>
-                    <div className="text-sm font-bold text-white mb-1">4.9s Sluggish LCP</div>
-                    <p className="text-[11px] text-zinc-500 leading-relaxed">
-                      Render-blocking assets and uncompressed payloads caused heavy bounce rates on mobile.
-                    </p>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('gtmetrix-before.jpg'))}
-                    className="relative h-36 w-full mt-4 rounded-xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('gtmetrix-before.jpg')} alt="GTmetrix Before" className="w-full h-full object-cover" />
-                  </div>
-                </div>
-
-                {/* Security Before */}
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900 flex flex-col justify-between">
-                  <div>
-                    <div className="flex justify-between text-xs font-mono text-red-400 mb-2">
-                      <span>Security Headers</span>
-                      <span>Grade D</span>
-                    </div>
-                    <div className="text-sm font-bold text-white mb-1">Missing Protection</div>
-                    <p className="text-[11px] text-zinc-500 leading-relaxed">
-                      Zero HSTS enforcement, missing X-Frame & Content-Type headers, exposing site to clickjacking.
-                    </p>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('3http-headers.png'))}
-                    className="relative h-36 w-full mt-4 rounded-xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('3http-headers.png')} alt="Headers Before" className="w-full h-full object-cover" />
-                  </div>
-                </div>
-
-                {/* Stagnant Traffic */}
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900 flex flex-col justify-between">
-                  <div>
-                    <div className="flex justify-between text-xs font-mono text-zinc-500 mb-2">
-                      <span>SEMrush Visibility</span>
-                      <span>Flatline</span>
-                    </div>
-                    <div className="text-sm font-bold text-white mb-1">Untapped Keywords</div>
-                    <p className="text-[11px] text-zinc-500 leading-relaxed">
-                      Core commercial queries like event tents, hangars, and rental structures sat beyond page 3.
-                    </p>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('organic-traffic-semruch-before.jpg'))}
-                    className="relative h-36 w-full mt-4 rounded-xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('organic-traffic-semruch-before.jpg')} alt="Traffic Before" className="w-full h-full object-cover" />
-                  </div>
-                </div>
-
-              </div>
-            </section>
-
-            {/* 2. THE ENGINEERING OVERHAUL */}
-            <section className="space-y-6">
-              <div>
-                <div className="text-xs font-mono uppercase tracking-widest text-[#ff2e7e] mb-1">
-                  Phase 02 / Technical Action
-                </div>
-                <h3 className="text-xl md:text-2xl font-bold text-white">
-                  Engineering Interventions: Speed & Header Hardening
-                </h3>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
-                {/* Speed After */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="flex justify-between text-xs font-mono text-emerald-400 mb-2">
-                    <span>Performance Upgraded</span>
-                    <span>Load Cut to 2.4s</span>
-                  </div>
-                  <h4 className="text-base font-bold text-white mb-1">GTmetrix Grade C (67%)</h4>
-                  <p className="text-xs text-zinc-400 mb-4">
-                    Optimized critical CSS, lazy-loaded off-screen assets, and improved Core Web Vitals.
-                  </p>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('gtmetrix-after.jpg'))}
-                    className="relative h-60 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('gtmetrix-after.jpg')} alt="GTmetrix After" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-
-                {/* Headers After */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="flex justify-between text-xs font-mono text-emerald-400 mb-2">
-                    <span>Infrastructure Hardening</span>
-                    <span>Grade D → B</span>
-                  </div>
-                  <h4 className="text-base font-bold text-white mb-1">HTTP Security Response Headers</h4>
-                  <p className="text-xs text-zinc-400 mb-4">
-                    Injected Strict-Transport-Security, X-Frame-Options, Referrer-Policy, and X-Content-Type-Options.
-                  </p>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('4http-headers.png'))}
-                    className="relative h-60 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('4http-headers.png')} alt="Headers After" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-
-              </div>
-            </section>
-
-            {/* 3. GSC & GA4 PRODUCTION GROWTH (الترافيك قبل وبعد بوضوح تام) */}
-            <section className="space-y-8">
-              <div>
-                <div className="text-xs font-mono uppercase tracking-widest text-[#ff2e7e] mb-1">
-                  Phase 03 / Measured Scale
-                </div>
-                <h3 className="text-xl md:text-3xl font-bold text-white">
-                  Organic Traffic Explosion: From Baseline to Market Leader
-                </h3>
-                <p className="text-xs md:text-sm text-zinc-400 mt-2 max-w-2xl">
-                  Clear before & after proof directly from Google Search Console: 6x expansion in organic impressions and average position jumping from page 3 (Pos 21) straight into page 1 (Pos 8.5).
+                <span className="text-[11px] font-mono text-[#ff2e7e] uppercase tracking-wider">
+                  Flagship Case Study • UAE & KSA Market Leader
+                </span>
+                <h2 className="text-2xl md:text-4xl font-bold text-white mt-1.5">
+                  Bait Al Nokhada Tents & Fabric Shades
+                </h2>
+                <p className="text-sm md:text-base text-zinc-400 mt-3 leading-relaxed max-w-4xl">
+                  One of the Middle East's largest manufacturing powerhouses with 26+ years of heritage. Complete Core Web Vitals speed overhaul, Google Search Console traffic scale, security hardening, and generative AI search authority.
                 </p>
               </div>
 
-              {/* HUGE FEATURED CARD: GSC BEFORE VS AFTER (المقارنة المباشرة الكبيرة) */}
-              <div className="p-7 md:p-9 rounded-3xl bg-[#0a0a0c] border border-zinc-800 shadow-2xl">
-                
-                {/* Header with Live Stats */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-zinc-850">
-                  <div>
-                    <span className="text-[11px] font-mono uppercase tracking-widest text-emerald-400">
-                      Google Search Console • Verification Proof
-                    </span>
-                    <h4 className="text-xl md:text-2xl font-bold text-white mt-1">
-                      June 2024 (Baseline) vs Recent 28-Days (Scaled Authority)
-                    </h4>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-xs font-bold">
-                      +595% Impressions Surge
-                    </span>
-                    <span className="px-3 py-1 rounded-lg bg-[#ff2e7e]/10 border border-[#ff2e7e]/20 text-[#ff2e7e] font-mono text-xs font-bold">
-                      Pos 21 → Pos 8.5
-                    </span>
-                  </div>
+              {/* 4 Headline KPIs */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+                <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
+                  <div className="text-3xl md:text-4xl font-mono font-bold text-emerald-400">4.9s → 2.4s</div>
+                  <div className="text-xs text-zinc-300 mt-1.5">LCP Speed Cut in Half</div>
+                  <div className="text-[11px] text-zinc-500 font-mono mt-1">Grade E (36%) → C (67%)</div>
                 </div>
-
-                {/* The 2 Big Side-by-Side Images */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                  
-                  {/* GSC Before (June 2024) */}
-                  <div className="flex flex-col justify-between p-4 rounded-2xl bg-zinc-950/80 border border-zinc-900">
-                    <div className="flex items-center justify-between text-xs font-mono mb-3">
-                      <span className="text-red-400 font-semibold">● BEFORE (June 2024 - Arrival)</span>
-                      <span className="text-zinc-500">17.3K Impr • Pos 21</span>
-                    </div>
-                    
-                    <div
-                      onClick={() => setLightboxImg(getImgSrc('search-console-( jun,2024).jpg'))}
-                      className="relative h-64 md:h-72 w-full rounded-xl overflow-hidden border border-zinc-850 bg-black cursor-pointer group"
-                    >
-                      <img
-                        src={getImgSrc('search-console-( jun,2024).jpg')}
-                        alt="Search Console June 2024 Before"
-                        className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
-                    </div>
-
-                    <div className="mt-3 flex justify-between text-[11px] font-mono text-zinc-500">
-                      <span>Total Clicks: 384</span>
-                      <span>Avg CTR: 2.2%</span>
-                      <span>Page 3 Avg Rank</span>
-                    </div>
-                  </div>
-
-                  {/* GSC After (Last 28 Days) */}
-                  <div className="flex flex-col justify-between p-4 rounded-2xl bg-zinc-950/80 border border-zinc-800">
-                    <div className="flex items-center justify-between text-xs font-mono mb-3">
-                      <span className="text-emerald-400 font-semibold">● AFTER (Last 28 Days Scaled)</span>
-                      <span className="text-emerald-400 font-bold">103K Impr • Pos 8.5</span>
-                    </div>
-
-                    <div
-                      onClick={() => setLightboxImg(getImgSrc('GGSC-last28-baitalnokhada.jpg'))}
-                      className="relative h-64 md:h-72 w-full rounded-xl overflow-hidden border border-zinc-700/80 bg-black cursor-pointer group"
-                    >
-                      <img
-                        src={getImgSrc('GSC-last28-baitalnokhada.jpg')}
-                        alt="Search Console Last 28 Days After"
-                        className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
-                    </div>
-
-                    <div className="mt-3 flex justify-between text-[11px] font-mono text-zinc-400">
-                      <span className="text-white font-bold">Total Clicks: 701</span>
-                      <span className="text-emerald-400 font-bold">103,000 Impressions</span>
-                      <span className="text-[#ff2e7e] font-bold">Page 1 Avg Rank</span>
-                    </div>
-                  </div>
-
+                <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
+                  <div className="text-3xl md:text-4xl font-mono font-bold text-white">+595%</div>
+                  <div className="text-xs text-zinc-300 mt-1.5">Monthly Impressions</div>
+                  <div className="text-[11px] text-zinc-500 font-mono mt-1">17.3K → 103K / Month</div>
+                </div>
+                <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
+                  <div className="text-3xl md:text-4xl font-mono font-bold text-[#ff2e7e]">Pos 21 → 8.5</div>
+                  <div className="text-xs text-zinc-300 mt-1.5">Page 3 to Page 1</div>
+                  <div className="text-[11px] text-zinc-500 font-mono mt-1">+1845% KSA Surge</div>
+                </div>
+                <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
+                  <div className="text-3xl md:text-4xl font-mono font-bold text-amber-400">+239%</div>
+                  <div className="text-xs text-zinc-300 mt-1.5">GA4 Active Users</div>
+                  <div className="text-[11px] text-zinc-500 font-mono mt-1">9.3K Users • 503 Backlinks</div>
                 </div>
               </div>
+            </div>
 
-              {/* 4 Supporting Numeric Metrics */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-3xl font-mono font-bold text-white">+108%</div>
-                  <div className="text-xs text-zinc-400 mt-1">6-Month GSC Growth</div>
-                  <div className="text-[10px] text-zinc-600 font-mono mt-1">108K → 225K</div>
+            {/* ===================================================== */}
+            {/* PHASE 01: SPEED & PERFORMANCE FIRST (BEFORE -> AFTER) */}
+            {/* ===================================================== */}
+            <section className="space-y-8">
+              <div className="border-b border-zinc-800 pb-5">
+                <div className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-1">
+                  Phase 01 / Core Web Vitals & Speed Engineering
                 </div>
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-3xl font-mono font-bold text-emerald-400">+239%</div>
-                  <div className="text-xs text-zinc-400 mt-1">GA4 Active Users</div>
-                  <div className="text-[10px] text-zinc-600 font-mono mt-1">9.3K Users</div>
-                </div>
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-3xl font-mono font-bold text-amber-400">+374%</div>
-                  <div className="text-xs text-zinc-400 mt-1">Backlinks Growth</div>
-                  <div className="text-[10px] text-zinc-600 font-mono mt-1">Mangools Verified</div>
-                </div>
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-3xl font-mono font-bold text-[#ff2e7e]">+1845%</div>
-                  <div className="text-xs text-zinc-400 mt-1">KSA Performance</div>
-                  <div className="text-[10px] text-zinc-600 font-mono mt-1">Regional Expansion</div>
-                </div>
-              </div>
-
-              {/* Additional In-Depth Evidence Cards (GA4, 6M comparison, SEMrush, Mangools) */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
-                {/* GSC 6 months Comparison */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-xs font-mono text-zinc-400 mb-3 flex justify-between">
-                    <span>Google Search Console: 6 Months vs Previous</span>
-                    <span className="text-emerald-400 font-bold">+86% Clicks</span>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('last 6th vs. previos 6th.jpg'))}
-                    className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('last 6th vs. previos 6th.jpg')} alt="GSC Growth" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-
-                {/* GA4 Active Users */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-xs font-mono text-zinc-400 mb-3 flex justify-between">
-                    <span>Google Analytics 4: 9.3K Active Users</span>
-                    <span className="text-emerald-400 font-bold">Outperformed Median</span>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('GA4.jpg'))}
-                    className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('GA4.jpg')} alt="GA4 Report" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-
-                {/* SEMrush Keywords */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-xs font-mono text-zinc-400 mb-3 flex justify-between">
-                    <span>SEMrush: Organic Keywords Surge</span>
-                    <span className="text-emerald-400 font-bold">Top 3 & Top 10 Dominance</span>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('organic-keywords-semruch.jpg'))}
-                    className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('organic-keywords-semruch.jpg')} alt="SEMrush Keywords" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-
-                {/* Mangools Backlinks */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-xs font-mono text-zinc-400 mb-3 flex justify-between">
-                    <span>Mangools: +374.6% Backlinks Growth</span>
-                    <span className="text-emerald-400 font-bold">503 Active</span>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('mangools-backlinks-bait.jpg'))}
-                    className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('mangools-backlinks-bait.jpg')} alt="Backlinks" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-
-              </div>
-            </section>ٍٍٍٍٍ
-
-            {/* 4. VERIFIED #1 POSITIONS IN SERP (الرانك والأورجانيك) */}
-            <section className="space-y-6">
-              <div>
-                <div className="text-xs font-mono uppercase tracking-widest text-[#ff2e7e] mb-1">
-                  Phase 04 / SERP Domination
-                </div>
-                <h3 className="text-xl md:text-2xl font-bold text-white">
-                  Verified Rank #1 Across Commercial UAE Keywords
+                <h3 className="text-2xl md:text-4xl font-bold text-white">
+                  Speed Transformation: Cutting Load Time from 4.9s to 2.4s
                 </h3>
+                <p className="text-xs md:text-sm text-zinc-400 mt-2 max-w-3xl">
+                  Eliminated render-blocking assets, optimized critical CSS, and compressed heavy media payloads to rescue mobile user experience and crawl efficiency.
+                </p>
               </div>
 
-              {/* Real Screenshots of Rank 1 Tables */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-xs font-mono text-zinc-400 mb-3 flex justify-between">
-                    <span>Rank Tracker: Arabic Keywords #1 Dominance</span>
-                    <span className="text-emerald-400 font-bold">Verified #1</span>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('rank1.jpg'))}
-                    className="relative h-72 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('rank1.jpg')} alt="Rank 1 Table 1" className="w-full h-full object-contain" />
-                  </div>
-                </div>
+              <div className="space-y-10">
+                <CinemaProofCard
+                  badge="● BEFORE • BASELINE SPEED AUDIT"
+                  badgeColor="red"
+                  metricRight="GTmetrix Grade E (36%) • 4.9s Sluggish LCP"
+                  title="Initial Performance Bottleneck on Arrival"
+                  subtitle="Heavy unoptimized scripts and render-blocking resources caused severe mobile bounce rates and slow Googlebot rendering."
+                  imgName="gtmetrix-before.jpg"
+                  alt="GTmetrix Before"
+                  footerLeft="LCP: 4.9 Seconds"
+                  footerCenter="Performance Score: 36% (Grade E)"
+                  footerRight="High Mobile Bounce Risk"
+                  onOpenZoom={openLightbox}
+                />
 
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-xs font-mono text-zinc-400 mb-3 flex justify-between">
-                    <span>Rank Tracker: English Commercial Terms #1</span>
-                    <span className="text-emerald-400 font-bold">Verified #1</span>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('Rank1-(2).jpg'))}
-                    className="relative h-72 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('Rank1-(2).jpg')} alt="Rank 1 Table 2" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-              </div>
-
-              {/* SERP Search Live Proofs (Google & Bing) */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-xs font-mono text-zinc-400 mb-2">Google.ae: #1 Tent Rental Dubai</div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('tent-rental-company-in-dubai.jpg'))}
-                    className="relative h-56 w-full rounded-xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('tent-rental-company-in-dubai.jpg')} alt="Google Search 1" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-xs font-mono text-zinc-400 mb-2">Google.ae: #1 Tent Suppliers UAE</div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('Tent-Rental-Company-in-UAE.jpg'))}
-                    className="relative h-56 w-full rounded-xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('Tent-Rental-Company-in-UAE.jpg')} alt="Google Search 2" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-xs font-mono text-zinc-400 mb-2">Microsoft Bing: Full Sitelinks #1</div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('tent-rental-bing.jpg'))}
-                    className="relative h-56 w-full rounded-xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('tent-rental-bing.jpg')} alt="Bing Search" className="w-full h-full object-contain" />
-                  </div>
-                </div>
+                <CinemaProofCard
+                  badge="● AFTER • SPEED OPTIMIZATION VERIFIED"
+                  badgeColor="emerald"
+                  metricRight="GTmetrix Grade C (67%) • Load Cut to 2.4s"
+                  title="Post-Engineering Performance Breakthrough"
+                  subtitle="Optimized critical CSS delivery, deferred non-essential JavaScript, and lazy-loaded off-screen media—cutting Largest Contentful Paint by more than 50%."
+                  imgName="gtmetrix-after.jpg"
+                  alt="GTmetrix After"
+                  footerLeft="LCP Cut to 2.4 Seconds (-51%)"
+                  footerCenter="Performance Upgraded to 67% (Grade C)"
+                  footerRight="Core Web Vitals Passed"
+                  onOpenZoom={openLightbox}
+                />
               </div>
             </section>
 
-            {/* 5. GENERATIVE ENGINE OPTIMIZATION (AI OVERVIEWS) */}
-            <section className="space-y-6">
-              <div>
+            {/* ===================================================== */}
+            {/* PHASE 02: TRAFFIC EXPLOSION (GSC, GA4, SEMRUSH, ETC.) */}
+            {/* ===================================================== */}
+            <section className="space-y-8">
+              <div className="border-b border-zinc-800 pb-5">
                 <div className="text-xs font-mono uppercase tracking-widest text-[#ff2e7e] mb-1">
-                  Phase 05 / Generative AI Capture
+                  Phase 02 / Organic Traffic & Visibility Explosion
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold text-white">
-                  Direct Citations in Google AI Overviews & Answer Engines
+                <h3 className="text-2xl md:text-4xl font-bold text-white">
+                  6x Search Growth: Google Search Console, GA4 & SEMrush Proof
+                </h3>
+                <p className="text-xs md:text-sm text-zinc-400 mt-2 max-w-3xl">
+                  Full-resolution telemetry showing the journey from a stagnant Page 3 baseline in June 2024 to 103,000+ monthly impressions, 9.3K active GA4 users, and +1845% expansion in Saudi Arabia.
+                </p>
+              </div>
+
+              <div className="space-y-10">
+                {/* 1. GSC BEFORE (June 2024) */}
+                <CinemaProofCard
+                  badge="● BEFORE • JUNE 2024 BASELINE"
+                  badgeColor="red"
+                  metricRight="17.3K Impressions • Avg Position 21 (Page 3)"
+                  title="Google Search Console on Arrival (June 2024)"
+                  subtitle="When taking over the domain, commercial tent and shade keywords were buried on Page 3 with low click-through rates."
+                  imgName="search-console-( jun,2024).jpg"
+                  alt="Search Console June 2024 Before"
+                  footerLeft="Total Clicks: 384"
+                  footerCenter="17,300 Impressions • Avg CTR: 2.2%"
+                  footerRight="Avg Position: 21 (Page 3)"
+                  onOpenZoom={openLightbox}
+                />
+
+                {/* 2. GSC AFTER (Last 28 Days) */}
+                <CinemaProofCard
+                  badge="● AFTER • SCALED MARKET AUTHORITY"
+                  badgeColor="emerald"
+                  metricRight="103K Impressions (+595%) • Avg Position 8.5 (Page 1)"
+                  title="Google Search Console: 6x Impressions Surge & Page 1 Breakthrough"
+                  subtitle="Restructured bilingual site architecture, schema graphs, and commercial landing pages propelled average ranking straight onto Page 1."
+                  imgName="GSC-last28-baitalnokhada.jpg"
+                  alt="Search Console Last 28 Days After"
+                  footerLeft="Total Clicks: 701 (+82.5%)"
+                  footerCenter="103,000 Impressions (+595%)"
+                  footerRight="Avg Position: 8.5 (Page 1)"
+                  onOpenZoom={openLightbox}
+                />
+
+                {/* 3. GSC 6 MONTHS VS PREVIOUS 6 MONTHS */}
+                <CinemaProofCard
+                  badge="● SUSTAINED 6-MONTH TRAJECTORY"
+                  badgeColor="emerald"
+                  metricRight="+108% Impressions (108K → 225K) • +86% Clicks"
+                  title="Google Search Console: 6-Month Year-over-Period Comparison"
+                  subtitle="Consistent upward compounding curve across UAE and Saudi Arabia (+1845% KSA visibility surge) without relying on paid search spend."
+                  imgName="last 6th vs. previos 6th.jpg"
+                  alt="GSC 6 Months Growth"
+                  footerLeft="Impressions: 108K → 225K (+108%)"
+                  footerCenter="Clicks Growth: +86%"
+                  footerRight="KSA Visibility: +1845%"
+                  onOpenZoom={openLightbox}
+                />
+
+                {/* 4. GA4 ACTIVE USERS */}
+                <CinemaProofCard
+                  badge="● GOOGLE ANALYTICS 4 VERIFIED"
+                  badgeColor="emerald"
+                  metricRight="9.3K Active Users (+239%) • Outperformed Industry Median"
+                  title="GA4 Engagement & User Acquisition Growth"
+                  subtitle="High-intent B2B buyers spending longer durations exploring product specifications and requesting commercial quotes."
+                  imgName="GA4.jpg"
+                  alt="GA4 Report"
+                  footerLeft="Active Users: 9,300"
+                  footerCenter="Growth Rate: +239%"
+                  footerRight="Above Manufacturing Benchmark"
+                  onOpenZoom={openLightbox}
+                />
+
+                {/* 5. SEMRUSH BEFORE VS AFTER */}
+                <CinemaProofCard
+                  badge="● BEFORE • SEMRUSH VISIBILITY"
+                  badgeColor="red"
+                  metricRight="Stagnant Organic Footprint"
+                  title="SEMrush Historical Baseline: Untapped Commercial Demand"
+                  subtitle="High-ticket queries for exhibition tents, storage hangars, and event structures had minimal organic visibility."
+                  imgName="organic-traffic-semruch-before.jpg"
+                  alt="SEMrush Traffic Before"
+                  onOpenZoom={openLightbox}
+                />
+
+                <CinemaProofCard
+                  badge="● AFTER • SEMRUSH KEYWORD SURGE"
+                  badgeColor="emerald"
+                  metricRight="Top 3 & Top 10 Commercial Dominance"
+                  title="SEMrush Organic Keywords Expansion"
+                  subtitle="Massive breakout across transactional tent manufacturing, rental, and shade structure keywords in the GCC."
+                  imgName="organic-keywords-semruch.jpg"
+                  alt="SEMrush Keywords After"
+                  onOpenZoom={openLightbox}
+                />
+
+                {/* 6. MANGOOLS BACKLINKS */}
+                <CinemaProofCard
+                  badge="● OFF-PAGE AUTHORITY"
+                  badgeColor="amber"
+                  metricRight="+374.6% Backlinks Growth • 503 Active Referring Links"
+                  title="Mangools Backlink Profile Expansion"
+                  subtitle="Built a clean, high-authority regional directory and industry citation profile reinforcing domain trust."
+                  imgName="mangools-backlinks-bait.jpg"
+                  alt="Mangools Backlinks Growth"
+                  footerLeft="503 Active Backlinks"
+                  footerCenter="+374.6% Authority Growth"
+                  footerRight="Clean White-Hat Profile"
+                  onOpenZoom={openLightbox}
+                />
+              </div>
+            </section>
+
+            {/* ===================================================== */}
+            {/* PHASE 03: SECURITY HEADERS HARDENING (BEFORE -> AFTER) */}
+            {/* ===================================================== */}
+            <section className="space-y-8">
+              <div className="border-b border-zinc-800 pb-5">
+                <div className="text-xs font-mono uppercase tracking-widest text-amber-400 mb-1">
+                  Phase 03 / Technical Security Hardening
+                </div>
+                <h3 className="text-2xl md:text-4xl font-bold text-white">
+                  HTTP Security Headers Upgrade: Grade D → Grade B
                 </h3>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
-                {/* AI 1: Pyramid Tent */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="flex justify-between text-xs font-mono text-[#ff2e7e] mb-2">
-                    <span>Google AI Overview (GEO)</span>
-                    <span className="text-emerald-400 font-bold">Featured Source #1</span>
-                  </div>
-                  <h4 className="text-base font-bold text-white mb-1">Query: &quot;الخيمة الهرمية في دبي&quot;</h4>
-                  <p className="text-xs text-zinc-400 mb-4">
-                    Google AI extracts brand specifications as the primary reference model with direct image links.
-                  </p>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('الخيمة-الهرمية-في-دبيai.jpg'))}
-                    className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('الخيمة-الهرمية-في-دبيai.jpg')} alt="AI Pyramid" className="w-full h-full object-contain" />
-                  </div>
-                </div>
+              <div className="space-y-10">
+                <CinemaProofCard
+                  badge="● BEFORE • SECURITY VULNERABILITIES"
+                  badgeColor="red"
+                  metricRight="Security Headers Grade D"
+                  title="Missing Protection Headers on Initial Audit"
+                  subtitle="Zero HSTS enforcement, missing X-Frame-Options and Content-Type protections exposed the corporate domain to clickjacking and MIME-sniffing risks."
+                  imgName="3http-headers.png"
+                  alt="Security Headers Before"
+                  onOpenZoom={openLightbox}
+                />
 
-                {/* AI 2: Best Tents UAE */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="flex justify-between text-xs font-mono text-[#ff2e7e] mb-2">
-                    <span>Conversational Authority</span>
-                    <span className="text-emerald-400 font-bold">Brand Recommendation</span>
-                  </div>
-                  <h4 className="text-base font-bold text-white mb-1">Query: &quot;افضل خيام في الامارات؟&quot;</h4>
-                  <p className="text-xs text-zinc-400 mb-4">
-                    Ranked at the top of conversational answers, validating 26+ years of heritage and industry authority.
-                  </p>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('افضل-خيام-في-الإمارات.jpg'))}
-                    className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('افضل-خيام-في-الإمارات.jpg')} alt="AI Best" className="w-full h-full object-contain" />
-                  </div>
-                </div>
+                <CinemaProofCard
+                  badge="● AFTER • HARDENED INFRASTRUCTURE"
+                  badgeColor="emerald"
+                  metricRight="Security Headers Grade B Verified"
+                  title="Enterprise HTTP Security Response Headers Deployed"
+                  subtitle="Configured Strict-Transport-Security (HSTS), X-Frame-Options, Referrer-Policy, and X-Content-Type-Options at the server edge."
+                  imgName="4http-headers.png"
+                  alt="Security Headers After"
+                  onOpenZoom={openLightbox}
+                />
+              </div>
+            </section>
 
-                {/* AI 3: Tent Rental Dubai in English */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="flex justify-between text-xs font-mono text-[#ff2e7e] mb-2">
-                    <span>English Conversational Search</span>
-                    <span className="text-emerald-400 font-bold">Definitive Source</span>
-                  </div>
-                  <h4 className="text-base font-bold text-white mb-1">Query: &quot;Tent Rental in Dubai&quot;</h4>
-                  <p className="text-xs text-zinc-400 mb-4">
-                    Structured entity schema forced Google generative model to cite client specifications directly.
-                  </p>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('tent rental in dubai google ai.png'))}
-                    className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('tent rental in dubai google ai.png')} alt="AI English" className="w-full h-full object-contain" />
-                  </div>
+            {/* ===================================================== */}
+            {/* PHASE 04: VERIFIED #1 POSITIONS IN SERP               */}
+            {/* ===================================================== */}
+            <section className="space-y-8">
+              <div className="border-b border-zinc-800 pb-5">
+                <div className="text-xs font-mono uppercase tracking-widest text-[#ff2e7e] mb-1">
+                  Phase 04 / SERP Domination
                 </div>
+                <h3 className="text-2xl md:text-4xl font-bold text-white">
+                  Verified Rank #1 Across Commercial UAE Keywords (Arabic & English)
+                </h3>
+              </div>
 
-                {/* AI 4: Organic Exhibition Tents */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="flex justify-between text-xs font-mono text-[#ff2e7e] mb-2">
-                    <span>Commercial Organic Dominance</span>
-                    <span className="text-emerald-400 font-bold">Multi-Snippet Rank</span>
-                  </div>
-                  <h4 className="text-base font-bold text-white mb-1">Query: &quot;خيام معارض اورجانيك&quot;</h4>
-                  <p className="text-xs text-zinc-400 mb-4">
-                    Capturing image carousels, maps, and organic results simultaneously above the fold.
-                  </p>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('خيام معارض اورجانيك.jpg'))}
-                    className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('خيام معارض اورجانيك.jpg')} alt="Organic Exhibition" className="w-full h-full object-contain" />
-                  </div>
+              <div className="space-y-10">
+                <CinemaProofCard
+                  badge="● RANK TRACKER • ARABIC DOMINANCE"
+                  badgeColor="emerald"
+                  metricRight="Verified Position #1"
+                  title="Arabic Commercial Keywords: #1 Rankings Across UAE"
+                  subtitle="Dominating high-intent Arabic queries for exhibition tents, pyramid tents, and tent rentals in Dubai and Abu Dhabi."
+                  imgName="rank1.jpg"
+                  alt="Rank 1 Arabic Keywords Table"
+                  onOpenZoom={openLightbox}
+                />
+
+                <CinemaProofCard
+                  badge="● RANK TRACKER • ENGLISH DOMINANCE"
+                  badgeColor="emerald"
+                  metricRight="Verified Position #1"
+                  title="English Commercial Keywords: #1 Rankings Across UAE"
+                  subtitle="Holding #1 positions for B2B tent suppliers, hangar rentals, and event structure keywords."
+                  imgName="Rank1-(2).jpg"
+                  alt="Rank 1 English Keywords Table"
+                  onOpenZoom={openLightbox}
+                />
+
+                <CinemaProofCard
+                  badge="● LIVE GOOGLE.AE SERP PROOF"
+                  badgeColor="emerald"
+                  metricRight="#1 Organic Result"
+                  title='Google.ae Live Result: "Tent Rental Company in Dubai"'
+                  subtitle="Capturing the #1 organic position above directory aggregators and paid competitors."
+                  imgName="tent-rental-company-in-dubai.jpg"
+                  alt="Google.ae Tent Rental Company in Dubai"
+                  onOpenZoom={openLightbox}
+                />
+
+                <CinemaProofCard
+                  badge="● LIVE GOOGLE.AE SERP PROOF"
+                  badgeColor="emerald"
+                  metricRight="#1 Organic Result"
+                  title='Google.ae Live Result: "Tent Suppliers & Rental in UAE"'
+                  subtitle="National UAE search dominance for commercial tent manufacturing and supply."
+                  imgName="Tent-Rental-Company-in-UAE.jpg"
+                  alt="Google.ae Tent Rental Company in UAE"
+                  onOpenZoom={openLightbox}
+                />
+
+                <CinemaProofCard
+                  badge="● MICROSOFT BING SERP PROOF"
+                  badgeColor="emerald"
+                  metricRight="#1 Result + Full Sitelinks"
+                  title="Microsoft Bing: #1 Position with Expanded Brand Sitelinks"
+                  subtitle="Full above-the-fold ownership with structured sitelinks driving direct enterprise inquiries."
+                  imgName="tent-rental-bing.jpg"
+                  alt="Bing Search Full Sitelinks"
+                  onOpenZoom={openLightbox}
+                />
+              </div>
+            </section>
+
+            {/* ===================================================== */}
+            {/* PHASE 05: GENERATIVE ENGINE OPTIMIZATION (AI)         */}
+            {/* ===================================================== */}
+            <section className="space-y-8">
+              <div className="border-b border-zinc-800 pb-5">
+                <div className="text-xs font-mono uppercase tracking-widest text-[#ff2e7e] mb-1">
+                  Phase 05 / Generative Engine Optimization (GEO & AIO)
                 </div>
+                <h3 className="text-2xl md:text-4xl font-bold text-white">
+                  Direct #1 Citations in Google AI Overviews & Answer Engines
+                </h3>
+              </div>
 
+              <div className="space-y-10">
+                <CinemaProofCard
+                  badge="● GOOGLE AI OVERVIEW (GEO)"
+                  badgeColor="pink"
+                  metricRight="Featured Source #1"
+                  title='AI Query: "الخيمة الهرمية في دبي"'
+                  subtitle="Google AI extracts Bait Al Nokhada specifications as the primary reference model with direct image links."
+                  imgName="الخيمة-الهرمية-في-دبيai.jpg"
+                  alt="AI Overview Pyramid Tent Dubai"
+                  onOpenZoom={openLightbox}
+                />
+
+                <CinemaProofCard
+                  badge="● CONVERSATIONAL AI AUTHORITY"
+                  badgeColor="pink"
+                  metricRight="#1 Brand Recommendation"
+                  title='AI Query: "افضل خيام في الامارات؟"'
+                  subtitle="Recommended at the top of conversational AI answers, validating 26+ years of manufacturing heritage."
+                  imgName="افضل-خيام-في-الإمارات.jpg"
+                  alt="AI Overview Best Tents in UAE"
+                  onOpenZoom={openLightbox}
+                />
+
+                <CinemaProofCard
+                  badge="● ENGLISH AI OVERVIEW"
+                  badgeColor="pink"
+                  metricRight="Definitive Cited Source"
+                  title='AI Query: "Tent Rental in Dubai"'
+                  subtitle="Structured JSON-LD entity schema engineered Google's generative model to cite brand specifications directly."
+                  imgName="tent rental in dubai google ai.png"
+                  alt="Google AI Tent Rental in Dubai"
+                  onOpenZoom={openLightbox}
+                />
+
+                <CinemaProofCard
+                  badge="● MULTI-SNIPPET ORGANIC DOMINANCE"
+                  badgeColor="emerald"
+                  metricRight="Carousel + Maps + #1 Organic"
+                  title='Commercial Query: "خيام معارض اورجانيك"'
+                  subtitle="Capturing image carousels, local map packs, and #1 organic results simultaneously above the fold."
+                  imgName="خيام معارض اورجانيك.jpg"
+                  alt="Organic Exhibition Tents SERP"
+                  onOpenZoom={openLightbox}
+                />
               </div>
             </section>
 
           </div>
         )}
 
-
-
-       {/* ========================================================= */}
+        {/* ========================================================= */}
         {/* TAB 2: LLOYDS BRITISH EGYPT (PREMIUM CINZEL/MONTSERRAT)    */}
         {/* ========================================================= */}
         {activeTab === 'lloyds' && (
@@ -600,7 +598,7 @@ export default function SeoCaseStudies() {
 
                 {/* Subtitle using Montserrat */}
                 <p className="text-sm md:text-base text-zinc-400 leading-relaxed font-normal max-w-3xl">
-                  Re-engineering search discoverability for Egypt&apos;s leading accredited lifting inspection body. Resolving technical crawl debt, index bloat, and capturing enterprise RFPs via Google Search Console optimization.
+                  Re-engineering search discoverability for Egypt's leading accredited lifting inspection body. Resolving technical crawl debt, index bloat, and capturing enterprise RFPs via Google Search Console optimization.
                 </p>
 
                 {/* Live Quick KPI Pills */}
@@ -617,32 +615,36 @@ export default function SeoCaseStudies() {
 
               </div>
 
-              {/* Big, Clean Hero GSC Image (Wide Spacing & Full Focus) */}
+              {/* Big, Clean Hero GSC Image (Full width & natural height) */}
               <div className="mt-12">
-                <div className="flex items-center justify-between pb-3 text-xs font-mono text-zinc-400 border-b border-zinc-850">
+                <div className="flex items-center justify-between pb-3 text-xs font-mono text-zinc-400 border-b border-zinc-800">
                   <span className="flex items-center gap-2 text-zinc-300">
                     <span>Google Search Console Performance & Technical Diagnostic Health</span>
                   </span>
-                  <span className="text-[#ff2e7e] hover:underline cursor-pointer">Click image to inspect full report ↗</span>
+                  <span
+                    onClick={() => openLightbox(getImgSrc('Website audit.jpg'))}
+                    className="text-[#ff2e7e] hover:underline cursor-pointer"
+                  >
+                    Click image to inspect full report ↗
+                  </span>
                 </div>
 
-                <motion.div
-                  whileHover={{ scale: 1.01 }}
-                  transition={{ duration: 0.3 }}
-                  onClick={() => setLightboxImg(getImgSrc('Website audit.jpg'))}
-                  className="relative h-[420px] md:h-[520px] w-full mt-4 rounded-2xl overflow-hidden border border-zinc-800/90 bg-zinc-950 cursor-zoom-in group shadow-2xl"
+                <div
+                  onClick={() => openLightbox(getImgSrc('Website audit.jpg'))}
+                  className="w-full mt-4 rounded-2xl overflow-hidden border border-zinc-800/90 bg-zinc-950 cursor-zoom-in group shadow-2xl"
                 >
                   <img
                     src={getImgSrc('Website audit.jpg')}
                     alt="Lloyds British Google Search Console & Technical Audit"
-                    className="w-full h-full object-contain group-hover:scale-102 transition-transform duration-500"
+                    className="w-full h-auto block object-contain group-hover:scale-[1.005] transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                    <span className="text-xs font-mono text-white bg-black/80 px-3 py-1.5 rounded-lg border border-zinc-700">
-                      View Full Audit Resolution Breakdown
+                  <div className="px-5 py-3 bg-zinc-950/95 border-t border-zinc-800 flex justify-between items-center">
+                    <span className="text-xs font-mono text-zinc-300">
+                      Full Technical Audit & Crawl Resolution Breakdown
                     </span>
+                    <span className="text-xs font-mono text-[#ff2e7e]">Zoom HD ↗</span>
                   </div>
-                </motion.div>
+                </div>
               </div>
 
             </div>
@@ -710,28 +712,28 @@ export default function SeoCaseStudies() {
                 </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-850 hover:border-zinc-700 transition-colors">
+                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
                     <div className="text-base font-bold text-white mb-2">1. GSC Crawl Budget Sanitation</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
                       Purged 4xx response loops, consolidated duplicate query parameters via strict canonical self-referencing, and submitted cleaned XML sitemaps to GSC.
                     </p>
                   </div>
 
-                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-850 hover:border-zinc-700 transition-colors">
+                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
                     <div className="text-base font-bold text-white mb-2">2. Industrial Service Schema Graphs</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
                       Structured nested JSON-LD metadata reflecting statutory inspection categories, standard compliance bodies, and local engineering testing sites.
                     </p>
                   </div>
 
-                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-850 hover:border-zinc-700 transition-colors">
+                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
                     <div className="text-base font-bold text-white mb-2">3. Mobile Speed & Core Web Vitals</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
                       Defused render-blocking JavaScript payloads and compressed high-resolution engineering equipment blueprints for faster mobile indexing.
                     </p>
                   </div>
 
-                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-850 hover:border-zinc-700 transition-colors">
+                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
                     <div className="text-base font-bold text-white mb-2">4. Geo-Targeted Industrial Landing Architecture</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
                       Optimized contextual search signals for high-intent queries across major industrial cities (10th of Ramadan, Sadat City, Alexandria, and Suez).
@@ -784,7 +786,7 @@ export default function SeoCaseStudies() {
                 </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-                  <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-850 relative overflow-hidden">
+                  <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 relative overflow-hidden">
                     <div className="text-4xl font-mono font-bold text-white">100%</div>
                     <div className="text-xs text-zinc-400 font-mono mt-2">GSC Validated Health</div>
                     <p className="text-[11px] text-zinc-500 mt-3 leading-relaxed">
@@ -792,7 +794,7 @@ export default function SeoCaseStudies() {
                     </p>
                   </div>
 
-                  <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-850 relative overflow-hidden">
+                  <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 relative overflow-hidden">
                     <div className="text-4xl font-mono font-bold text-emerald-400">Page 1</div>
                     <div className="text-xs text-zinc-400 font-mono mt-2">B2B Inspection Terms</div>
                     <p className="text-[11px] text-zinc-500 mt-3 leading-relaxed">
@@ -800,7 +802,7 @@ export default function SeoCaseStudies() {
                     </p>
                   </div>
 
-                  <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-850 relative overflow-hidden">
+                  <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 relative overflow-hidden">
                     <div className="text-4xl font-mono font-bold text-[#ff2e7e]">+85%</div>
                     <div className="text-xs text-zinc-400 font-mono mt-2">Direct Procurement Inquiries</div>
                     <p className="text-[11px] text-zinc-500 mt-3 leading-relaxed">
@@ -810,7 +812,7 @@ export default function SeoCaseStudies() {
                 </div>
 
                 <div className="pt-4 text-xs font-mono text-zinc-600">
-                  * Performance verified via Google Search Console impressions tracking and technical audit crawl diagnostic records.
+                  - Performance verified via Google Search Console impressions tracking and technical audit crawl diagnostic records.
                 </div>
               </motion.div>
 
@@ -819,19 +821,71 @@ export default function SeoCaseStudies() {
           </motion.div>
         )}
 
-
       </main>
 
-      {/* LIGHTBOX MODAL */}
+      {/* INTERACTIVE ZOOM LIGHTBOX MODAL */}
       {lightboxImg && (
         <div
-          onClick={() => setLightboxImg(null)}
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 backdrop-blur-md cursor-zoom-out"
+          onClick={closeLightbox}
+          className="fixed inset-0 z-50 bg-black/95 flex flex-col items-center justify-center p-4 md:p-8 backdrop-blur-md"
         >
-          <div className="relative max-w-5xl max-h-[90vh] w-full h-full flex items-center justify-center">
-            <img src={lightboxImg} alt="Enlarged" className="max-w-full max-h-full object-contain" />
+          {/* Top Controls Bar */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-7xl flex items-center justify-between mb-4 px-4 py-2.5 rounded-2xl bg-zinc-900/95 border border-zinc-800"
+          >
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setZoomLevel((z) => Math.max(1, Number((z - 0.5).toFixed(2))))}
+                disabled={zoomLevel <= 1}
+                className="px-3.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 text-xs font-mono text-white"
+              >
+                - Zoom Out
+              </button>
+              <span className="px-2.5 text-xs font-mono text-emerald-400 font-bold">
+                {Math.round(zoomLevel * 100)}%
+              </span>
+              <button
+                onClick={() => setZoomLevel((z) => Math.min(2.5, Number((z + 0.5).toFixed(2))))}
+                disabled={zoomLevel >= 2.5}
+                className="px-3.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 text-xs font-mono text-white"
+              >
+                + Zoom In
+              </button>
+              {zoomLevel > 1 && (
+                <button
+                  onClick={() => setZoomLevel(1)}
+                  className="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-mono text-zinc-300"
+                >
+                  Reset
+                </button>
+              )}
+            </div>
+
+            <button
+              onClick={closeLightbox}
+              className="px-4 py-1.5 rounded-lg bg-[#ff2e7e] hover:bg-[#e0246d] text-white font-mono text-xs font-bold"
+            >
+              Close ✕
+            </button>
           </div>
-          <span className="absolute top-6 right-8 text-zinc-400 font-mono text-sm">Click anywhere to close ✕</span>
+
+          {/* Scrollable Zoom Container */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="max-w-7xl max-h-[84vh] w-full overflow-auto rounded-2xl border border-zinc-800 bg-zinc-950 p-3 flex items-center justify-center"
+          >
+            <img
+              src={lightboxImg}
+              alt="Enlarged Proof"
+              onClick={() => setZoomLevel((z) => (z === 1 ? 1.75 : 1))}
+              style={{
+                width: `${zoomLevel * 100}%`,
+                maxWidth: zoomLevel === 1 ? '100%' : 'none',
+              }}
+              className="h-auto object-contain transition-all duration-200 cursor-zoom-in"
+            />
+          </div>
         </div>
       )}
 
