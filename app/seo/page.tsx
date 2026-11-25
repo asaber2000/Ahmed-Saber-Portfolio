@@ -316,21 +316,6 @@ export default function SeoCaseStudies() {
                   onOpenZoom={openLightbox}
                 />
 
-                {/* 3. GSC 6 MONTHS VS PREVIOUS 6 MONTHS */}
-                <CinemaProofCard
-                  badge="● SUSTAINED 6-MONTH TRAJECTORY"
-                  badgeColor="emerald"
-                  metricRight="+108% Impressions (108K → 225K) • +86% Clicks"
-                  title="Google Search Console: 6-Month Year-over-Period Comparison"
-                  subtitle="Consistent upward compounding curve across UAE and Saudi Arabia (+1845% KSA visibility surge) without relying on paid search spend."
-                  imgName="last 6th vs. previos 6th.jpg"
-                  alt="GSC 6 Months Growth"
-                  footerLeft="Impressions: 108K → 225K (+108%)"
-                  footerCenter="Clicks Growth: +86%"
-                  footerRight="KSA Visibility: +1845%"
-                  onOpenZoom={openLightbox}
-                />
-
                 {/* 4. GA4 ACTIVE USERS */}
                 <CinemaProofCard
                   badge="● GOOGLE ANALYTICS 4 VERIFIED"
@@ -346,15 +331,18 @@ export default function SeoCaseStudies() {
                   onOpenZoom={openLightbox}
                 />
 
-                {/* 5. SEMRUSH BEFORE VS AFTER */}
+                {/* 5. SEMRUSH ORGANIC TRAFFIC SURGE */}
                 <CinemaProofCard
-                  badge="● BEFORE • SEMRUSH VISIBILITY"
-                  badgeColor="red"
-                  metricRight="Stagnant Organic Footprint"
-                  title="SEMrush Historical Baseline: Untapped Commercial Demand"
-                  subtitle="High-ticket queries for exhibition tents, storage hangars, and event structures had minimal organic visibility."
+                  badge="● AFTER • SEMRUSH ORGANIC TRAFFIC SURGE"
+                  badgeColor="emerald"
+                  metricRight="935+ Monthly Organic Visits • Peak ~1.3K"
+                  title="SEMrush Organic Traffic Breakout: Replacing Paid Spend with Organic Growth"
+                  subtitle="Captured high-ticket commercial queries for exhibition tents, storage hangars, and event structures—scaling organic traffic while reducing reliance on paid ads."
                   imgName="organic-traffic-semruch-before.jpg"
-                  alt="SEMrush Traffic Before"
+                  alt="SEMrush Organic Traffic Growth"
+                  footerLeft="Organic Traffic Surge: ~1.3K Peak"
+                  footerCenter="Zero Paid Ad Dependency"
+                  footerRight="High-Intent GCC Traffic"
                   onOpenZoom={openLightbox}
                 />
 

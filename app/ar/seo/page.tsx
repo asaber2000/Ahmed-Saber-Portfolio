@@ -334,21 +334,6 @@ export default function ArabicSeoCaseStudies() {
                   onOpenZoom={openLightbox}
                 />
 
-                {/* 3. مقارنة 6 أشهر */}
-                <CinemaProofCardAr
-                  badge="● نمو مستدام على مدار 6 أشهر"
-                  badgeColor="emerald"
-                  metricRight="+108% Impressions (108K → 225K) • +86% Clicks"
-                  title="مقارنة 6 أشهر بالفترة السابقة في Google Search Console"
-                  subtitle="منحنى نمو تراكمي مستمر في الإمارات والسعودية (+1845% نمو الظهور في السعودية) دون الاعتماد على الإعلانات المدفوعة."
-                  imgName="last 6th vs. previos 6th.jpg"
-                  alt="نمو 6 أشهر في GSC"
-                  footerLeft="مرات الظهور: 108K → 225K (+108%)"
-                  footerCenter="نمو النقرات: +86%"
-                  footerRight="الظهور في السعودية: +1845%"
-                  onOpenZoom={openLightbox}
-                />
-
                 {/* 4. GA4 */}
                 <CinemaProofCardAr
                   badge="● موثق عبر Google Analytics 4"
@@ -364,15 +349,18 @@ export default function ArabicSeoCaseStudies() {
                   onOpenZoom={openLightbox}
                 />
 
-                {/* 5. SEMrush قبل وبعد */}
+                {/* 5. SEMRUSH طفرة الزيارات العضوية */}
                 <CinemaProofCardAr
-                  badge="● قبل التحسين • SEMrush"
-                  badgeColor="red"
-                  metricRight="نمو متوقف"
-                  title="الظهور التاريخي في SEMrush: كلمات تجارية غير مستغلة"
-                  subtitle="الكلمات البحثية عالية القيمة مثل تأجير الخيام والهناجر وخيام الفعاليات كانت متأخرة بعد الصفحة الثالثة."
+                  badge="● بعد التحسين • طفرة الزيارات في SEMrush"
+                  badgeColor="emerald"
+                  metricRight="935+ زيارة شهرية • ذروة ~1.3K"
+                  title="انفجار الزيارات العضوية في SEMrush: تعويض الإعلانات المدفوعة بالنمو الطبيعي"
+                  subtitle="الاستحواذ على الكلمات البحثية عالية القيمة لتأجير وتصنيع الخيام والهناجر، مما ضاعف الزيارات المجانية وقلل الاعتماد على الإعلانات المدفوعة."
                   imgName="organic-traffic-semruch-before.jpg"
-                  alt="الزيارات العضوية قبل التحسين"
+                  alt="طفرة الزيارات العضوية في SEMrush"
+                  footerLeft="ذروة الزيارات العضوية: ~1.3K"
+                  footerCenter="تقليل الاعتماد على الإعلانات"
+                  footerRight="زيارات تجارية عالية الجودة"
                   onOpenZoom={openLightbox}
                 />
 
