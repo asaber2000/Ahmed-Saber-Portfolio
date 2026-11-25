@@ -12,9 +12,121 @@ const getImgSrc = (name: string) => {
   return encodeURI(cleanPath);
 };
 
+interface ProofBlockProps {
+  badge: string;
+  badgeColor?: 'red' | 'emerald' | 'pink' | 'amber';
+  title: string;
+  subtitle?: string;
+  metricRight?: string;
+  imgName: string;
+  alt: string;
+  footerLeft?: string;
+  footerCenter?: string;
+  footerRight?: string;
+  onOpenZoom: (src: string) => void;
+}
+
+function CinemaProofCardAr({
+  badge,
+  badgeColor = 'emerald',
+  title,
+  subtitle,
+  metricRight,
+  imgName,
+  alt,
+  footerLeft,
+  footerCenter,
+  footerRight,
+  onOpenZoom,
+}: ProofBlockProps) {
+  const badgeStyles = {
+    red: 'bg-red-500/10 border-red-500/30 text-red-400',
+    emerald: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400',
+    pink: 'bg-[#ff2e7e]/10 border-[#ff2e7e]/30 text-[#ff2e7e]',
+    amber: 'bg-amber-500/10 border-amber-500/30 text-amber-400',
+  };
+
+  const borderHighlight =
+    badgeColor === 'red'
+      ? 'border-zinc-800 hover:border-red-500/40'
+      : badgeColor === 'pink'
+      ? 'border-zinc-800 hover:border-[#ff2e7e]/40'
+      : 'border-zinc-800 hover:border-emerald-500/40';
+
+  return (
+    <div
+      className={`p-5 sm:p-8 rounded-3xl bg-[#0a0a0c] border ${borderHighlight} shadow-2xl transition-colors space-y-5 text-right`}
+    >
+      {/* شريط المعلومات العلوي */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <div className="space-y-1.5">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <span
+              className={`px-3 py-1 rounded-full border text-xs font-bold ${badgeStyles[badgeColor]}`}
+            >
+              {badge}
+            </span>
+            {metricRight && (
+              <span dir="ltr" className="text-xs font-mono font-bold text-zinc-300">
+                {metricRight}
+              </span>
+            )}
+          </div>
+          <h4 className="text-xl md:text-2xl font-bold text-white">{title}</h4>
+          {subtitle && (
+            <p className="text-xs md:text-sm text-zinc-400 max-w-4xl leading-relaxed">
+              {subtitle}
+            </p>
+          )}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => onOpenZoom(getImgSrc(imgName))}
+          className="self-start md:self-center shrink-0 px-4 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-bold text-zinc-200 hover:text-white transition"
+        >
+          تكبير التقرير بدقة كاملة ↖
+        </button>
+      </div>
+
+      {/* عرض الصورة بكامل العرض وبدون أي قص أو ارتفاع مقيد */}
+      <div
+        onClick={() => onOpenZoom(getImgSrc(imgName))}
+        className="w-full rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-950 cursor-zoom-in group shadow-inner"
+      >
+        <img
+          src={getImgSrc(imgName)}
+          alt={alt}
+          className="w-full h-auto block object-contain group-hover:scale-[1.005] transition-transform duration-300"
+        />
+      </div>
+
+      {/* شريط المؤشرات السفلي */}
+      {(footerLeft || footerCenter || footerRight) && (
+        <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs text-zinc-400 border-t border-zinc-900">
+          <span>{footerLeft}</span>
+          <span className="text-emerald-400 font-bold">{footerCenter}</span>
+          <span className="text-[#ff2e7e] font-bold">{footerRight}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ArabicSeoCaseStudies() {
   const [activeTab, setActiveTab] = useState<'nokhada' | 'lloyds'>('nokhada');
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
+  const [zoomLevel, setZoomLevel] = useState<number>(1);
+
+  const openLightbox = (src: string) => {
+    setZoomLevel(1);
+    setLightboxImg(src);
+  };
+
+  const closeLightbox = () => {
+    setLightboxImg(null);
+    setZoomLevel(1);
+  };
 
   return (
     <div
@@ -24,7 +136,7 @@ export default function ArabicSeoCaseStudies() {
     >
       <NavbarAr />
 
-      <main className="max-w-5xl mx-auto px-6 md:px-8 pt-10 pb-24 text-right">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 pt-10 pb-28 text-right">
         {/* رابط العودة */}
         <Link
           href="/ar"
@@ -37,21 +149,21 @@ export default function ArabicSeoCaseStudies() {
         {/* العنوان الرئيسي */}
         <div className="mb-10">
           <div className="text-xs font-semibold text-[#ff2e7e] mb-2">
-            نتائج موثقة بالأرقام
+            نتائج موثقة بالأرقام • معاينة بالحجم الكامل
           </div>
           <h1 className="text-4xl md:text-6xl font-black tracking-tight text-white">
             السيو التقني والظهور في محركات الذكاء الاصطناعي (GEO)<span className="text-[#ff2e7e]">.</span>
           </h1>
-          <p className="text-sm md:text-base text-zinc-400 mt-3 max-w-2xl leading-relaxed">
-            تدقيق تقني شامل، تصدر النتائج التجارية في الصفحات الأولى، وبناء حضور موثق في إجابات Google AI Overviews عبر أسواق الإمارات والسعودية ومصر.
+          <p className="text-sm md:text-base text-zinc-400 mt-3 max-w-3xl leading-relaxed">
+            تدقيق تقني شامل، تسريع الأداء، تصدر النتائج التجارية في الصفحات الأولى، وبناء حضور موثق في إجابات Google AI Overviews عبر أسواق الإمارات والسعودية ومصر.
           </p>
         </div>
 
         {/* أزرار التبديل بين دراسات الحالة */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-1.5 rounded-2xl bg-[#0c0c0e] border border-zinc-900 mb-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-1.5 rounded-2xl bg-[#0c0c0e] border border-zinc-900 mb-14 max-w-2xl">
           <button
             onClick={() => setActiveTab('nokhada')}
-            className={`py-3 px-4 rounded-xl text-xs font-semibold transition-all ${
+            className={`py-3.5 px-5 rounded-xl text-xs font-semibold transition-all ${
               activeTab === 'nokhada'
                 ? 'bg-zinc-800 text-white font-bold border border-zinc-700 shadow-lg'
                 : 'text-zinc-500 hover:text-zinc-300'
@@ -62,7 +174,7 @@ export default function ArabicSeoCaseStudies() {
 
           <button
             onClick={() => setActiveTab('lloyds')}
-            className={`py-3 px-4 rounded-xl text-xs font-semibold transition-all ${
+            className={`py-3.5 px-5 rounded-xl text-xs font-semibold transition-all ${
               activeTab === 'lloyds'
                 ? 'bg-zinc-800 text-white font-bold border border-zinc-700 shadow-lg'
                 : 'text-zinc-500 hover:text-zinc-300'
@@ -76,474 +188,388 @@ export default function ArabicSeoCaseStudies() {
         {/* التبويب الأول: بيت النوخذة للخيام والمظلات                 */}
         {/* ========================================================= */}
         {activeTab === 'nokhada' && (
-          <div className="space-y-20">
-            {/* بطاقة نظرة عامة */}
-            <div className="p-8 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-              <span className="text-xs font-semibold text-[#ff2e7e]">
-                دراسة حالة رئيسية • ريادة السوق في الإمارات
-              </span>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mt-1.5">
-                بيت النوخذة للخيام والمظلات القماشية
-              </h2>
-              <p className="text-xs md:text-sm text-zinc-400 mt-2 leading-relaxed max-w-3xl">
-                واحدة من أكبر الشركات الصناعية الرائدة في الشرق الأوسط بخبرة تمتد لأكثر من 26 عاماً. قمت بإعادة هيكلة البنية التقنية للسيو بالكامل، وتسريع مؤشرات الأداء الأساسية (Core Web Vitals)، وترسيخ ظهور العلامة كمرجع أول في محركات البحث التوليدية.
-              </p>
-            </div>
-
-            {/* 1. الفحص الأولي (نقطة البداية) */}
-            <section className="space-y-6">
+          <div className="space-y-24">
+            {/* بطاقة نظرة عامة + المؤشرات الرئيسية */}
+            <div className="p-8 md:p-10 rounded-3xl bg-gradient-to-br from-[#0e0e12] to-[#08080a] border border-zinc-800 space-y-8">
               <div>
-                <div className="text-xs text-zinc-500 mb-1">
-                  المرحلة 01 / التشخيص والفحص الأولي
-                </div>
-                <h3 className="text-xl md:text-2xl font-bold text-white">
-                  نقطة البداية: التحديات التقنية التي واجهتها عند استلام الموقع
-                </h3>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* السرعة قبل التحسين */}
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900 flex flex-col justify-between">
-                  <div>
-                    <div className="flex justify-between text-xs text-red-400 mb-2 font-semibold">
-                      <span>تقييم GTmetrix</span>
-                      <span dir="ltr">Grade E (36%)</span>
-                    </div>
-                    <div className="text-sm font-bold text-white mb-1">بطء التحميل (4.9 ثانية LCP)</div>
-                    <p className="text-xs text-zinc-500 leading-relaxed">
-                      ملفات JavaScript و CSS غير المضغوطة تسببت في تأخير عرض المحتوى وارتفاع معدل الارتداد على الهواتف.
-                    </p>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('gtmetrix-before.jpg'))}
-                    className="relative h-36 w-full mt-4 rounded-xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('gtmetrix-before.jpg')} alt="تقرير GTmetrix قبل التحسين" className="w-full h-full object-cover" />
-                  </div>
-                </div>
-
-                {/* الأمان قبل التحسين */}
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900 flex flex-col justify-between">
-                  <div>
-                    <div className="flex justify-between text-xs text-red-400 mb-2 font-semibold">
-                      <span>ترويسات الأمان (Headers)</span>
-                      <span dir="ltr">Grade D</span>
-                    </div>
-                    <div className="text-sm font-bold text-white mb-1">غياب بروتوكولات الحماية</div>
-                    <p className="text-xs text-zinc-500 leading-relaxed">
-                      عدم تفعيل HSTS وغياب ترويسات X-Frame و Content-Type، مما يضعف ثقة المتصفحات ومحركات البحث.
-                    </p>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('3http-headers.png'))}
-                    className="relative h-36 w-full mt-4 rounded-xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('3http-headers.png')} alt="ترويسات HTTP قبل التحسين" className="w-full h-full object-cover" />
-                  </div>
-                </div>
-
-                {/* الزيارات قبل التحسين */}
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900 flex flex-col justify-between">
-                  <div>
-                    <div className="flex justify-between text-xs text-zinc-500 mb-2 font-semibold">
-                      <span>الظهور في SEMrush</span>
-                      <span>نمو متوقف</span>
-                    </div>
-                    <div className="text-sm font-bold text-white mb-1">كلمات تجارية غير مستغلة</div>
-                    <p className="text-xs text-zinc-500 leading-relaxed">
-                      الكلمات البحثية عالية القيمة مثل تأجير الخيام والهناجر وخيام الفعاليات كانت متأخرة بعد الصفحة الثالثة.
-                    </p>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('organic-traffic-semruch-before.jpg'))}
-                    className="relative h-36 w-full mt-4 rounded-xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('organic-traffic-semruch-before.jpg')} alt="الزيارات العضوية قبل التحسين" className="w-full h-full object-cover" />
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* 2. التدخل الهندسي وتحسين البنية */}
-            <section className="space-y-6">
-              <div>
-                <div className="text-xs font-semibold text-[#ff2e7e] mb-1">
-                  المرحلة 02 / التنفيذ التقني
-                </div>
-                <h3 className="text-xl md:text-2xl font-bold text-white">
-                  التدخلات الهندسية: تسريع الأداء وتحصين ترويسات الخادم
-                </h3>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* السرعة بعد التحسين */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="flex justify-between text-xs text-emerald-400 mb-2 font-semibold">
-                    <span>قفزة في سرعة الأداء</span>
-                    <span>تقليص التحميل إلى 2.4 ثانية</span>
-                  </div>
-                  <h4 dir="ltr" className="text-base font-bold text-white mb-1 text-right">GTmetrix Grade C (67%)</h4>
-                  <p className="text-xs text-zinc-400 mb-4 leading-relaxed">
-                    ضغط ملفات CSS الحرجة، تفعيل التحميل الكسول للصور والوسائط، وتحسين مؤشرات Core Web Vitals للهواتف.
-                  </p>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('gtmetrix-after.jpg'))}
-                    className="relative h-60 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('gtmetrix-after.jpg')} alt="تقرير GTmetrix بعد التحسين" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-
-                {/* الأمان بعد التحسين */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="flex justify-between text-xs text-emerald-400 mb-2 font-semibold">
-                    <span>تحصين البنية التحتية</span>
-                    <span dir="ltr">Grade D → B</span>
-                  </div>
-                  <h4 className="text-base font-bold text-white mb-1">تأمين ترويسات الاستجابة (HTTP Security Headers)</h4>
-                  <p className="text-xs text-zinc-400 mb-4 leading-relaxed">
-                    تفعيل بروتوكولات Strict-Transport-Security و X-Frame-Options و Referrer-Policy لحماية الموقع ورفع موثوقيته.
-                  </p>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('4http-headers.png'))}
-                    className="relative h-60 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('4http-headers.png')} alt="ترويسات HTTP بعد التحسين" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* 3. نمو الزيارات في GSC و GA4 */}
-            <section className="space-y-8">
-              <div>
-                <div className="text-xs font-semibold text-[#ff2e7e] mb-1">
-                  المرحلة 03 / النمو القابل للقياس
-                </div>
-                <h3 className="text-xl md:text-3xl font-bold text-white">
-                  تضاعف الزيارات العضوية: من نقطة البداية إلى صدارة السوق
-                </h3>
-                <p className="text-xs md:text-sm text-zinc-400 mt-2 max-w-2xl leading-relaxed">
-                  مقارنة موثقة مباشرة من Google Search Console: تضاعف مرات الظهور بأكثر من 6 أضعاف، وقفز متوسط الترتيب من الصفحة الثالثة (المركز 21) مباشرة إلى الصفحة الأولى (المركز 8.5).
+                <span className="text-xs font-semibold text-[#ff2e7e]">
+                  دراسة حالة رئيسية • ريادة السوق في الإمارات والسعودية
+                </span>
+                <h2 className="text-2xl md:text-4xl font-bold text-white mt-1.5">
+                  بيت النوخذة للخيام والمظلات القماشية
+                </h2>
+                <p className="text-sm md:text-base text-zinc-400 mt-3 leading-relaxed max-w-4xl">
+                  واحدة من أكبر الشركات الصناعية الرائدة في الشرق الأوسط بخبرة تمتد لأكثر من 26 عاماً. قمت بإعادة هيكلة البنية التقنية للسيو بالكامل، وتسريع مؤشرات الأداء الأساسية (Core Web Vitals)، وترسيخ ظهور العلامة كمرجع أول في محركات البحث التوليدية.
                 </p>
               </div>
 
-              {/* بطاقة المقارنة الكبيرة */}
-              <div className="p-7 md:p-9 rounded-3xl bg-[#0a0a0c] border border-zinc-800 shadow-2xl">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-zinc-850">
-                  <div>
-                    <span className="text-xs font-semibold text-emerald-400">
-                      Google Search Console • إثبات النمو الفعلي
-                    </span>
-                    <h4 className="text-xl md:text-2xl font-bold text-white mt-1">
-                      يونيو 2024 (نقطة الاستلام) مقابل آخر 28 يوماً
-                    </h4>
+              {/* 4 مؤشرات رئيسية في الأعلى */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+                <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
+                  <div dir="ltr" className="text-2xl md:text-3xl font-mono font-bold text-emerald-400 text-right">
+                    4.9s → 2.4s
                   </div>
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className="px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold">
-                      +595% نمو في مرات الظهور
-                    </span>
-                    <span dir="ltr" className="px-3 py-1 rounded-lg bg-[#ff2e7e]/10 border border-[#ff2e7e]/20 text-[#ff2e7e] font-mono text-xs font-bold">
-                      Pos 21 → Pos 8.5
-                    </span>
+                  <div className="text-xs text-zinc-300 mt-1.5">تقليص وقت التحميل للنصف</div>
+                  <div dir="ltr" className="text-[11px] text-zinc-500 font-mono mt-1 text-right">
+                    Grade E (36%) → C (67%)
                   </div>
                 </div>
-
-                {/* الصورتان المتجاورتان للمقارنة */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                  {/* قبل */}
-                  <div className="flex flex-col justify-between p-4 rounded-2xl bg-zinc-950/80 border border-zinc-900">
-                    <div className="flex items-center justify-between text-xs mb-3">
-                      <span className="text-red-400 font-semibold">● قبل التحسين (يونيو 2024)</span>
-                      <span dir="ltr" className="text-zinc-500 font-mono">17.3K Impr • Pos 21</span>
-                    </div>
-
-                    <div
-                      onClick={() => setLightboxImg(getImgSrc('search-console-( jun,2024).jpg'))}
-                      className="relative h-64 md:h-72 w-full rounded-xl overflow-hidden border border-zinc-850 bg-black cursor-pointer group"
-                    >
-                      <img
-                        src={getImgSrc('search-console-( jun,2024).jpg')}
-                        alt="Search Console يونيو 2024 قبل التحسين"
-                        className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-300"
-                      />
-                    </div>
-
-                    <div className="mt-3 flex justify-between text-xs text-zinc-500">
-                      <span>النقرات: 384</span>
-                      <span>نسبة النقر: 2.2%</span>
-                      <span>متوسط الترتيب: الصفحة 3</span>
-                    </div>
+                <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
+                  <div dir="ltr" className="text-2xl md:text-3xl font-mono font-bold text-white text-right">
+                    +595%
                   </div>
-
-                  {/* بعد */}
-                  <div className="flex flex-col justify-between p-4 rounded-2xl bg-zinc-950/80 border border-zinc-800">
-                    <div className="flex items-center justify-between text-xs mb-3">
-                      <span className="text-emerald-400 font-semibold">● بعد التحسين (آخر 28 يوماً)</span>
-                      <span dir="ltr" className="text-emerald-400 font-mono font-bold">103K Impr • Pos 8.5</span>
-                    </div>
-
-                    <div
-                      onClick={() => setLightboxImg(getImgSrc('GSC-last28-baitalnokhada.jpg'))}
-                      className="relative h-64 md:h-72 w-full rounded-xl overflow-hidden border border-zinc-700/80 bg-black cursor-pointer group"
-                    >
-                      <img
-                        src={getImgSrc('GSC-last28-baitalnokhada.jpg')}
-                        alt="Search Console آخر 28 يوماً بعد التحسين"
-                        className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-300"
-                      />
-                    </div>
-
-                    <div className="mt-3 flex justify-between text-xs text-zinc-400">
-                      <span className="text-white font-bold">النقرات: 701</span>
-                      <span className="text-emerald-400 font-bold">103,000 ظهور</span>
-                      <span className="text-[#ff2e7e] font-bold">متوسط الترتيب: الصفحة 1</span>
-                    </div>
+                  <div className="text-xs text-zinc-300 mt-1.5">نمو مرات الظهور الشهرية</div>
+                  <div dir="ltr" className="text-[11px] text-zinc-500 font-mono mt-1 text-right">
+                    17.3K → 103K / Month
                   </div>
+                </div>
+                <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
+                  <div dir="ltr" className="text-2xl md:text-3xl font-mono font-bold text-[#ff2e7e] text-right">
+                    Pos 21 → 8.5
+                  </div>
+                  <div className="text-xs text-zinc-300 mt-1.5">من الصفحة 3 إلى الصفحة 1</div>
+                  <div className="text-[11px] text-zinc-500 mt-1">+1845% توسع في السعودية</div>
+                </div>
+                <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
+                  <div dir="ltr" className="text-2xl md:text-3xl font-mono font-bold text-amber-400 text-right">
+                    +239%
+                  </div>
+                  <div className="text-xs text-zinc-300 mt-1.5">المستخدمون النشطون (GA4)</div>
+                  <div className="text-[11px] text-zinc-500 mt-1">9.3 آلاف مستخدم • 503 رابط</div>
                 </div>
               </div>
+            </div>
 
-              {/* 4 مؤشرات رقمية داعمة */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                  <div dir="ltr" className="text-3xl font-mono font-bold text-white text-right">+108%</div>
-                  <div className="text-xs text-zinc-400 mt-1">نمو 6 أشهر في GSC</div>
-                  <div dir="ltr" className="text-[11px] text-zinc-600 font-mono mt-1 text-right">108K → 225K</div>
+            {/* ===================================================== */}
+            {/* المرحلة 01: السرعة والأداء أولاً (قبل -> بعد)         */}
+            {/* ===================================================== */}
+            <section className="space-y-8">
+              <div className="border-b border-zinc-800 pb-5">
+                <div className="text-xs font-semibold text-emerald-400 mb-1">
+                  المرحلة 01 / هندسة السرعة ومؤشرات Core Web Vitals
                 </div>
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                  <div dir="ltr" className="text-3xl font-mono font-bold text-emerald-400 text-right">+239%</div>
-                  <div className="text-xs text-zinc-400 mt-1">المستخدمون النشطون (GA4)</div>
-                  <div className="text-[11px] text-zinc-600 mt-1">9.3 آلاف مستخدم نشط</div>
-                </div>
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                  <div dir="ltr" className="text-3xl font-mono font-bold text-amber-400 text-right">+374%</div>
-                  <div className="text-xs text-zinc-400 mt-1">نمو الروابط الخلفية</div>
-                  <div className="text-[11px] text-zinc-600 mt-1">موثق عبر Mangools</div>
-                </div>
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                  <div dir="ltr" className="text-3xl font-mono font-bold text-[#ff2e7e] text-right">+1845%</div>
-                  <div className="text-xs text-zinc-400 mt-1">التوسع في السوق السعودي</div>
-                  <div className="text-[11px] text-zinc-600 mt-1">نمو إقليمي متسارع</div>
-                </div>
+                <h3 className="text-2xl md:text-4xl font-bold text-white">
+                  طفرة سرعة الأداء: تقليص وقت التحميل من 4.9 ثانية إلى 2.4 ثانية
+                </h3>
+                <p className="text-xs md:text-sm text-zinc-400 mt-2 max-w-3xl leading-relaxed">
+                  معالجة الملفات المعطلة للعرض، ضغط أكواد CSS الحرجة، وتفعيل التحميل الكسول للوسائط لتحسين تجربة الهواتف وسرعة أرشفة جوجل.
+                </p>
               </div>
 
-              {/* بطاقات الأدلة الإضافية */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* مقارنة 6 أشهر */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-xs text-zinc-400 mb-3 flex justify-between">
-                    <span>مقارنة 6 أشهر بالفترة السابقة (GSC)</span>
-                    <span className="text-emerald-400 font-bold">+86% زيادة في النقرات</span>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('last 6th vs. previos 6th.jpg'))}
-                    className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('last 6th vs. previos 6th.jpg')} alt="نمو 6 أشهر في GSC" className="w-full h-full object-contain" />
-                  </div>
-                </div>
+              <div className="space-y-10">
+                <CinemaProofCardAr
+                  badge="● قبل التحسين • فحص السرعة الأولي"
+                  badgeColor="red"
+                  metricRight="GTmetrix Grade E (36%) • 4.9s LCP"
+                  title="بطء التحميل عند استلام الموقع (4.9 ثانية LCP)"
+                  subtitle="ملفات JavaScript و CSS غير المضغوطة تسببت في تأخير عرض المحتوى وارتفاع معدل الارتداد على الهواتف."
+                  imgName="gtmetrix-before.jpg"
+                  alt="تقرير GTmetrix قبل التحسين"
+                  footerLeft="وقت التحميل: 4.9 ثانية"
+                  footerCenter="التقييم الأولي: 36% (Grade E)"
+                  footerRight="معدل ارتداد مرتفع على الهواتف"
+                  onOpenZoom={openLightbox}
+                />
 
-                {/* GA4 */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-xs text-zinc-400 mb-3 flex justify-between">
-                    <span>تحليلات Google Analytics 4</span>
-                    <span className="text-emerald-400 font-bold">تجاوز متوسط القطاع</span>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('GA4.jpg'))}
-                    className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('GA4.jpg')} alt="تقرير GA4" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-
-                {/* SEMrush */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-xs text-zinc-400 mb-3 flex justify-between">
-                    <span>توسع الكلمات المفتاحية (SEMrush)</span>
-                    <span className="text-emerald-400 font-bold">صدارة المراكز الثلاثة الأولى</span>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('organic-keywords-semruch.jpg'))}
-                    className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('organic-keywords-semruch.jpg')} alt="كلمات SEMrush" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-
-                {/* Mangools */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-xs text-zinc-400 mb-3 flex justify-between">
-                    <span>نمو الروابط الخلفية (+374.6%)</span>
-                    <span className="text-emerald-400 font-bold">503 رابط نشط</span>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('mangools-backlinks-bait.jpg'))}
-                    className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('mangools-backlinks-bait.jpg')} alt="الروابط الخلفية في Mangools" className="w-full h-full object-contain" />
-                  </div>
-                </div>
+                <CinemaProofCardAr
+                  badge="● بعد التحسين • قفزة في سرعة الأداء"
+                  badgeColor="emerald"
+                  metricRight="GTmetrix Grade C (67%) • 2.4s LCP"
+                  title="نتيجة التدخل الهندسي: تقليص التحميل لأكثر من النصف (2.4 ثانية)"
+                  subtitle="ضغط ملفات CSS الحرجة، تفعيل التحميل الكسول للصور والوسائط، وتحسين مؤشرات Core Web Vitals للهواتف."
+                  imgName="gtmetrix-after.jpg"
+                  alt="تقرير GTmetrix بعد التحسين"
+                  footerLeft="تقليص التحميل إلى 2.4 ثانية (-51%)"
+                  footerCenter="ارتفاع التقييم إلى 67% (Grade C)"
+                  footerRight="اجتياز مؤشرات Core Web Vitals"
+                  onOpenZoom={openLightbox}
+                />
               </div>
             </section>
 
-            {/* 4. تصدر المراكز الأولى في صفحات البحث (SERP) */}
-            <section className="space-y-6">
-              <div>
+            {/* ===================================================== */}
+            {/* المرحلة 02: تضاعف الترافيك (GSC, GA4, SEMrush, Mangools) */}
+            {/* ===================================================== */}
+            <section className="space-y-8">
+              <div className="border-b border-zinc-800 pb-5">
                 <div className="text-xs font-semibold text-[#ff2e7e] mb-1">
-                  المرحلة 04 / تصدر نتائج البحث (SERP)
+                  المرحلة 02 / تضاعف الزيارات العضوية والظهور
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold text-white">
-                  المركز الأول (#1) في الكلمات التجارية الأعلى بحثاً في الإمارات
+                <h3 className="text-2xl md:text-4xl font-bold text-white">
+                  6 أضعاف نمو في البحث: إثباتات Google Search Console و GA4 و SEMrush
+                </h3>
+                <p className="text-xs md:text-sm text-zinc-400 mt-2 max-w-3xl leading-relaxed">
+                  بيانات موثقة بالحجم الكامل توضح رحلة النمو من الصفحة الثالثة في يونيو 2024 إلى أكثر من 103,000 ظهور شهري، و9.3 آلاف مستخدم نشط، ونمو +1845% في السوق السعودي.
+                </p>
+              </div>
+
+              <div className="space-y-10">
+                {/* 1. GSC قبل التحسين (يونيو 2024) */}
+                <CinemaProofCardAr
+                  badge="● قبل التحسين • يونيو 2024"
+                  badgeColor="red"
+                  metricRight="17.3K Impr • Avg Pos 21"
+                  title="تقرير Google Search Console عند استلام الموقع (يونيو 2024)"
+                  subtitle="عند استلام الدومين كانت الكلمات التجارية للخيام والمظلات متأخرة في الصفحة الثالثة مع معدل نقر منخفض."
+                  imgName="search-console-( jun,2024).jpg"
+                  alt="Search Console يونيو 2024 قبل التحسين"
+                  footerLeft="إجمالي النقرات: 384"
+                  footerCenter="17,300 ظهور • نسبة النقر: 2.2%"
+                  footerRight="متوسط الترتيب: 21 (الصفحة 3)"
+                  onOpenZoom={openLightbox}
+                />
+
+                {/* 2. GSC بعد التحسين (آخر 28 يوماً) */}
+                <CinemaProofCardAr
+                  badge="● بعد التحسين • آخر 28 يوماً"
+                  badgeColor="emerald"
+                  metricRight="103K Impr (+595%) • Avg Pos 8.5"
+                  title="تقرير Google Search Console: تضاعف الظهور 6 أضعاف والوصول للصفحة الأولى"
+                  subtitle="إعادة هيكلة الصفحات باللغتين، بناء البيانات المنظمة (Schema)، وتحسين الصفحات التجارية دفعت متوسط الترتيب مباشرة للصفحة الأولى."
+                  imgName="GSC-last28-baitalnokhada.jpg"
+                  alt="Search Console آخر 28 يوماً بعد التحسين"
+                  footerLeft="إجمالي النقرات: 701 (+82.5%)"
+                  footerCenter="103,000 ظهور (+595%)"
+                  footerRight="متوسط الترتيب: 8.5 (الصفحة 1)"
+                  onOpenZoom={openLightbox}
+                />
+
+                {/* 3. مقارنة 6 أشهر */}
+                <CinemaProofCardAr
+                  badge="● نمو مستدام على مدار 6 أشهر"
+                  badgeColor="emerald"
+                  metricRight="+108% Impressions (108K → 225K) • +86% Clicks"
+                  title="مقارنة 6 أشهر بالفترة السابقة في Google Search Console"
+                  subtitle="منحنى نمو تراكمي مستمر في الإمارات والسعودية (+1845% نمو الظهور في السعودية) دون الاعتماد على الإعلانات المدفوعة."
+                  imgName="last 6th vs. previos 6th.jpg"
+                  alt="نمو 6 أشهر في GSC"
+                  footerLeft="مرات الظهور: 108K → 225K (+108%)"
+                  footerCenter="نمو النقرات: +86%"
+                  footerRight="الظهور في السعودية: +1845%"
+                  onOpenZoom={openLightbox}
+                />
+
+                {/* 4. GA4 */}
+                <CinemaProofCardAr
+                  badge="● موثق عبر Google Analytics 4"
+                  badgeColor="emerald"
+                  metricRight="9.3K Active Users (+239%)"
+                  title="تحليلات Google Analytics 4: 9.3 آلاف مستخدم نشط"
+                  subtitle="تجاوز متوسط أداء القطاع الصناعي مع ارتفاع مدة تصفح المواصفات الهندسية وطلبات عروض الأسعار المباشرة."
+                  imgName="GA4.jpg"
+                  alt="تقرير GA4"
+                  footerLeft="المستخدمون النشطون: 9,300"
+                  footerCenter="معدل النمو: +239%"
+                  footerRight="تجاوز متوسط القطاع"
+                  onOpenZoom={openLightbox}
+                />
+
+                {/* 5. SEMrush قبل وبعد */}
+                <CinemaProofCardAr
+                  badge="● قبل التحسين • SEMrush"
+                  badgeColor="red"
+                  metricRight="نمو متوقف"
+                  title="الظهور التاريخي في SEMrush: كلمات تجارية غير مستغلة"
+                  subtitle="الكلمات البحثية عالية القيمة مثل تأجير الخيام والهناجر وخيام الفعاليات كانت متأخرة بعد الصفحة الثالثة."
+                  imgName="organic-traffic-semruch-before.jpg"
+                  alt="الزيارات العضوية قبل التحسين"
+                  onOpenZoom={openLightbox}
+                />
+
+                <CinemaProofCardAr
+                  badge="● بعد التحسين • SEMrush"
+                  badgeColor="emerald"
+                  metricRight="Top 3 & Top 10 Dominance"
+                  title="توسع الكلمات المفتاحية العضوية في SEMrush"
+                  subtitle="قفزة كبيرة في عدد الكلمات المصنفة ضمن المراكز الثلاثة الأولى والعشرة الأولى في أسواق الخليج."
+                  imgName="organic-keywords-semruch.jpg"
+                  alt="كلمات SEMrush"
+                  onOpenZoom={openLightbox}
+                />
+
+                {/* 6. Mangools */}
+                <CinemaProofCardAr
+                  badge="● بناء الموثوقية الخارجية (Off-Page SEO)"
+                  badgeColor="amber"
+                  metricRight="+374.6% Backlinks • 503 Active"
+                  title="نمو الروابط الخلفية (+374.6%) الموثق عبر Mangools"
+                  subtitle="بناء شبكة روابط خلفية نظيفة وعالية الموثوقية في الأدلة التجارية والمنصات الصناعية بالمنطقة."
+                  imgName="mangools-backlinks-bait.jpg"
+                  alt="الروابط الخلفية في Mangools"
+                  footerLeft="503 رابط خلفي نشط"
+                  footerCenter="نمو بنسبة +374.6%"
+                  footerRight="ملف روابط نظيف 100%"
+                  onOpenZoom={openLightbox}
+                />
+              </div>
+            </section>
+
+            {/* ===================================================== */}
+            {/* المرحلة 03: تحصين الأمان (قبل -> بعد)                  */}
+            {/* ===================================================== */}
+            <section className="space-y-8">
+              <div className="border-b border-zinc-800 pb-5">
+                <div className="text-xs font-semibold text-amber-400 mb-1">
+                  المرحلة 03 / تحصين البنية التحتية والأمان
+                </div>
+                <h3 className="text-2xl md:text-4xl font-bold text-white">
+                  ترقية ترويسات الأمان HTTP Security Headers: من Grade D إلى Grade B
                 </h3>
               </div>
 
-              {/* جداول تتبع الترتيب */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-xs text-zinc-400 mb-3 flex justify-between">
-                    <span>متتبع الترتيب: صدارة الكلمات العربية</span>
-                    <span className="text-emerald-400 font-bold">المركز #1 موثق</span>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('rank1.jpg'))}
-                    className="relative h-72 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('rank1.jpg')} alt="جدول ترتيب الكلمات العربية" className="w-full h-full object-contain" />
-                  </div>
-                </div>
+              <div className="space-y-10">
+                <CinemaProofCardAr
+                  badge="● قبل التحسين • ثغرات الترويسات"
+                  badgeColor="red"
+                  metricRight="Security Headers Grade D"
+                  title="غياب بروتوكولات الحماية عند الفحص الأولي"
+                  subtitle="عدم تفعيل HSTS وغياب ترويسات X-Frame و Content-Type، مما يضعف ثقة المتصفحات ومحركات البحث."
+                  imgName="3http-headers.png"
+                  alt="ترويسات HTTP قبل التحسين"
+                  onOpenZoom={openLightbox}
+                />
 
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="text-xs text-zinc-400 mb-3 flex justify-between">
-                    <span>متتبع الترتيب: صدارة الكلمات الإنجليزية</span>
-                    <span className="text-emerald-400 font-bold">المركز #1 موثق</span>
-                  </div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('Rank1-(2).jpg'))}
-                    className="relative h-72 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('Rank1-(2).jpg')} alt="جدول ترتيب الكلمات الإنجليزية" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-              </div>
-
-              {/* لقطات حية من جوجل وبينج */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                  <div dir="ltr" className="text-xs font-mono text-zinc-400 mb-2 text-right">Google.ae: #1 Tent Rental Dubai</div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('tent-rental-company-in-dubai.jpg'))}
-                    className="relative h-56 w-full rounded-xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('tent-rental-company-in-dubai.jpg')} alt="نتيجة جوجل دبي" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                  <div dir="ltr" className="text-xs font-mono text-zinc-400 mb-2 text-right">Google.ae: #1 Tent Suppliers UAE</div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('Tent-Rental-Company-in-UAE.jpg'))}
-                    className="relative h-56 w-full rounded-xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('Tent-Rental-Company-in-UAE.jpg')} alt="نتيجة جوجل الإمارات" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-
-                <div className="p-5 rounded-2xl bg-[#0a0a0c] border border-zinc-900">
-                  <div dir="ltr" className="text-xs font-mono text-zinc-400 mb-2 text-right">Microsoft Bing: Full Sitelinks #1</div>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('tent-rental-bing.jpg'))}
-                    className="relative h-56 w-full rounded-xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('tent-rental-bing.jpg')} alt="نتيجة بحث Bing" className="w-full h-full object-contain" />
-                  </div>
-                </div>
+                <CinemaProofCardAr
+                  badge="● بعد التحسين • بنية محصّنة"
+                  badgeColor="emerald"
+                  metricRight="Security Headers Grade B"
+                  title="تأمين ترويسات الاستجابة (HTTP Security Headers)"
+                  subtitle="تفعيل بروتوكولات Strict-Transport-Security و X-Frame-Options و Referrer-Policy لحماية الموقع ورفع موثوقيته."
+                  imgName="4http-headers.png"
+                  alt="ترويسات HTTP بعد التحسين"
+                  onOpenZoom={openLightbox}
+                />
               </div>
             </section>
 
-            {/* 5. التحسين لمحركات الذكاء الاصطناعي (GEO / AI Overviews) */}
-            <section className="space-y-6">
-              <div>
+            {/* ===================================================== */}
+            {/* المرحلة 04: تصدر المركز الأول #1 (SERP)               */}
+            {/* ===================================================== */}
+            <section className="space-y-8">
+              <div className="border-b border-zinc-800 pb-5">
                 <div className="text-xs font-semibold text-[#ff2e7e] mb-1">
-                  المرحلة 05 / الظهور في الذكاء الاصطناعي (GEO)
+                  المرحلة 04 / تصدر نتائج البحث (SERP)
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold text-white">
+                <h3 className="text-2xl md:text-4xl font-bold text-white">
+                  المركز الأول (#1) في الكلمات التجارية الأعلى بحثاً في الإمارات (عربي وإنجليزي)
+                </h3>
+              </div>
+
+              <div className="space-y-10">
+                <CinemaProofCardAr
+                  badge="● متتبع الترتيب • صدارة الكلمات العربية"
+                  badgeColor="emerald"
+                  metricRight="Verified #1"
+                  title="جدول ترتيب الكلمات المفتاحية العربية: المركز #1 في الإمارات"
+                  subtitle="تصدر الكلمات التجارية الأعلى بحثاً لتأجير وتصنيع الخيام الهرمية وخيام الفعاليات والمعارض."
+                  imgName="rank1.jpg"
+                  alt="جدول ترتيب الكلمات العربية"
+                  onOpenZoom={openLightbox}
+                />
+
+                <CinemaProofCardAr
+                  badge="● متتبع الترتيب • صدارة الكلمات الإنجليزية"
+                  badgeColor="emerald"
+                  metricRight="Verified #1"
+                  title="جدول ترتيب الكلمات المفتاحية الإنجليزية: المركز #1 في الإمارات"
+                  subtitle="الحفاظ على المركز الأول للكلمات التجارية الخاصة بتوريد وتأجير الخيام والهناجر."
+                  imgName="Rank1-(2).jpg"
+                  alt="جدول ترتيب الكلمات الإنجليزية"
+                  onOpenZoom={openLightbox}
+                />
+
+                <CinemaProofCardAr
+                  badge="● إثبات حي من Google.ae"
+                  badgeColor="emerald"
+                  metricRight="#1 Organic Result"
+                  title='نتيجة بحث حية في Google.ae: "Tent Rental Company in Dubai"'
+                  subtitle="الاستحواذ على المركز الأول عضوياً متفوقاً على المنصات الإعلانية والأدلة المنافسة."
+                  imgName="tent-rental-company-in-dubai.jpg"
+                  alt="نتيجة جوجل دبي"
+                  onOpenZoom={openLightbox}
+                />
+
+                <CinemaProofCardAr
+                  badge="● إثبات حي من Google.ae"
+                  badgeColor="emerald"
+                  metricRight="#1 Organic Result"
+                  title='نتيجة بحث حية في Google.ae: "Tent Rental Company in UAE"'
+                  subtitle="تصدر نتائج البحث على مستوى دولة الإمارات بالكامل لخدمات تصنيع وتأجير الخيام."
+                  imgName="Tent-Rental-Company-in-UAE.jpg"
+                  alt="نتيجة جوجل الإمارات"
+                  onOpenZoom={openLightbox}
+                />
+
+                <CinemaProofCardAr
+                  badge="● إثبات حي من Microsoft Bing"
+                  badgeColor="emerald"
+                  metricRight="#1 + Full Sitelinks"
+                  title="محرك بحث Microsoft Bing: المركز الأول مع الروابط الفرعية الكاملة"
+                  subtitle="ظهور متكامل يغطي الجزء العلوي من الصفحة مع روابط الأقسام المباشرة لزيادة التحويلات."
+                  imgName="tent-rental-bing.jpg"
+                  alt="نتيجة بحث Bing"
+                  onOpenZoom={openLightbox}
+                />
+              </div>
+            </section>
+
+            {/* ===================================================== */}
+            {/* المرحلة 05: الظهور في الذكاء الاصطناعي (GEO)          */}
+            {/* ===================================================== */}
+            <section className="space-y-8">
+              <div className="border-b border-zinc-800 pb-5">
+                <div className="text-xs font-semibold text-[#ff2e7e] mb-1">
+                  المرحلة 05 / الظهور في محركات الذكاء الاصطناعي (GEO)
+                </div>
+                <h3 className="text-2xl md:text-4xl font-bold text-white">
                   الاستشهاد المباشر بالعلامة التجارية في Google AI Overviews
                 </h3>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* AI 1 */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="flex justify-between text-xs text-[#ff2e7e] mb-2 font-semibold">
-                    <span>Google AI Overview (GEO)</span>
-                    <span className="text-emerald-400 font-bold">المصدر المرجعي #1</span>
-                  </div>
-                  <h4 className="text-base font-bold text-white mb-1">عبارة البحث: "الخيمة الهرمية في دبي"</h4>
-                  <p className="text-xs text-zinc-400 mb-4 leading-relaxed">
-                    يستخلص محرك Google AI مواصفات المنتج من الموقع كمرجع أساسي مع عرض الصور والروابط المباشرة.
-                  </p>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('الخيمة-الهرمية-في-دبيai.jpg'))}
-                    className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('الخيمة-الهرمية-في-دبيai.jpg')} alt="ظهور الخيمة الهرمية في Google AI" className="w-full h-full object-contain" />
-                  </div>
-                </div>
+              <div className="space-y-10">
+                <CinemaProofCardAr
+                  badge="● Google AI Overview (GEO)"
+                  badgeColor="pink"
+                  metricRight="المصدر المرجعي #1"
+                  title='عبارة البحث: "الخيمة الهرمية في دبي"'
+                  subtitle="يستخلص محرك Google AI مواصفات المنتج من الموقع كمرجع أساسي مع عرض الصور والروابط المباشرة."
+                  imgName="الخيمة-الهرمية-في-دبيai.jpg"
+                  alt="ظهور الخيمة الهرمية في Google AI"
+                  onOpenZoom={openLightbox}
+                />
 
-                {/* AI 2 */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="flex justify-between text-xs text-[#ff2e7e] mb-2 font-semibold">
-                    <span>الموثوقية في الإجابات التوليدية</span>
-                    <span className="text-emerald-400 font-bold">ترشيح مباشر للعلامة</span>
-                  </div>
-                  <h4 className="text-base font-bold text-white mb-1">عبارة البحث: "افضل خيام في الامارات؟"</h4>
-                  <p className="text-xs text-zinc-400 mb-4 leading-relaxed">
-                    تصدر التوصيات الذكية مع إبراز خبرة الشركة الممتدة لأكثر من 26 عاماً وجودة التصنيع.
-                  </p>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('افضل-خيام-في-الإمارات.jpg'))}
-                    className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('افضل-خيام-في-الإمارات.jpg')} alt="أفضل خيام في الإمارات AI" className="w-full h-full object-contain" />
-                  </div>
-                </div>
+                <CinemaProofCardAr
+                  badge="● الموثوقية في الإجابات التوليدية"
+                  badgeColor="pink"
+                  metricRight="ترشيح مباشر للعلامة"
+                  title='عبارة البحث: "افضل خيام في الامارات؟"'
+                  subtitle="تصدر التوصيات الذكية مع إبراز خبرة الشركة الممتدة لأكثر من 26 عاماً وجودة التصنيع."
+                  imgName="افضل-خيام-في-الإمارات.jpg"
+                  alt="أفضل خيام في الإمارات AI"
+                  onOpenZoom={openLightbox}
+                />
 
-                {/* AI 3 */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="flex justify-between text-xs text-[#ff2e7e] mb-2 font-semibold">
-                    <span>البحث التوليدي باللغة الإنجليزية</span>
-                    <span className="text-emerald-400 font-bold">مصدر معتمد</span>
-                  </div>
-                  <h4 dir="ltr" className="text-base font-bold text-white mb-1 text-right">Query: "Tent Rental in Dubai"</h4>
-                  <p className="text-xs text-zinc-400 mb-4 leading-relaxed">
-                    هيكلة البيانات المنظمة (Schema Markup) دفعت نموذج Google التوليدي للاعتماد على بيانات الشركة كمصدر موثوق.
-                  </p>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('tent rental in dubai google ai.png'))}
-                    className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('tent rental in dubai google ai.png')} alt="ظهور Google AI بالإنجليزية" className="w-full h-full object-contain" />
-                  </div>
-                </div>
+                <CinemaProofCardAr
+                  badge="● البحث التوليدي باللغة الإنجليزية"
+                  badgeColor="pink"
+                  metricRight="مصدر معتمد"
+                  title='عبارة البحث: "Tent Rental in Dubai"'
+                  subtitle="هيكلة البيانات المنظمة (Schema Markup) دفعت نموذج Google التوليدي للاعتماد على بيانات الشركة كمصدر موثوق."
+                  imgName="tent rental in dubai google ai.png"
+                  alt="ظهور Google AI بالإنجليزية"
+                  onOpenZoom={openLightbox}
+                />
 
-                {/* AI 4 */}
-                <div className="p-6 rounded-3xl bg-[#0a0a0c] border border-zinc-900">
-                  <div className="flex justify-between text-xs text-[#ff2e7e] mb-2 font-semibold">
-                    <span>السيطرة على نتائج البحث التجارية</span>
-                    <span className="text-emerald-400 font-bold">ظهور متعدد العناصر</span>
-                  </div>
-                  <h4 className="text-base font-bold text-white mb-1">عبارة البحث: "خيام معارض اورجانيك"</h4>
-                  <p className="text-xs text-zinc-400 mb-4 leading-relaxed">
-                    الاستحواذ المتزامن على شريط الصور، الخرائط، والنتائج العضوية الأولى في الجزء العلوي من الصفحة.
-                  </p>
-                  <div
-                    onClick={() => setLightboxImg(getImgSrc('خيام معارض اورجانيك.jpg'))}
-                    className="relative h-64 w-full rounded-2xl overflow-hidden border border-zinc-800 cursor-pointer bg-zinc-950"
-                  >
-                    <img src={getImgSrc('خيام معارض اورجانيك.jpg')} alt="خيام معارض اورجانيك" className="w-full h-full object-contain" />
-                  </div>
-                </div>
+                <CinemaProofCardAr
+                  badge="● السيطرة على نتائج البحث التجارية"
+                  badgeColor="emerald"
+                  metricRight="ظهور متعدد العناصر"
+                  title='عبارة البحث: "خيام معارض اورجانيك"'
+                  subtitle="الاستحواذ المتزامن على شريط الصور، الخرائط، والنتائج العضوية الأولى في الجزء العلوي من الصفحة."
+                  imgName="خيام معارض اورجانيك.jpg"
+                  alt="خيام معارض اورجانيك"
+                  onOpenZoom={openLightbox}
+                />
               </div>
             </section>
           </div>
@@ -593,37 +619,36 @@ export default function ArabicSeoCaseStudies() {
                 </div>
               </div>
 
-              {/* صورة تقرير التدقيق */}
+              {/* صورة تقرير التدقيق بالحجم الكامل بدون أي ارتفاع مقيد */}
               <div className="mt-12">
-                <div className="flex items-center justify-between pb-3 text-xs text-zinc-400 border-b border-zinc-850">
+                <div className="flex items-center justify-between pb-3 text-xs text-zinc-400 border-b border-zinc-800">
                   <span className="text-zinc-300">
                     صحة الفهرسة والأداء التقني في Google Search Console
                   </span>
                   <span
-                    onClick={() => setLightboxImg(getImgSrc('Website audit.jpg'))}
-                    className="text-[#ff2e7e] hover:underline cursor-pointer"
+                    onClick={() => openLightbox(getImgSrc('Website audit.jpg'))}
+                    className="text-[#ff2e7e] hover:underline cursor-pointer font-bold"
                   >
-                    اضغط على الصورة لمعاينة التقرير الكامل ↖
+                    اضغط على الصورة للتكبير ومعاينة التقرير الكامل ↖
                   </span>
                 </div>
 
-                <motion.div
-                  whileHover={{ scale: 1.01 }}
-                  transition={{ duration: 0.3 }}
-                  onClick={() => setLightboxImg(getImgSrc('Website audit.jpg'))}
-                  className="relative h-[420px] md:h-[520px] w-full mt-4 rounded-2xl overflow-hidden border border-zinc-800/90 bg-zinc-950 cursor-zoom-in group shadow-2xl"
+                <div
+                  onClick={() => openLightbox(getImgSrc('Website audit.jpg'))}
+                  className="w-full mt-4 rounded-2xl overflow-hidden border border-zinc-800/90 bg-zinc-950 cursor-zoom-in group shadow-2xl"
                 >
                   <img
                     src={getImgSrc('Website audit.jpg')}
                     alt="تقرير تدقيق موقع لويدز بريتش مصر"
-                    className="w-full h-full object-contain group-hover:scale-102 transition-transform duration-500"
+                    className="w-full h-auto block object-contain group-hover:scale-[1.005] transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                    <span className="text-xs text-white bg-black/80 px-3 py-1.5 rounded-lg border border-zinc-700">
-                      استعراض تفاصيل معالجة أخطاء الفهرسة
+                  <div className="px-5 py-3 bg-zinc-950/95 border-t border-zinc-800 flex justify-between items-center">
+                    <span className="text-xs text-zinc-300">
+                      استعراض تفاصيل معالجة أخطاء الفهرسة وتطهير الروابط
                     </span>
+                    <span className="text-xs font-bold text-[#ff2e7e]">تكبير HD ↖</span>
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
 
@@ -680,28 +705,28 @@ export default function ArabicSeoCaseStudies() {
                 </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-850 hover:border-zinc-700 transition-colors">
+                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
                     <div className="text-base font-bold text-white mb-2">1. تنظيف ميزانية الزحف (Crawl Budget Sanitation)</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
                       إزالة حلقات أخطاء 4xx، وتوحيد الروابط ذات المعاملات المكررة عبر وسوم Canonical صارمة، وإرسال خرائط موقع XML نظيفة إلى GSC.
                     </p>
                   </div>
 
-                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-850 hover:border-zinc-700 transition-colors">
+                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
                     <div className="text-base font-bold text-white mb-2">2. بناء مخططات البيانات المنظمة للخدمات الصناعية</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
                       هيكلة أكواد JSON-LD متداخلة تعكس فئات الفحص المعتمدة، معايير السلامة الدولية، ومواقع الاختبارات الهندسية.
                     </p>
                   </div>
 
-                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-850 hover:border-zinc-700 transition-colors">
+                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
                     <div className="text-base font-bold text-white mb-2">3. تسريع نسخة الهاتف ومؤشرات Core Web Vitals</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
                       إزالة ملفات JavaScript المعطلة للعرض وضغط صور ومخططات المعدات الهندسية لتسريع الأرشفة عبر فهرسة الجوال (Mobile-First Indexing).
                     </p>
                   </div>
 
-                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-850 hover:border-zinc-700 transition-colors">
+                  <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
                     <div className="text-base font-bold text-white mb-2">4. استهداف المناطق الصناعية جغرافياً</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
                       تعزيز الإشارات الدلالية للاستعلامات التجارية في المدن والمناطق الصناعية الكبرى (العاشر من رمضان، مدينة السادات، الإسكندرية، والسويس).
@@ -751,7 +776,7 @@ export default function ArabicSeoCaseStudies() {
                 </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-                  <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-850 relative overflow-hidden">
+                  <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 relative overflow-hidden">
                     <div dir="ltr" className="text-4xl font-mono font-bold text-white text-right">100%</div>
                     <div className="text-xs text-zinc-400 mt-2">صحة الفهرسة في GSC</div>
                     <p className="text-xs text-zinc-500 mt-3 leading-relaxed">
@@ -759,7 +784,7 @@ export default function ArabicSeoCaseStudies() {
                     </p>
                   </div>
 
-                  <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-850 relative overflow-hidden">
+                  <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 relative overflow-hidden">
                     <div className="text-4xl font-bold text-emerald-400">الصفحة 1</div>
                     <div className="text-xs text-zinc-400 mt-2">كلمات الفحص والاعتماد الصناعي</div>
                     <p className="text-xs text-zinc-500 mt-3 leading-relaxed">
@@ -767,7 +792,7 @@ export default function ArabicSeoCaseStudies() {
                     </p>
                   </div>
 
-                  <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-850 relative overflow-hidden">
+                  <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 relative overflow-hidden">
                     <div dir="ltr" className="text-4xl font-mono font-bold text-[#ff2e7e] text-right">+85%</div>
                     <div className="text-xs text-zinc-400 mt-2">نمو طلبات عروض الأسعار المباشرة</div>
                     <p className="text-xs text-zinc-500 mt-3 leading-relaxed">
@@ -777,7 +802,7 @@ export default function ArabicSeoCaseStudies() {
                 </div>
 
                 <div className="pt-4 text-xs text-zinc-600">
-                  * تم التحقق من جميع المؤشرات عبر سجلات التغطية ومرات الظهور في Google Search Console وتقارير الفحص التقني.
+                  - تم التحقق من جميع المؤشرات عبر سجلات التغطية ومرات الظهور في Google Search Console وتقارير الفحص التقني.
                 </div>
               </motion.div>
             </div>
@@ -785,16 +810,69 @@ export default function ArabicSeoCaseStudies() {
         )}
       </main>
 
-      {/* عارض الصور المكبرة (LIGHTBOX) */}
+      {/* عارض الصور المكبرة التفاعلي (LIGHTBOX WITH ZOOM) */}
       {lightboxImg && (
         <div
-          onClick={() => setLightboxImg(null)}
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 backdrop-blur-md cursor-zoom-out"
+          onClick={closeLightbox}
+          className="fixed inset-0 z-50 bg-black/95 flex flex-col items-center justify-center p-4 md:p-8 backdrop-blur-md"
         >
-          <div className="relative max-w-5xl max-h-[90vh] w-full h-full flex items-center justify-center">
-            <img src={lightboxImg} alt="معاينة التقرير" className="max-w-full max-h-full object-contain" />
+          {/* شريط أدوات التكبير */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-7xl flex items-center justify-between mb-4 px-4 py-2.5 rounded-2xl bg-zinc-900/95 border border-zinc-800"
+          >
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setZoomLevel((z) => Math.max(1, Number((z - 0.5).toFixed(2))))}
+                disabled={zoomLevel <= 1}
+                className="px-3.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 text-xs font-bold text-white"
+              >
+                - تصغير
+              </button>
+              <span dir="ltr" className="px-2.5 text-xs font-mono text-emerald-400 font-bold">
+                {Math.round(zoomLevel * 100)}%
+              </span>
+              <button
+                onClick={() => setZoomLevel((z) => Math.min(2.5, Number((z + 0.5).toFixed(2))))}
+                disabled={zoomLevel >= 2.5}
+                className="px-3.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 text-xs font-bold text-white"
+              >
+                + تكبير
+              </button>
+              {zoomLevel > 1 && (
+                <button
+                  onClick={() => setZoomLevel(1)}
+                  className="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-bold text-zinc-300"
+                >
+                  إعادة ضبط
+                </button>
+              )}
+            </div>
+
+            <button
+              onClick={closeLightbox}
+              className="px-4 py-1.5 rounded-lg bg-[#ff2e7e] hover:bg-[#e0246d] text-white text-xs font-bold"
+            >
+              إغلاق ✕
+            </button>
           </div>
-          <span className="absolute top-6 left-8 text-zinc-400 text-sm">اضغط في أي مكان للإغلاق ✕</span>
+
+          {/* حاوية التمرير والتكبير */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="max-w-7xl max-h-[84vh] w-full overflow-auto rounded-2xl border border-zinc-800 bg-zinc-950 p-3 flex items-center justify-center"
+          >
+            <img
+              src={lightboxImg}
+              alt="معاينة التقرير بدقة كاملة"
+              onClick={() => setZoomLevel((z) => (z === 1 ? 1.75 : 1))}
+              style={{
+                width: `${zoomLevel * 100}%`,
+                maxWidth: zoomLevel === 1 ? '100%' : 'none',
+              }}
+              className="h-auto object-contain transition-all duration-200 cursor-zoom-in"
+            />
+          </div>
         </div>
       )}
 
