@@ -105,12 +105,21 @@ export default function ArabicHeroSection() {
           أبني الأنظمة الرقمية وأضاعف الظهور في محركات البحث منذ{' '}
           <span className="text-zinc-200 font-mono">2023</span>
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-2">
+        <div className="flex flex-wrap items-center justify-center gap-2.5">
           <span>خبير السيو التقني (SEO) ومطور تطبيقات الويب والسحابة</span>
           <span className="text-zinc-700">•</span>
           <a
+            href="https://www.linkedin.com/in/ahmedsaber-seo/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white hover:text-[#ff2e7e] transition-colors underline underline-offset-4 font-medium"
+          >
+            LinkedIn ↗
+          </a>
+          <span className="text-zinc-700">•</span>
+          <a
             href="#seo"
-            className="text-white hover:text-[#ff2e7e] transition-colors underline underline-offset-4"
+            className="text-white hover:text-[#ff2e7e] transition-colors underline underline-offset-4 font-medium"
           >
             استعرض النتائج والمشاريع ↓
           </a>

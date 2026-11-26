@@ -711,38 +711,6 @@ export default function ArabicSeoCaseStudies() {
                   </div>
                 </div>
 
-                {/* الصورة 3: تقرير التدقيق التقني للموقع */}
-                <div>
-                  <div className="flex items-center justify-between pb-3 text-xs text-zinc-400 border-b border-zinc-800">
-                    <span className="text-zinc-300 font-semibold">
-                      صحة الفهرسة والتدقيق التقني الشامل في Google Search Console
-                    </span>
-                    <span
-                      onClick={() => openLightbox(getImgSrc('Website audit.jpg'))}
-                      className="text-[#ff2e7e] hover:underline cursor-pointer font-bold"
-                    >
-                      اضغط على الصورة لمعاينة التقرير الكامل ↖
-                    </span>
-                  </div>
-
-                  <div
-                    onClick={() => openLightbox(getImgSrc('Website audit.jpg'))}
-                    className="w-full mt-4 rounded-2xl overflow-hidden border border-zinc-800/90 bg-zinc-950 cursor-zoom-in group shadow-2xl"
-                  >
-                    <img
-                      src={getImgSrc('Website audit.jpg')}
-                      alt="تقرير التدقيق التقني لموقع لويدز بريتش مصر"
-                      className="w-full h-auto block object-contain group-hover:scale-[1.005] transition-transform duration-500"
-                    />
-                    <div className="px-5 py-3 bg-zinc-950/95 border-t border-zinc-800 flex justify-between items-center">
-                      <span className="text-xs text-zinc-300">
-                        ملخص الفحص التقني ومعالجة أخطاء الزحف والفهرسة
-                      </span>
-                      <span className="text-xs font-bold text-[#ff2e7e]">تكبير HD ↖</span>
-                    </div>
-                  </div>
-                </div>
-
               </div>
             </div>
 
@@ -774,17 +742,17 @@ export default function ArabicSeoCaseStudies() {
                 className="space-y-4 pb-12 border-b border-zinc-900"
               >
                 <div className="text-xs font-semibold text-red-400">
-                  02 / المشكلات التقنية في Google Search Console
+                  02 / التحدي ونقطة البداية
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-white">
-                  استنزاف ميزانية الزحف، تضخم الروابط المكررة، وتراجع صفحات الخدمات
+                  تراجع ظهور صفحات الخدمات الرئيسية في نتائج البحث الأولى
                 </h3>
                 <p className="text-sm md:text-base text-zinc-400 leading-relaxed font-normal max-w-4xl">
-                  أظهر فحص سجلات التغطية في Google Search Console وجود مئات الروابط القديمة ومعاملات التصفح المكررة التي تستهلك وقت زحف عناكب جوجل (Googlebot) بدون فائدة، مما تسبب في تراجع صفحات الخدمات الرئيسية (مثل فحص الأوناش، اختبارات التحميل، واعتمادات LEEA) إلى ما بعد الصفحة الأولى بسبب بطء التحميل وتكرار العناوين الوصفية.
+                  عند مراجعة تقارير Google Search Console و Mangools في البداية، كان متوسط ترتيب الموقع متأخراً عند المركز 22.3 (في الصفحة الثالثة من جوجل). صفحات الخدمات الأساسية للشركة—مثل فحص واختبار المعدات الثقيلة واعتمادات السلامة الصناعية—كانت بعيدة عن أنظار مديري المشتريات بسبب تكرار عناوين الصفحات، ضعف الربط الداخلي بين الأقسام، وعدم توافق محتوى الصفحات مع الكلمات التي يبحث بها العملاء فعلياً.
                 </p>
               </motion.div>
 
-              {/* القسم 3: محاور الحل الهندسي */}
+              {/* القسم 3: محاور الحل */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -792,38 +760,38 @@ export default function ArabicSeoCaseStudies() {
                 className="space-y-6 pb-12 border-b border-zinc-900"
               >
                 <div className="text-xs font-semibold text-amber-400">
-                  03 / خطة المعالجة التقنية ومواءمة Search Console
+                  03 / خطة العمل والتحسينات المنفذة
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-white">
-                  تنظيم الزحف، الربط الدلالي، وبناء البيانات المنظمة (Schema)
+                  تنظيف الفهرسة، إعادة صياغة الصفحات، وتقوية الربط الداخلي
                 </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
                   <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
-                    <div className="text-base font-bold text-white mb-2">1. تنظيف مسارات الزحف (Crawl Budget Sanitation)</div>
+                    <div className="text-base font-bold text-white mb-2">1. معالجة الروابط المكررة وأخطاء الفهرسة</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
-                      إغلاق حلقات أخطاء 4xx، وتوحيد الروابط ذات المعاملات المكررة باستخدام وسوم Canonical دقيقة، وتحديث خرائط الموقع XML في Search Console.
+                      حصر الروابط المتشابهة وتوحيدها باستخدام وسوم Canonical، مع إغلاق الصفحات المكسورة وتحديث خريطة الموقع (XML Sitemap) في Google Search Console.
                     </p>
                   </div>
 
                   <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
-                    <div className="text-base font-bold text-white mb-2">2. بناء مخططات Schema للخدمات الهندسية</div>
+                    <div className="text-base font-bold text-white mb-2">2. تحسين عناوين ووصف صفحات الخدمات</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
-                      كتابة أكواد JSON-LD منظمة توضح لمحركات البحث تخصصات الفحص المعتمدة، معايير السلامة الدولية، ومواقع الاختبارات الهندسية.
+                      إعادة كتابة العناوين الرئيسية (Titles & H1) والوصف التعريفي لكل خدمة بحيث تطابق الكلمات التجارية التي يبحث بها مسؤولو الشركات والمصانع.
                     </p>
                   </div>
 
                   <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
-                    <div className="text-base font-bold text-white mb-2">3. تسريع التصفح على الهاتف ومؤشرات الأداء</div>
+                    <div className="text-base font-bold text-white mb-2">3. إضافة البيانات المنظمة (Schema Markup)</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
-                      تقليل ملفات JavaScript التي تؤخر عرض الصفحة وضغط صور ومخططات المعدات الهندسية لتسريع الأرشفة في فهرسة الجوال (Mobile-First Indexing).
+                      ربط صفحات الخدمات بأكواد JSON-LD واضحة تعرّف محركات البحث بطبيعة نشاط الشركة، فروعها، واعتمادات السلامة التي تقدمها.
                     </p>
                   </div>
 
                   <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
-                    <div className="text-base font-bold text-white mb-2">4. استهداف المدن والمناطق الصناعية جغرافياً</div>
+                    <div className="text-base font-bold text-white mb-2">4. تقوية الربط الداخلي واستهداف المناطق الصناعية</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
-                      تقوية الإشارات الجغرافية للكلمات التجارية داخل أكبر التجمعات الصناعية في مصر (العاشر من رمضان، مدينة السادات، الإسكندرية، والسويس).
+                      بناء روابط داخلية منظمة توجه قوة الموقع نحو الصفحات الأهم، مع إبراز تواجد الشركة في المدن الصناعية الكبرى مثل العاشر من رمضان والسادات والإسكندرية والسويس.
                     </p>
                   </div>
                 </div>
@@ -871,26 +839,26 @@ export default function ArabicSeoCaseStudies() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
                   <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 relative overflow-hidden">
-                    <div dir="ltr" className="text-4xl font-mono font-bold text-white text-right">100%</div>
-                    <div className="text-xs text-zinc-400 mt-2">صحة الفهرسة في GSC</div>
+                    <div dir="ltr" className="text-4xl font-mono font-bold text-white text-right">+108.3%</div>
+                    <div className="text-xs text-zinc-400 mt-2">نمو مرات الظهور في Search Console</div>
                     <p className="text-xs text-zinc-500 mt-3 leading-relaxed">
-                      صفر أخطاء فهرسة، القضاء التام على حلقات إعادة التوجيه 4xx، وتغطية كاملة لكافة صفحات الخدمات الرئيسية.
+                      ارتفاع مرات الظهور من 108K إلى 225K خلال 6 أشهر، مع تقدم متوسط ترتيب الموقع من المركز 22.3 إلى 17.9.
                     </p>
                   </div>
 
                   <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 relative overflow-hidden">
-                    <div className="text-4xl font-bold text-emerald-400">الصفحة 1</div>
-                    <div className="text-xs text-zinc-400 mt-2">كلمات الفحص والاعتماد الصناعي</div>
+                    <div dir="ltr" className="text-4xl font-mono font-bold text-emerald-400 text-right">+413.9%</div>
+                    <div className="text-xs text-zinc-400 mt-2">قفزة مؤشر الأداء العام (Mangools)</div>
                     <p className="text-xs text-zinc-500 mt-3 leading-relaxed">
-                      تصدر المراكز الأولى في كلمات فحص الأوناش، اختبارات التحميل، واعتمادات السلامة الهندسية.
+                      صعود مستمر في مؤشر الأداء (17.83/100) ومؤشر الظهور في نتائج البحث (+232.4%) للكلمات التجارية الخاصة بالقطاع.
                     </p>
                   </div>
 
                   <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 relative overflow-hidden">
-                    <div dir="ltr" className="text-4xl font-mono font-bold text-[#ff2e7e] text-right">+85%</div>
-                    <div className="text-xs text-zinc-400 mt-2">نمو طلبات عروض الأسعار المباشرة</div>
+                    <div dir="ltr" className="text-4xl font-mono font-bold text-[#ff2e7e] text-right">+85.9%</div>
+                    <div className="text-xs text-zinc-400 mt-2">نمو النقرات العضوية المستهدفة</div>
                     <p className="text-xs text-zinc-500 mt-3 leading-relaxed">
-                      زيادة ملحوظة في الاستفسارات التجارية الواردة من شركات المقاولات الكبرى والمصانع.
+                      تضاعف الزيارات المجانية من 2.62K إلى 4.87K نقرة خلال 6 أشهر من شركات المقاولات والمصانع الباحثة عن خدمات الفحص.
                     </p>
                   </div>
                 </div>

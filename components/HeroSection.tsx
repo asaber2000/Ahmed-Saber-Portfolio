@@ -103,12 +103,21 @@ export default function HeroSection() {
         <div>
           Scaling search visibility & systems since <span className="text-zinc-200 font-mono">2023</span>
         </div>
-        <div className="flex items-center gap-2">
-          <span>Technical SEO Strategist & Full-Stack Engineer</span>
+        <div className="flex flex-wrap items-center justify-center gap-2.5">
+          <span><span>Technical SEO, Web & Cloud Engineer</span></span>
+          <span className="text-zinc-700">•</span>
+          <a
+            href="https://www.linkedin.com/in/ahmedsaber-seo/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white hover:text-[#ff2e7e] transition-colors underline underline-offset-4 font-medium"
+          >
+            LinkedIn ↗
+          </a>
           <span className="text-zinc-700">•</span>
           <a
             href="#seo"
-            className="text-white hover:text-[#ff2e7e] transition-colors underline underline-offset-4"
+            className="text-white hover:text-[#ff2e7e] transition-colors underline underline-offset-4 font-medium"
           >
             Explore Proof ↓
           </a>

@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white font-sans selection:bg-[#ff2e7e] selection:text-white">
       <Navbar />
-      <main className="max-w-5xl mx-auto px-6 md:px-8">
+      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-10">
         <HeroSection />
         <ProjectsSection />
         <FragmentsSection />

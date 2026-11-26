@@ -733,16 +733,16 @@ export default function SeoCaseStudies() {
                 className="space-y-4 pb-12 border-b border-zinc-900"
               >
                 <div className="text-xs font-mono uppercase tracking-widest text-red-400">
-                  02 / The GSC Diagnostic Bottlenecks
+                  02 / The Challenge & Baseline
                 </div>
                 <h3 
                   className="text-2xl md:text-3xl font-bold text-white tracking-wide"
                   style={{ fontFamily: 'var(--font-heading-en), Cinzel, serif' }}
                 >
-                  Index Waste, Parameter Bloat & Buried High-Ticket RFPs
+                  Low Page-1 Visibility for Core Commercial Inspection Services
                 </h3>
                 <p className="text-sm md:text-base text-zinc-400 leading-relaxed font-normal max-w-4xl">
-                  Upon analyzing Google Search Console coverage logs, severe indexing decay was detected: hundreds of legacy pagination parameters and obsolete test URLs were draining Googlebot’s crawl budget. Crucial commercial pages (such as crane proof load testing, wire rope inspections, and LEEA certifications) were stranded outside Page 1, suffering from slow rendering speeds and duplicate meta signatures.
+                  Initial Google Search Console and Mangools reports showed the site sitting at an average position of 22.3 (Page 3 on Google). Core commercial service pages—such as heavy lifting equipment testing, crane inspections, and safety certifications—were hidden from procurement managers due to duplicate page titles, weak internal linking between service categories, and poorly aligned search terms.
                 </p>
               </motion.div>
 
@@ -754,41 +754,41 @@ export default function SeoCaseStudies() {
                 className="space-y-6 pb-12 border-b border-zinc-900"
               >
                 <div className="text-xs font-mono uppercase tracking-widest text-amber-400">
-                  03 / Engineering Remediation & GSC Alignment
+                  03 / Action Plan & Technical Execution
                 </div>
                 <h3 
                   className="text-2xl md:text-3xl font-bold text-white tracking-wide"
                   style={{ fontFamily: 'var(--font-heading-en), Cinzel, serif' }}
                 >
-                  Crawl Optimization, Semantic Mapping & Schema Graphs
+                  Index Cleanup, Page Optimization & Internal Link Architecture
                 </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
                   <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
-                    <div className="text-base font-bold text-white mb-2">1. GSC Crawl Budget Sanitation</div>
+                    <div className="text-base font-bold text-white mb-2">1. Duplicate URL & Index Cleanup</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
-                      Purged 4xx response loops, consolidated duplicate query parameters via strict canonical self-referencing, and submitted cleaned XML sitemaps to GSC.
+                      Consolidated duplicate URL parameters using strict canonical tags, cleaned up broken links, and submitted a streamlined XML sitemap to Google Search Console.
                     </p>
                   </div>
 
                   <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
-                    <div className="text-base font-bold text-white mb-2">2. Industrial Service Schema Graphs</div>
+                    <div className="text-base font-bold text-white mb-2">2. Service Page Titles & Meta Alignment</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
-                      Structured nested JSON-LD metadata reflecting statutory inspection categories, standard compliance bodies, and local engineering testing sites.
+                      Rewrote page titles (Titles & H1s) and meta descriptions across core inspection pages to match the exact commercial queries used by B2B buyers and factory managers.
                     </p>
                   </div>
 
                   <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
-                    <div className="text-base font-bold text-white mb-2">3. Mobile Speed & Core Web Vitals</div>
+                    <div className="text-base font-bold text-white mb-2">3. Structured Data (Schema Markup)</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
-                      Defused render-blocking JavaScript payloads and compressed high-resolution engineering equipment blueprints for faster mobile indexing.
+                      Implemented clean JSON-LD schema markup defining the company's accredited inspection services, safety standards, and testing branches for search engines.
                     </p>
                   </div>
 
                   <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
-                    <div className="text-base font-bold text-white mb-2">4. Geo-Targeted Industrial Landing Architecture</div>
+                    <div className="text-base font-bold text-white mb-2">4. Internal Linking & Industrial Hub Targeting</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
-                      Optimized contextual search signals for high-intent queries across major industrial cities (10th of Ramadan, Sadat City, Alexandria, and Suez).
+                      Built structured internal links to pass authority to high-value service pages while strengthening regional search relevance across 10th of Ramadan, Sadat City, Alexandria, and Suez.
                     </p>
                   </div>
                 </div>
@@ -839,26 +839,26 @@ export default function SeoCaseStudies() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
                   <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 relative overflow-hidden">
-                    <div className="text-4xl font-mono font-bold text-white">100%</div>
-                    <div className="text-xs text-zinc-400 font-mono mt-2">GSC Validated Health</div>
+                    <div className="text-4xl font-mono font-bold text-white">+108.3%</div>
+                    <div className="text-xs text-zinc-400 font-mono mt-2">6-Month Impressions Surge</div>
                     <p className="text-[11px] text-zinc-500 mt-3 leading-relaxed">
-                      Zero indexing exceptions, no 4xx redirection loops, and complete coverage of high-intent services.
+                      Expanded search impressions from 108K to 225K while improving average position from 22.3 to 17.9.
                     </p>
                   </div>
 
                   <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 relative overflow-hidden">
-                    <div className="text-4xl font-mono font-bold text-emerald-400">Page 1</div>
-                    <div className="text-xs text-zinc-400 font-mono mt-2">B2B Inspection Terms</div>
+                    <div className="text-4xl font-mono font-bold text-emerald-400">+413.9%</div>
+                    <div className="text-xs text-zinc-400 font-mono mt-2">Performance Index Growth</div>
                     <p className="text-[11px] text-zinc-500 mt-3 leading-relaxed">
-                      Statutory crane inspection, proof load testing, and rigging certifications ranking in top positions.
+                      Verified climb in Mangools Performance Index (17.83/100) and Visibility Index (+232.4%) across B2B inspection terms.
                     </p>
                   </div>
 
                   <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 relative overflow-hidden">
-                    <div className="text-4xl font-mono font-bold text-[#ff2e7e]">+85%</div>
-                    <div className="text-xs text-zinc-400 font-mono mt-2">Direct Procurement Inquiries</div>
+                    <div className="text-4xl font-mono font-bold text-[#ff2e7e]">+85.9%</div>
+                    <div className="text-xs text-zinc-400 font-mono mt-2">Organic Clicks Expansion</div>
                     <p className="text-[11px] text-zinc-500 mt-3 leading-relaxed">
-                      Measured growth in organic quote requests from industrial EPC contractors and manufacturing hubs.
+                      Nearly doubled qualified organic clicks from 2.62K to 4.87K within a 6-month comparison window.
                     </p>
                   </div>
                 </div>
