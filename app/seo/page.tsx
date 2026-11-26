@@ -630,36 +630,73 @@ export default function SeoCaseStudies() {
 
               </div>
 
-              {/* Big, Clean Hero GSC Image (Full width & natural height) */}
-              <div className="mt-12">
-                <div className="flex items-center justify-between pb-3 text-xs font-mono text-zinc-400 border-b border-zinc-800">
-                  <span className="flex items-center gap-2 text-zinc-300">
-                    <span>Google Search Console Performance & Technical Diagnostic Health</span>
-                  </span>
-                  <span
-                    onClick={() => openLightbox(getImgSrc('Website audit.jpg'))}
-                    className="text-[#ff2e7e] hover:underline cursor-pointer"
-                  >
-                    Click image to inspect full report ↗
-                  </span>
-                </div>
+              {/* ALL 3 FULL-WIDTH SCREENSHOTS STACKED */}
+              <div className="mt-12 space-y-12">
 
-                <div
-                  onClick={() => openLightbox(getImgSrc('Website audit.jpg'))}
-                  className="w-full mt-4 rounded-2xl overflow-hidden border border-zinc-800/90 bg-zinc-950 cursor-zoom-in group shadow-2xl"
-                >
-                  <img
-                    src={getImgSrc('Website audit.jpg')}
-                    alt="Lloyds British Google Search Console & Technical Audit"
-                    className="w-full h-auto block object-contain group-hover:scale-[1.005] transition-transform duration-500"
-                  />
-                  <div className="px-5 py-3 bg-zinc-950/95 border-t border-zinc-800 flex justify-between items-center">
-                    <span className="text-xs font-mono text-zinc-300">
-                      Full Technical Audit & Crawl Resolution Breakdown
+                {/* Image 1: Google Search Console 6-Month Growth */}
+                <div>
+                  <div className="flex items-center justify-between pb-3 text-xs font-mono text-zinc-400 border-b border-zinc-800">
+                    <span className="flex items-center gap-2 text-zinc-300">
+                      <span>Google Search Console: 6-Month Organic Clicks & Impressions Surge (+108% Impressions)</span>
                     </span>
-                    <span className="text-xs font-mono text-[#ff2e7e]">Zoom HD ↗</span>
+                    <span
+                      onClick={() => openLightbox(getImgSrc('last 6th vs. previos 6th.jpg'))}
+                      className="text-[#ff2e7e] hover:underline cursor-pointer"
+                    >
+                      Click image to inspect full report ↗
+                    </span>
+                  </div>
+
+                  <div
+                    onClick={() => openLightbox(getImgSrc('last 6th vs. previos 6th.jpg'))}
+                    className="w-full mt-4 rounded-2xl overflow-hidden border border-zinc-800/90 bg-zinc-950 cursor-zoom-in group shadow-2xl"
+                  >
+                    <img
+                      src={getImgSrc('last 6th vs. previos 6th.jpg')}
+                      alt="Lloyds British Google Search Console 6-Month Comparison"
+                      className="w-full h-auto block object-contain group-hover:scale-[1.005] transition-transform duration-500"
+                    />
+                    <div className="px-5 py-3 bg-zinc-950/95 border-t border-zinc-800 flex flex-wrap justify-between items-center gap-2">
+                      <span className="text-xs font-mono text-zinc-300">
+                        Clicks: 2.62K → 4.87K (+85.9%) • Impressions: 108K → 225K (+108.3%) • Avg Pos: 22.3 → 17.9
+                      </span>
+                      <span className="text-xs font-mono text-[#ff2e7e]">Zoom HD ↗</span>
+                    </div>
                   </div>
                 </div>
+
+                {/* Image 2: Performance Index & Visibility Index */}
+                <div>
+                  <div className="flex items-center justify-between pb-3 text-xs font-mono text-zinc-400 border-b border-zinc-800">
+                    <span className="flex items-center gap-2 text-zinc-300">
+                      <span>SERP Visibility & Performance Index Trajectory (+413.93% Performance Growth)</span>
+                    </span>
+                    <span
+                      onClick={() => openLightbox(getImgSrc('performance ( last period).jpg'))}
+                      className="text-[#ff2e7e] hover:underline cursor-pointer"
+                    >
+                      Click image to inspect full report ↗
+                    </span>
+                  </div>
+
+                  <div
+                    onClick={() => openLightbox(getImgSrc('performance ( last period).webp'))}
+                    className="w-full mt-4 rounded-2xl overflow-hidden border border-zinc-800/90 bg-zinc-950 cursor-zoom-in group shadow-2xl"
+                  >
+                    <img
+                      src={getImgSrc('performance ( last period).webp')}
+                      alt="Lloyds British Performance Index and Visibility"
+                      className="w-full h-auto block object-contain group-hover:scale-[1.005] transition-transform duration-500"
+                    />
+                    <div className="px-5 py-3 bg-zinc-950/95 border-t border-zinc-800 flex flex-wrap justify-between items-center gap-2">
+                      <span className="text-xs font-mono text-zinc-300">
+                        Performance Index: 17.83/100 (+413.93%) • Visibility Index: 5.39/100 (+232.43%)
+                      </span>
+                      <span className="text-xs font-mono text-[#ff2e7e]">Zoom HD ↗</span>
+                    </div>
+                  </div>
+                </div>
+
               </div>
 
             </div>
@@ -836,7 +873,7 @@ export default function SeoCaseStudies() {
           </motion.div>
         )}
 
-      </main>
+        </main>
 
       {/* INTERACTIVE ZOOM LIGHTBOX MODAL */}
       {lightboxImg && (

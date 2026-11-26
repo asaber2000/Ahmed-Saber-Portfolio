@@ -610,7 +610,7 @@ export default function ArabicSeoCaseStudies() {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-16"
           >
-            {/* 1. القسم التمهيدي */}
+            {/* 1. القسم التمهيدي واستعراض الإثباتات */}
             <div className="relative p-8 md:p-14 rounded-3xl bg-gradient-to-b from-[#0e0e12] via-[#09090b] to-black border border-zinc-800/80 shadow-[0_0_50px_-15px_rgba(255,46,126,0.15)] overflow-hidden">
               <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#ff2e7e]/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -625,11 +625,11 @@ export default function ArabicSeoCaseStudies() {
                 </div>
 
                 <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
-                  إعادة إحياء الظهور العضوي لخدمات فحص واعتماد معدات الرفع الهندسية
+                  مضاعفة الظهور العضوي لخدمات فحص واعتماد معدات الرفع الهندسية
                 </h2>
 
                 <p className="text-sm md:text-base text-zinc-400 leading-relaxed font-normal max-w-3xl">
-                  إعادة هندسة القابلية للاكتشاف في محركات البحث لأبرز جهة معتمدة لفحص معدات الرفع في مصر، من خلال معالجة ديون الزحف التقنية، وتنظيف تضخم الفهرسة، واستقطاب طلبات عروض الأسعار (RFPs) من كبرى الشركات الصناعية.
+                  إعادة بناء حضور محركات البحث لأبرز جهة معتمدة لفحص معدات الرفع في مصر، عبر حل مشكلات الزحف التقنية، وتنظيف الصفحات المكررة غير المفيدة، واستقطاب طلبات عروض الأسعار (RFPs) من كبرى الشركات الصناعية.
                 </p>
 
                 <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-zinc-400">
@@ -640,40 +640,109 @@ export default function ArabicSeoCaseStudies() {
                   <div>•</div>
                   <div>النطاق الجغرافي: القاهرة الكبرى وموانئ قناة السويس</div>
                   <div>•</div>
-                  <div className="text-emerald-400 font-bold">تطهير شامل لميزانية الزحف بنسبة 100%</div>
+                  <div className="text-emerald-400 font-bold">تنظيف شامل لمسارات الزحف بنسبة 100%</div>
                 </div>
               </div>
 
-              {/* صورة تقرير التدقيق بالحجم الكامل بدون أي ارتفاع مقيد */}
-              <div className="mt-12">
-                <div className="flex items-center justify-between pb-3 text-xs text-zinc-400 border-b border-zinc-800">
-                  <span className="text-zinc-300">
-                    صحة الفهرسة والأداء التقني في Google Search Console
-                  </span>
-                  <span
-                    onClick={() => openLightbox(getImgSrc('Website audit.jpg'))}
-                    className="text-[#ff2e7e] hover:underline cursor-pointer font-bold"
-                  >
-                    اضغط على الصورة للتكبير ومعاينة التقرير الكامل ↖
-                  </span>
-                </div>
+              {/* الصور الثلاث بالحجم الكامل ومتتالية */}
+              <div className="mt-12 space-y-12">
 
-                <div
-                  onClick={() => openLightbox(getImgSrc('Website audit.jpg'))}
-                  className="w-full mt-4 rounded-2xl overflow-hidden border border-zinc-800/90 bg-zinc-950 cursor-zoom-in group shadow-2xl"
-                >
-                  <img
-                    src={getImgSrc('Website audit.jpg')}
-                    alt="تقرير تدقيق موقع لويدز بريتش مصر"
-                    className="w-full h-auto block object-contain group-hover:scale-[1.005] transition-transform duration-500"
-                  />
-                  <div className="px-5 py-3 bg-zinc-950/95 border-t border-zinc-800 flex justify-between items-center">
-                    <span className="text-xs text-zinc-300">
-                      استعراض تفاصيل معالجة أخطاء الفهرسة وتطهير الروابط
+                {/* الصورة 1: نمو 6 أشهر في Google Search Console */}
+                <div>
+                  <div className="flex items-center justify-between pb-3 text-xs text-zinc-400 border-b border-zinc-800">
+                    <span className="text-zinc-300 font-semibold">
+                      Google Search Console: قفزة النقرات ومرات الظهور خلال 6 أشهر (+108% نمو في الظهور)
                     </span>
-                    <span className="text-xs font-bold text-[#ff2e7e]">تكبير HD ↖</span>
+                    <span
+                      onClick={() => openLightbox(getImgSrc('last 6th vs. previos 6th.jpg'))}
+                      className="text-[#ff2e7e] hover:underline cursor-pointer font-bold"
+                    >
+                      اضغط على الصورة لمعاينة التقرير الكامل ↖
+                    </span>
+                  </div>
+
+                  <div
+                    onClick={() => openLightbox(getImgSrc('last 6th vs. previos 6th.jpg'))}
+                    className="w-full mt-4 rounded-2xl overflow-hidden border border-zinc-800/90 bg-zinc-950 cursor-zoom-in group shadow-2xl"
+                  >
+                    <img
+                      src={getImgSrc('last 6th vs. previos 6th.jpg')}
+                      alt="مقارنة 6 أشهر في Google Search Console لشركة لويدز بريتش مصر"
+                      className="w-full h-auto block object-contain group-hover:scale-[1.005] transition-transform duration-500"
+                    />
+                    <div className="px-5 py-3 bg-zinc-950/95 border-t border-zinc-800 flex flex-wrap justify-between items-center gap-2">
+                      <span dir="ltr" className="text-xs font-mono text-zinc-300">
+                        Clicks: 2.62K → 4.87K (+85.9%) • Impressions: 108K → 225K (+108.3%) • Avg Pos: 22.3 → 17.9
+                      </span>
+                      <span className="text-xs font-bold text-[#ff2e7e]">تكبير HD ↖</span>
+                    </div>
                   </div>
                 </div>
+
+                {/* الصورة 2: مؤشر الأداء والظهور */}
+                <div>
+                  <div className="flex items-center justify-between pb-3 text-xs text-zinc-400 border-b border-zinc-800">
+                    <span className="text-zinc-300 font-semibold">
+                      منحنى نمو الظهور والأداء في نتائج البحث (+413.93% نمو في مؤشر الأداء)
+                    </span>
+                    <span
+                      onClick={() => openLightbox(getImgSrc('performance ( last period).webp'))}
+                      className="text-[#ff2e7e] hover:underline cursor-pointer font-bold"
+                    >
+                      اضغط على الصورة لمعاينة التقرير الكامل ↖
+                    </span>
+                  </div>
+
+                  <div
+                    onClick={() => openLightbox(getImgSrc('performance ( last period).webp'))}
+                    className="w-full mt-4 rounded-2xl overflow-hidden border border-zinc-800/90 bg-zinc-950 cursor-zoom-in group shadow-2xl"
+                  >
+                    <img
+                      src={getImgSrc('performance ( last period).webp')}
+                      alt="مؤشر الأداء والظهور لشركة لويدز بريتش مصر"
+                      className="w-full h-auto block object-contain group-hover:scale-[1.005] transition-transform duration-500"
+                    />
+                    <div className="px-5 py-3 bg-zinc-950/95 border-t border-zinc-800 flex flex-wrap justify-between items-center gap-2">
+                      <span dir="ltr" className="text-xs font-mono text-zinc-300">
+                        Performance Index: 17.83/100 (+413.93%) • Visibility Index: 5.39/100 (+232.43%)
+                      </span>
+                      <span className="text-xs font-bold text-[#ff2e7e]">تكبير HD ↖</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* الصورة 3: تقرير التدقيق التقني للموقع */}
+                <div>
+                  <div className="flex items-center justify-between pb-3 text-xs text-zinc-400 border-b border-zinc-800">
+                    <span className="text-zinc-300 font-semibold">
+                      صحة الفهرسة والتدقيق التقني الشامل في Google Search Console
+                    </span>
+                    <span
+                      onClick={() => openLightbox(getImgSrc('Website audit.jpg'))}
+                      className="text-[#ff2e7e] hover:underline cursor-pointer font-bold"
+                    >
+                      اضغط على الصورة لمعاينة التقرير الكامل ↖
+                    </span>
+                  </div>
+
+                  <div
+                    onClick={() => openLightbox(getImgSrc('Website audit.jpg'))}
+                    className="w-full mt-4 rounded-2xl overflow-hidden border border-zinc-800/90 bg-zinc-950 cursor-zoom-in group shadow-2xl"
+                  >
+                    <img
+                      src={getImgSrc('Website audit.jpg')}
+                      alt="تقرير التدقيق التقني لموقع لويدز بريتش مصر"
+                      className="w-full h-auto block object-contain group-hover:scale-[1.005] transition-transform duration-500"
+                    />
+                    <div className="px-5 py-3 bg-zinc-950/95 border-t border-zinc-800 flex justify-between items-center">
+                      <span className="text-xs text-zinc-300">
+                        ملخص الفحص التقني ومعالجة أخطاء الزحف والفهرسة
+                      </span>
+                      <span className="text-xs font-bold text-[#ff2e7e]">تكبير HD ↖</span>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
 
@@ -687,13 +756,13 @@ export default function ArabicSeoCaseStudies() {
                 className="space-y-4 pb-12 border-b border-zinc-900"
               >
                 <div className="text-xs font-semibold text-[#ff2e7e]">
-                  01 / سياق المؤسسة والقطاع
+                  01 / طبيعة الشركة والسوق المستهدف
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-white">
                   مرجعية هندسية معتمدة للفحوصات غير الإتلافية (NDT) والسلامة الصناعية
                 </h3>
                 <p className="text-sm md:text-base text-zinc-400 leading-relaxed font-normal max-w-4xl">
-                  تعمل شركة لويدز بريتش مصر كهيئة هندسية معتمدة تقدم اختبارات التحميل، واعتماد الحاويات البحرية، والفحوصات غير الإتلافية (NDT)، والتدريب المتخصص على السلامة. يعتمد استقطاب العملاء هنا على الوصول المباشر لمديري المشتريات والمشاريع في شركات البترول، الترسانات البحرية، والمجمعات الصناعية الكبرى عبر البحث العضوي.
+                  تعمل شركة لويدز بريتش مصر كهيئة هندسية معتمدة تقدم اختبارات التحميل، واعتماد الحاويات البحرية، والفحوصات غير الإتلافية (NDT)، والتدريب المتخصص على السلامة. يعتمد نمو أعمال الشركة على الوصول المباشر لمديري المشتريات والمشاريع في شركات البترول، الترسانات البحرية، والمصانع الكبرى عندما يبحثون عن جهات اعتماد موثوقة في جوجل.
                 </p>
               </motion.div>
 
@@ -705,13 +774,13 @@ export default function ArabicSeoCaseStudies() {
                 className="space-y-4 pb-12 border-b border-zinc-900"
               >
                 <div className="text-xs font-semibold text-red-400">
-                  02 / تشخيص مشكلات Google Search Console
+                  02 / المشكلات التقنية في Google Search Console
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-white">
-                  هدر ميزانية الزحف، تضخم الروابط المتكررة، وتراجع صفحات الخدمات الرئيسية
+                  استنزاف ميزانية الزحف، تضخم الروابط المكررة، وتراجع صفحات الخدمات
                 </h3>
                 <p className="text-sm md:text-base text-zinc-400 leading-relaxed font-normal max-w-4xl">
-                  كشف تحليل سجلات التغطية في Google Search Console عن وجود مئات الروابط القديمة ومعاملات التصفح المكررة التي تستنزف ميزانية زحف Googlebot، مما أدى إلى تراجع صفحات الخدمات عالية القيمة (مثل فحص الأوناش، اختبارات التحميل، واعتمادات LEEA) إلى ما بعد الصفحة الأولى بسبب بطء العرض وتكرار البيانات الوصفية.
+                  أظهر فحص سجلات التغطية في Google Search Console وجود مئات الروابط القديمة ومعاملات التصفح المكررة التي تستهلك وقت زحف عناكب جوجل (Googlebot) بدون فائدة، مما تسبب في تراجع صفحات الخدمات الرئيسية (مثل فحص الأوناش، اختبارات التحميل، واعتمادات LEEA) إلى ما بعد الصفحة الأولى بسبب بطء التحميل وتكرار العناوين الوصفية.
                 </p>
               </motion.div>
 
@@ -723,38 +792,38 @@ export default function ArabicSeoCaseStudies() {
                 className="space-y-6 pb-12 border-b border-zinc-900"
               >
                 <div className="text-xs font-semibold text-amber-400">
-                  03 / المعالجة الهندسية ومواءمة Search Console
+                  03 / خطة المعالجة التقنية ومواءمة Search Console
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-white">
-                  تحسين الزحف، الربط الدلالي، وبناء مخططات Schema الصناعية
+                  تنظيم الزحف، الربط الدلالي، وبناء البيانات المنظمة (Schema)
                 </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
                   <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
-                    <div className="text-base font-bold text-white mb-2">1. تنظيف ميزانية الزحف (Crawl Budget Sanitation)</div>
+                    <div className="text-base font-bold text-white mb-2">1. تنظيف مسارات الزحف (Crawl Budget Sanitation)</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
-                      إزالة حلقات أخطاء 4xx، وتوحيد الروابط ذات المعاملات المكررة عبر وسوم Canonical صارمة، وإرسال خرائط موقع XML نظيفة إلى GSC.
+                      إغلاق حلقات أخطاء 4xx، وتوحيد الروابط ذات المعاملات المكررة باستخدام وسوم Canonical دقيقة، وتحديث خرائط الموقع XML في Search Console.
                     </p>
                   </div>
 
                   <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
-                    <div className="text-base font-bold text-white mb-2">2. بناء مخططات البيانات المنظمة للخدمات الصناعية</div>
+                    <div className="text-base font-bold text-white mb-2">2. بناء مخططات Schema للخدمات الهندسية</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
-                      هيكلة أكواد JSON-LD متداخلة تعكس فئات الفحص المعتمدة، معايير السلامة الدولية، ومواقع الاختبارات الهندسية.
+                      كتابة أكواد JSON-LD منظمة توضح لمحركات البحث تخصصات الفحص المعتمدة، معايير السلامة الدولية، ومواقع الاختبارات الهندسية.
                     </p>
                   </div>
 
                   <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
-                    <div className="text-base font-bold text-white mb-2">3. تسريع نسخة الهاتف ومؤشرات Core Web Vitals</div>
+                    <div className="text-base font-bold text-white mb-2">3. تسريع التصفح على الهاتف ومؤشرات الأداء</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
-                      إزالة ملفات JavaScript المعطلة للعرض وضغط صور ومخططات المعدات الهندسية لتسريع الأرشفة عبر فهرسة الجوال (Mobile-First Indexing).
+                      تقليل ملفات JavaScript التي تؤخر عرض الصفحة وضغط صور ومخططات المعدات الهندسية لتسريع الأرشفة في فهرسة الجوال (Mobile-First Indexing).
                     </p>
                   </div>
 
                   <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800 hover:border-zinc-700 transition-colors">
-                    <div className="text-base font-bold text-white mb-2">4. استهداف المناطق الصناعية جغرافياً</div>
+                    <div className="text-base font-bold text-white mb-2">4. استهداف المدن والمناطق الصناعية جغرافياً</div>
                     <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-normal">
-                      تعزيز الإشارات الدلالية للاستعلامات التجارية في المدن والمناطق الصناعية الكبرى (العاشر من رمضان، مدينة السادات، الإسكندرية، والسويس).
+                      تقوية الإشارات الجغرافية للكلمات التجارية داخل أكبر التجمعات الصناعية في مصر (العاشر من رمضان، مدينة السادات، الإسكندرية، والسويس).
                     </p>
                   </div>
                 </div>
@@ -763,7 +832,7 @@ export default function ArabicSeoCaseStudies() {
               {/* القسم 4: المنهجيات والأدوات المطبقة */}
               <div className="space-y-4 pb-12 border-b border-zinc-900">
                 <div className="text-xs text-zinc-500">
-                  04 / المنهجيات والأطر التقنية المطبقة
+                  04 / المنهجيات والأدوات التقنية المطبقة
                 </div>
                 <div className="flex flex-wrap gap-2.5">
                   {[
@@ -794,7 +863,7 @@ export default function ArabicSeoCaseStudies() {
                 className="space-y-6"
               >
                 <div className="text-xs font-semibold text-emerald-400">
-                  05 / النتائج الموثقة ومؤشرات الأداء
+                  05 / النتائج المحققة ومؤشرات النمو
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-white">
                   جودة الزيارات واستقرار الفهرسة في محركات البحث
@@ -833,7 +902,8 @@ export default function ArabicSeoCaseStudies() {
             </div>
           </motion.div>
         )}
-      </main>
+
+        </main>
 
       {/* عارض الصور المكبرة التفاعلي (LIGHTBOX WITH ZOOM) */}
       {lightboxImg && (
