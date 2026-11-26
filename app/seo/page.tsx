@@ -183,41 +183,68 @@ export default function SeoCaseStudies() {
         {activeTab === 'nokhada' && (
           <div className="space-y-24">
 
-            {/* Overview & Executive KPIs */}
+            {/* Overview & 8 Executive KPIs (100% Verified by Screenshots) */}
             <div className="p-8 md:p-10 rounded-3xl bg-gradient-to-br from-[#0e0e12] to-[#08080a] border border-zinc-800 space-y-8">
               <div>
                 <span className="text-[11px] font-mono text-[#ff2e7e] uppercase tracking-wider">
-                  Flagship Case Study • UAE & KSA Market Leader
+                  Flagship Case Study • UAE Market Leader
                 </span>
                 <h2 className="text-2xl md:text-4xl font-bold text-white mt-1.5">
                   Bait Al Nokhada Tents & Fabric Shades
                 </h2>
                 <p className="text-sm md:text-base text-zinc-400 mt-3 leading-relaxed max-w-4xl">
-                  One of the Middle East's largest manufacturing powerhouses with 26+ years of heritage. Complete Core Web Vitals speed overhaul, Google Search Console traffic scale, security hardening, and generative AI search authority.
+                  One of the Middle East's largest manufacturing powerhouses with 26+ years of heritage. Complete Core Web Vitals speed overhaul, Google Search Console traffic scale, HTTP security hardening, and generative AI search authority across the UAE.
                 </p>
               </div>
 
-              {/* 4 Headline KPIs */}
+              {/* 8 Headline KPIs (2 Rows x 4 Columns) */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
                 <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
-                  <div className="text-3xl md:text-4xl font-mono font-bold text-emerald-400">4.9s → 2.4s</div>
-                  <div className="text-xs text-zinc-300 mt-1.5">LCP Speed Cut in Half</div>
-                  <div className="text-[11px] text-zinc-500 font-mono mt-1">Grade E (36%) → C (67%)</div>
+                  <div className="text-2xl md:text-3xl font-mono font-bold text-emerald-400">4.9s → 889ms</div>
+                  <div className="text-xs text-zinc-300 mt-1.5">LCP Speed (-82% Faster)</div>
+                  <div className="text-[11px] text-zinc-500 font-mono mt-1">Grade E (36%) → Grade A (93%)</div>
                 </div>
+
                 <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
-                  <div className="text-3xl md:text-4xl font-mono font-bold text-white">+595%</div>
+                  <div className="text-2xl md:text-3xl font-mono font-bold text-white">+595%</div>
                   <div className="text-xs text-zinc-300 mt-1.5">Monthly Impressions</div>
                   <div className="text-[11px] text-zinc-500 font-mono mt-1">17.3K → 103K / Month</div>
                 </div>
+
                 <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
-                  <div className="text-3xl md:text-4xl font-mono font-bold text-[#ff2e7e]">Pos 21 → 8.5</div>
+                  <div className="text-2xl md:text-3xl font-mono font-bold text-[#ff2e7e]">Pos 21 → 8.5</div>
                   <div className="text-xs text-zinc-300 mt-1.5">Page 3 to Page 1</div>
-                  <div className="text-[11px] text-zinc-500 font-mono mt-1">+1845% KSA Surge</div>
+                  <div className="text-[11px] text-zinc-500 font-mono mt-1">GSC Verified Avg Rank</div>
                 </div>
+
                 <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
-                  <div className="text-3xl md:text-4xl font-mono font-bold text-amber-400">+239%</div>
+                  <div className="text-2xl md:text-3xl font-mono font-bold text-amber-400">Grade D → A</div>
+                  <div className="text-xs text-zinc-300 mt-1.5">HTTP Security Headers</div>
+                  <div className="text-[11px] text-zinc-500 font-mono mt-1">All 6 Headers Hardened</div>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
+                  <div className="text-2xl md:text-3xl font-mono font-bold text-emerald-400">+239%</div>
                   <div className="text-xs text-zinc-300 mt-1.5">GA4 Active Users</div>
-                  <div className="text-[11px] text-zinc-500 font-mono mt-1">9.3K Users • 503 Backlinks</div>
+                  <div className="text-[11px] text-zinc-500 font-mono mt-1">9.3K Users • Beat Median</div>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
+                  <div className="text-2xl md:text-3xl font-mono font-bold text-white">+374.6%</div>
+                  <div className="text-xs text-zinc-300 mt-1.5">Backlinks Growth</div>
+                  <div className="text-[11px] text-zinc-500 font-mono mt-1">503 Active • Mangools Verified</div>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
+                  <div className="text-2xl md:text-3xl font-mono font-bold text-amber-400">Rank #1</div>
+                  <div className="text-xs text-zinc-300 mt-1.5">UAE Commercial SERPs</div>
+                  <div className="text-[11px] text-zinc-500 font-mono mt-1">Google.ae & Bing Sitelinks</div>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
+                  <div className="text-2xl md:text-3xl font-mono font-bold text-[#ff2e7e]">#1 Cited</div>
+                  <div className="text-xs text-zinc-300 mt-1.5">Google AI Overviews</div>
+                  <div className="text-[11px] text-zinc-500 font-mono mt-1">Arabic & English GEO</div>
                 </div>
               </div>
             </div>
@@ -256,14 +283,14 @@ export default function SeoCaseStudies() {
                 <CinemaProofCard
                   badge="● AFTER • SPEED OPTIMIZATION VERIFIED"
                   badgeColor="emerald"
-                  metricRight="GTmetrix Grade C (67%) • Load Cut to 2.4s"
-                  title="Post-Engineering Performance Breakthrough"
-                  subtitle="Optimized critical CSS delivery, deferred non-essential JavaScript, and lazy-loaded off-screen media—cutting Largest Contentful Paint by more than 50%."
-                  imgName="gtmetrix-baitalnokhada.webp"
+                  metricRight="GTmetrix Grade A (93%) • LCP Cut to 889ms"
+                  title="Post-Engineering Performance Breakthrough: Grade A (93%)"
+                  subtitle="Optimized critical CSS delivery, deferred non-essential JavaScript, and lazy-loaded off-screen media—slashing Largest Contentful Paint from 4.9s down to 889ms (sub-second load)."
+                  imgName="gtmetrix-after.jpg"
                   alt="GTmetrix After"
-                  footerLeft="LCP Cut to 2.4 Seconds (-51%)"
-                  footerCenter="Performance Upgraded to 67% (Grade C)"
-                  footerRight="Core Web Vitals Passed"
+                  footerLeft="LCP Cut to 889ms (-82%)"
+                  footerCenter="Performance Upgraded to 93% (Grade A)"
+                  footerRight="TBT: 48ms • CLS: 0"
                   onOpenZoom={openLightbox}
                 />
               </div>
@@ -383,7 +410,7 @@ export default function SeoCaseStudies() {
                   Phase 03 / Technical Security Hardening
                 </div>
                 <h3 className="text-2xl md:text-4xl font-bold text-white">
-                  HTTP Security Headers Upgrade: Grade D → Grade B
+                  HTTP Security Headers Upgrade: Grade D → Grade A
                 </h3>
               </div>
 
@@ -402,10 +429,10 @@ export default function SeoCaseStudies() {
                 <CinemaProofCard
                   badge="● AFTER • HARDENED INFRASTRUCTURE"
                   badgeColor="emerald"
-                  metricRight="Security Headers Grade B Verified"
-                  title="Enterprise HTTP Security Response Headers Deployed"
-                  subtitle="Configured Strict-Transport-Security (HSTS), X-Frame-Options, Referrer-Policy, and X-Content-Type-Options at the server edge."
-                  imgName="Security-headers-baitalnokhada.webp"
+                  metricRight="Security Headers Grade A Verified"
+                  title="Enterprise HTTP Security Response Headers Deployed (Grade A)"
+                  subtitle="Configured Content-Security-Policy (CSP), Permissions-Policy, Strict-Transport-Security (HSTS), X-Frame-Options, Referrer-Policy, and X-Content-Type-Options at the server edge."
+                  imgName="4http-headers.png"
                   alt="Security Headers After"
                   onOpenZoom={openLightbox}
                 />

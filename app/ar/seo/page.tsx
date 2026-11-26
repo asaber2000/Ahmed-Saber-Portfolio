@@ -203,17 +203,18 @@ export default function ArabicSeoCaseStudies() {
                 </p>
               </div>
 
-              {/* 4 مؤشرات رئيسية في الأعلى */}
+              {/* 8 مؤشرات رئيسية موثقة بالصور (صفين × 4 خانات) */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
                 <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
                   <div dir="ltr" className="text-2xl md:text-3xl font-mono font-bold text-emerald-400 text-right">
-                    4.9s → 2.4s
+                    4.9s → 889ms
                   </div>
-                  <div className="text-xs text-zinc-300 mt-1.5">تقليص وقت التحميل للنصف</div>
+                  <div className="text-xs text-zinc-300 mt-1.5">تسريع التحميل بنسبة 82%</div>
                   <div dir="ltr" className="text-[11px] text-zinc-500 font-mono mt-1 text-right">
-                    Grade E (36%) → C (67%)
+                    Grade E (36%) → Grade A (93%)
                   </div>
                 </div>
+
                 <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
                   <div dir="ltr" className="text-2xl md:text-3xl font-mono font-bold text-white text-right">
                     +595%
@@ -223,19 +224,55 @@ export default function ArabicSeoCaseStudies() {
                     17.3K → 103K / Month
                   </div>
                 </div>
+
                 <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
                   <div dir="ltr" className="text-2xl md:text-3xl font-mono font-bold text-[#ff2e7e] text-right">
                     Pos 21 → 8.5
                   </div>
                   <div className="text-xs text-zinc-300 mt-1.5">من الصفحة 3 إلى الصفحة 1</div>
-                  <div className="text-[11px] text-zinc-500 mt-1">+1845% توسع في السعودية</div>
+                  <div className="text-[11px] text-zinc-500 mt-1">موثق في Search Console</div>
                 </div>
+
                 <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
                   <div dir="ltr" className="text-2xl md:text-3xl font-mono font-bold text-amber-400 text-right">
+                    Grade D → A
+                  </div>
+                  <div className="text-xs text-zinc-300 mt-1.5">تحصين ترويسات الأمان</div>
+                  <div dir="ltr" className="text-[11px] text-zinc-500 font-mono mt-1 text-right">
+                    All 6 Headers Hardened
+                  </div>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
+                  <div dir="ltr" className="text-2xl md:text-3xl font-mono font-bold text-emerald-400 text-right">
                     +239%
                   </div>
                   <div className="text-xs text-zinc-300 mt-1.5">المستخدمون النشطون (GA4)</div>
-                  <div className="text-[11px] text-zinc-500 mt-1">9.3 آلاف مستخدم • 503 رابط</div>
+                  <div className="text-[11px] text-zinc-500 mt-1">9.3 آلاف مستخدم نشط</div>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
+                  <div dir="ltr" className="text-2xl md:text-3xl font-mono font-bold text-white text-right">
+                    +374.6%
+                  </div>
+                  <div className="text-xs text-zinc-300 mt-1.5">نمو الروابط الخلفية</div>
+                  <div className="text-[11px] text-zinc-500 mt-1">503 رابط • Mangools</div>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
+                  <div dir="ltr" className="text-2xl md:text-3xl font-mono font-bold text-amber-400 text-right">
+                    Rank #1
+                  </div>
+                  <div className="text-xs text-zinc-300 mt-1.5">صدارة الكلمات التجارية</div>
+                  <div className="text-[11px] text-zinc-500 mt-1">Google.ae و Bing Sitelinks</div>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-black/70 border border-zinc-800">
+                  <div dir="ltr" className="text-2xl md:text-3xl font-mono font-bold text-[#ff2e7e] text-right">
+                    #1 Cited
+                  </div>
+                  <div className="text-xs text-zinc-300 mt-1.5">Google AI Overviews</div>
+                  <div className="text-[11px] text-zinc-500 mt-1">مرجع أول بالعربي والإنجليزي</div>
                 </div>
               </div>
             </div>
@@ -274,14 +311,14 @@ export default function ArabicSeoCaseStudies() {
                 <CinemaProofCardAr
                   badge="● بعد التحسين • قفزة في سرعة الأداء"
                   badgeColor="emerald"
-                  metricRight="GTmetrix Grade C (67%) • 2.4s LCP"
-                  title="نتيجة التدخل الهندسي: تقليص التحميل لأكثر من النصف (2.4 ثانية)"
-                  subtitle="ضغط ملفات CSS الحرجة، تفعيل التحميل الكسول للصور والوسائط، وتحسين مؤشرات Core Web Vitals للهواتف."
-                  imgName="gtmetrix-baitalnokhada.webp"
+                  metricRight="GTmetrix Grade A (93%) • 889ms LCP"
+                  title="نتيجة التدخل الهندسي: الوصول إلى Grade A (93%) وتحميل في أقل من ثانية (889ms)"
+                  subtitle="ضغط ملفات CSS الحرجة، تفعيل التحميل الكسول للصور والوسائط، وتحسين مؤشرات Core Web Vitals لتقليص وقت العرض من 4.9 ثانية إلى 889 مللي ثانية."
+                  imgName="gtmetrix-after.jpg"
                   alt="تقرير GTmetrix بعد التحسين"
-                  footerLeft="تقليص التحميل إلى 2.4 ثانية (-51%)"
-                  footerCenter="ارتفاع التقييم إلى 67% (Grade C)"
-                  footerRight="اجتياز مؤشرات Core Web Vitals"
+                  footerLeft="تقليص التحميل إلى 889ms (-82%)"
+                  footerCenter="ارتفاع التقييم إلى 93% (Grade A)"
+                  footerRight="TBT: 48ms • CLS: 0"
                   onOpenZoom={openLightbox}
                 />
               </div>
@@ -401,7 +438,7 @@ export default function ArabicSeoCaseStudies() {
                   المرحلة 03 / تحصين البنية التحتية والأمان
                 </div>
                 <h3 className="text-2xl md:text-4xl font-bold text-white">
-                  ترقية ترويسات الأمان HTTP Security Headers: من Grade D إلى Grade B
+                  ترقية ترويسات الأمان HTTP Security Headers: من Grade D إلى Grade A
                 </h3>
               </div>
 
@@ -420,10 +457,10 @@ export default function ArabicSeoCaseStudies() {
                 <CinemaProofCardAr
                   badge="● بعد التحسين • بنية محصّنة"
                   badgeColor="emerald"
-                  metricRight="Security Headers Grade B"
-                  title="تأمين ترويسات الاستجابة (HTTP Security Headers)"
-                  subtitle="تفعيل بروتوكولات Strict-Transport-Security و X-Frame-Options و Referrer-Policy لحماية الموقع ورفع موثوقيته."
-                  imgName="Security-headers-baitalnokhada.webp"
+                  metricRight="Security Headers Grade A Verified"
+                  title="تأمين ترويسات الاستجابة بالكامل (Grade A)"
+                  subtitle="تفعيل جميع بروتوكولات الحماية الستة: Content-Security-Policy و Permissions-Policy و Strict-Transport-Security (HSTS) و X-Frame-Options و Referrer-Policy و X-Content-Type-Options."
+                  imgName="4http-headers.png"
                   alt="ترويسات HTTP بعد التحسين"
                   onOpenZoom={openLightbox}
                 />
